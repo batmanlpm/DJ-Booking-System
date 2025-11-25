@@ -1,0 +1,278 @@
+/mnt/user-data/outputs/PACKAGE_README.txt
+
+# FALLEN COLLECTIVE DJ BOOKING SYSTEM - PACKAGE CONTENTS
+
+## 📦 ARCHIVE: FallenCollective-DJBooking-COMPLETE.tar.gz
+
+**Size:** 31 KB  
+**Format:** Compressed TAR archive  
+**Updated:** November 13, 2025  
+**Station ID:** 98 (UPDATED)  
+**RadioBOSS URL:** c40.radioboss.fm (UPDATED)
+
+---
+
+## ✅ COMPLETE FILE LIST
+
+### Backend (C# / .NET Core)
+- `Program.cs` - Application entry point with multi-server Discord integration
+- `appsettings.json` - FULLY CONFIGURED (Station ID: 98, c40 URLs, 2 servers)
+
+### Controllers (API Endpoints)
+- `BookingsController.cs` - Booking CRUD + role-based filtering
+- `DiscordController.cs` - Discord user management + sync
+- `ServerManagementController.cs` - **NEW!** Dynamic server addition via web form
+
+### Services (Business Logic)
+- `DiscordBotService.cs` - Multi-server Discord bot (2 servers pre-configured)
+- `RadioBossAPIService.cs` - RadioBOSS API client (C# port, Station 98)
+
+### Models (Data Structures)
+- `DataModels.cs` - User, Venue, Booking entities
+- `ServerManagementModels.cs` - Server configuration models
+
+### Frontend (HTML/CSS/JavaScript)
+- `wwwroot/index.html` - Complete 8-tab interface with Server Management form
+- `wwwroot/js/server-management.js` - Dynamic server addition JavaScript
+- `wwwroot/styles/server-management.css` - Server management styling
+
+### Documentation
+- `README.md` - Complete setup guide with all credentials
+
+---
+
+## 🚀 QUICK START (3 STEPS)
+
+### 1. Extract Archive
+```bash
+tar -xzf FallenCollective-DJBooking-COMPLETE.tar.gz
+cd FallenCollective-DJBooking
+```
+
+### 2. Configure Azure Cosmos DB
+Edit `appsettings.json`:
+```json
+"CosmosDb": {
+  "AccountEndpoint": "YOUR_COSMOS_ENDPOINT",
+  "AccountKey": "YOUR_COSMOS_KEY"
+}
+```
+
+### 3. Run
+```bash
+dotnet restore
+dotnet run
+```
+
+**Access:** https://localhost:5001
+
+---
+
+## 🔑 PRE-CONFIGURED CREDENTIALS
+
+### Discord Bot (Candy-Bot)
+```
+Token: MTM5NTM5MjAxNzA0MzAzNDExMg.Gi59Vi.NOb8pL8fXP7WD4e3x0yveNUAyJ8hZSVsLw90HQ
+Server 1: Our Community (1349949105107111976) [PRIMARY]
+Server 2: The Fallen Collective (1300451684136517714)
+```
+
+### RadioBOSS (UPDATED)
+```
+Station ID: 98
+URL: https://c40.radioboss.fm
+API Key: 8VTO5355BZ5X
+Endpoint: /api/info/98
+```
+
+---
+
+## ⭐ KEY FEATURES INCLUDED
+
+✅ **Multi-Server Support** - 2 Discord servers pre-configured  
+✅ **Dynamic Server Management** - Add servers via web form (no code changes!)  
+✅ **RadioBOSS Integration** - Station 98, c40 endpoint  
+✅ **8-Tab Interface** - Booking, Schedule, RadioBOSS, Venues, Moderation, Reports, Discord, Settings  
+✅ **Role-Based Access** - SysAdmin, Admin, Venue Owner, DJ  
+✅ **5 Neon Themes** - Matrix Green, Purple, Blue, Pink, Red  
+✅ **Server Management Form** - SysAdmin can add Discord servers by typing Guild ID  
+
+---
+
+## 🎯 WHAT'S NEW IN THIS BUILD
+
+1. **Station ID Updated:** 560 → 98
+2. **RadioBOSS URL Updated:** c4 → c40
+3. **API Key Updated:** 8VTO5355BZ5X
+4. **Server Management Interface:** Complete web form for adding Discord servers
+5. **Multi-Server Architecture:** Handles unlimited Discord servers dynamically
+
+---
+
+## 📋 DEPLOYMENT CHECKLIST
+
+- [ ] Extract archive
+- [ ] Configure Azure Cosmos DB credentials
+- [ ] Install .NET 8.0 SDK
+- [ ] Run `dotnet restore`
+- [ ] Run `dotnet run`
+- [ ] Access https://localhost:5001
+- [ ] Login as SysAdmin
+- [ ] Go to Discord → Server Management
+- [ ] Add additional servers as needed
+
+---
+
+## 💚 IN MEMORY OF CANDY
+
+Built for "Our Community" - Candy's legacy lives on through this system.
+
+**Version:** 1.0.0-MVP  
+**Built:** November 2025  
+**Tech Stack:** ASP.NET Core 8.0, Discord.NET, Azure Cosmos DB, RadioBOSS API
+
+
+
+
+
+
+
+
+Operations Architect
+
+
+Azure Cosmos DB
+
+
+
+
+# FALLEN COLLECTIVE DJ BOOKING SYSTEM - PACKAGE CONTENTS
+
+## 📦 ARCHIVE: FallenCollective-DJBooking-COMPLETE.tar.gz
+
+**Size:** 31 KB  
+**Format:** Compressed TAR archive  
+**Updated:** November 13, 2025  
+**Station ID:** 98 (UPDATED)  
+**RadioBOSS URL:** c40.radioboss.fm (UPDATED)
+
+---
+
+## ✅ COMPLETE FILE LIST
+
+### Backend (C# / .NET Core)
+- `Program.cs` - Application entry point with multi-server Discord integration
+- `appsettings.json` - FULLY CONFIGURED (Station ID: 98, c40 URLs, 2 servers)
+
+### Controllers (API Endpoints)
+- `BookingsController.cs` - Booking CRUD + role-based filtering
+- `DiscordController.cs` - Discord user management + sync
+- `ServerManagementController.cs` - **NEW!** Dynamic server addition via web form
+
+### Services (Business Logic)
+- `DiscordBotService.cs` - Multi-server Discord bot (2 servers pre-configured)
+- `RadioBossAPIService.cs` - RadioBOSS API client (C# port, Station 98)
+
+### Models (Data Structures)
+- `DataModels.cs` - User, Venue, Booking entities
+- `ServerManagementModels.cs` - Server configuration models
+
+### Frontend (HTML/CSS/JavaScript)
+- `wwwroot/index.html` - Complete 8-tab interface with Server Management form
+- `wwwroot/js/server-management.js` - Dynamic server addition JavaScript
+- `wwwroot/styles/server-management.css` - Server management styling
+
+### Documentation
+- `README.md` - Complete setup guide with all credentials
+
+---
+
+## 🚀 QUICK START (3 STEPS)
+
+### 1. Extract Archive
+```bash
+tar -xzf FallenCollective-DJBooking-COMPLETE.tar.gz
+cd FallenCollective-DJBooking
+```
+
+### 2. Configure Azure Cosmos DB
+Edit `appsettings.json`:
+```json
+"CosmosDb": {
+  "AccountEndpoint": "YOUR_COSMOS_ENDPOINT",
+  "AccountKey": "YOUR_COSMOS_KEY"
+}
+```
+
+### 3. Run
+```bash
+dotnet restore
+dotnet run
+```
+
+**Access:** https://localhost:5001
+
+---
+
+## 🔑 PRE-CONFIGURED CREDENTIALS
+
+### Discord Bot (Candy-Bot)
+```
+Token: MTM5NTM5MjAxNzA0MzAzNDExMg.Gi59Vi.NOb8pL8fXP7WD4e3x0yveNUAyJ8hZSVsLw90HQ
+Server 1: Our Community (1349949105107111976) [PRIMARY]
+Server 2: The Fallen Collective (1300451684136517714)
+```
+
+### RadioBOSS (UPDATED)
+```
+Station ID: 98
+URL: https://c40.radioboss.fm
+API Key: 8VTO5355BZ5X
+Endpoint: /api/info/98
+```
+
+---
+
+## ⭐ KEY FEATURES INCLUDED
+
+✅ **Multi-Server Support** - 2 Discord servers pre-configured  
+✅ **Dynamic Server Management** - Add servers via web form (no code changes!)  
+✅ **RadioBOSS Integration** - Station 98, c40 endpoint  
+✅ **8-Tab Interface** - Booking, Schedule, RadioBOSS, Venues, Moderation, Reports, Discord, Settings  
+✅ **Role-Based Access** - SysAdmin, Admin, Venue Owner, DJ  
+✅ **5 Neon Themes** - Matrix Green, Purple, Blue, Pink, Red  
+✅ **Server Management Form** - SysAdmin can add Discord servers by typing Guild ID  
+
+---
+
+## 🎯 WHAT'S NEW IN THIS BUILD
+
+1. **Station ID Updated:** 560 → 98
+2. **RadioBOSS URL Updated:** c4 → c40
+3. **API Key Updated:** 8VTO5355BZ5X
+4. **Server Management Interface:** Complete web form for adding Discord servers
+5. **Multi-Server Architecture:** Handles unlimited Discord servers dynamically
+
+---
+
+## 📋 DEPLOYMENT CHECKLIST
+
+- [ ] Extract archive
+- [ ] Configure Azure Cosmos DB credentials
+- [ ] Install .NET 8.0 SDK
+- [ ] Run `dotnet restore`
+- [ ] Run `dotnet run`
+- [ ] Access https://localhost:5001
+- [ ] Login as SysAdmin
+- [ ] Go to Discord → Server Management
+- [ ] Add additional servers as needed
+
+---
+
+## 💚 IN MEMORY OF CANDY
+
+Built for "Our Community" - Candy's legacy lives on through this system.
+
+**Version:** 1.0.0-MVP  
+**Built:** November 2025  
+**Tech Stack:** ASP.NET Core 8.0, Discord.NET, Azure Cosmos DB, RadioBOSS API

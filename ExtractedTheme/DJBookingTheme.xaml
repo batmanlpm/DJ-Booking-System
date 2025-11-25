@@ -1,0 +1,1441 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         DJ BOOKING SYSTEM - RADIOBOSS EDITION
+         XAML Theme Pack v3.1.2
+         
+         A comprehensive space-themed UI theme inspired by
+         the RadioBoss DJ Booking System web interface.
+         
+         Features:
+         - Neon green terminal aesthetic
+         - Space/cosmic background elements
+         - Animated glows and transitions
+         - Retro-futuristic design language
+         ======================================== -->
+
+    <!-- ========================================
+         COLOR PALETTE - PRIMARY COLORS
+         ======================================== -->
+    
+    <!-- Primary Neon Green -->
+    <Color x:Key="NeonGreenColor">#00FF00</Color>
+    <Color x:Key="NeonGreenDarkColor">#00CC00</Color>
+    <Color x:Key="NeonGreenDarkerColor">#009900</Color>
+    <Color x:Key="NeonGreenDarkestColor">#006600</Color>
+    
+    <!-- Background Blacks -->
+    <Color x:Key="SpaceBlackColor">#000000</Color>
+    <Color x:Key="DeepSpaceColor">#0A0A0A</Color>
+    <Color x:Key="DarkSpaceColor">#1A1A1A</Color>
+    <Color x:Key="PanelBlackColor">#001100</Color>
+    <Color x:Key="CardBlackColor">#001400</Color>
+    
+    <!-- Accent Colors -->
+    <Color x:Key="CyanAccentColor">#00FFFF</Color>
+    <Color x:Key="MagentaAccentColor">#FF00FF</Color>
+    <Color x:Key="YellowAccentColor">#FFFF00</Color>
+    <Color x:Key="OrangeAccentColor">#FFAA00</Color>
+    <Color x:Key="RedAccentColor">#FF0000</Color>
+    <Color x:Key="PinkAccentColor">#FF6B9D</Color>
+    <Color x:Key="GoldAccentColor">#FFD700</Color>
+    
+    <!-- Status Colors -->
+    <Color x:Key="SuccessGreenColor">#00FF00</Color>
+    <Color x:Key="ErrorRedColor">#FF0000</Color>
+    <Color x:Key="WarningOrangeColor">#FFAA00</Color>
+    <Color x:Key="InfoCyanColor">#00FFFF</Color>
+    
+    <!-- Transparency Variants -->
+    <Color x:Key="NeonGreenTransparent10">#1A00FF00</Color>
+    <Color x:Key="NeonGreenTransparent20">#3300FF00</Color>
+    <Color x:Key="NeonGreenTransparent30">#4D00FF00</Color>
+    <Color x:Key="NeonGreenTransparent40">#6600FF00</Color>
+    <Color x:Key="NeonGreenTransparent50">#8000FF00</Color>
+    
+    <Color x:Key="BlackTransparent80">#CC000000</Color>
+    <Color x:Key="BlackTransparent85">#D9000000</Color>
+    <Color x:Key="BlackTransparent90">#E6000000</Color>
+    <Color x:Key="BlackTransparent95">#F2000000</Color>
+
+    <!-- ========================================
+         SOLID COLOR BRUSHES
+         ======================================== -->
+    
+    <SolidColorBrush x:Key="NeonGreenBrush" Color="{StaticResource NeonGreenColor}"/>
+    <SolidColorBrush x:Key="NeonGreenDarkBrush" Color="{StaticResource NeonGreenDarkColor}"/>
+    <SolidColorBrush x:Key="NeonGreenDarkerBrush" Color="{StaticResource NeonGreenDarkerColor}"/>
+    <SolidColorBrush x:Key="NeonGreenDarkestBrush" Color="{StaticResource NeonGreenDarkestColor}"/>
+    
+    <SolidColorBrush x:Key="SpaceBlackBrush" Color="{StaticResource SpaceBlackColor}"/>
+    <SolidColorBrush x:Key="DeepSpaceBrush" Color="{StaticResource DeepSpaceColor}"/>
+    <SolidColorBrush x:Key="DarkSpaceBrush" Color="{StaticResource DarkSpaceColor}"/>
+    <SolidColorBrush x:Key="PanelBlackBrush" Color="{StaticResource PanelBlackColor}"/>
+    <SolidColorBrush x:Key="CardBlackBrush" Color="{StaticResource CardBlackColor}"/>
+    
+    <SolidColorBrush x:Key="CyanAccentBrush" Color="{StaticResource CyanAccentColor}"/>
+    <SolidColorBrush x:Key="MagentaAccentBrush" Color="{StaticResource MagentaAccentColor}"/>
+    <SolidColorBrush x:Key="YellowAccentBrush" Color="{StaticResource YellowAccentColor}"/>
+    <SolidColorBrush x:Key="OrangeAccentBrush" Color="{StaticResource OrangeAccentColor}"/>
+    <SolidColorBrush x:Key="RedAccentBrush" Color="{StaticResource RedAccentColor}"/>
+    <SolidColorBrush x:Key="PinkAccentBrush" Color="{StaticResource PinkAccentColor}"/>
+    <SolidColorBrush x:Key="GoldAccentBrush" Color="{StaticResource GoldAccentColor}"/>
+    
+    <SolidColorBrush x:Key="SuccessGreenBrush" Color="{StaticResource SuccessGreenColor}"/>
+    <SolidColorBrush x:Key="ErrorRedBrush" Color="{StaticResource ErrorRedColor}"/>
+    <SolidColorBrush x:Key="WarningOrangeBrush" Color="{StaticResource WarningOrangeColor}"/>
+    <SolidColorBrush x:Key="InfoCyanBrush" Color="{StaticResource InfoCyanColor}"/>
+
+    <!-- ========================================
+         GRADIENT BRUSHES - BACKGROUNDS
+         ======================================== -->
+    
+    <!-- Space Background Gradient -->
+    <RadialGradientBrush x:Key="SpaceBackgroundBrush" 
+                         GradientOrigin="0.5,0.5" 
+                         Center="0.5,0.5" 
+                         RadiusX="1" 
+                         RadiusY="1">
+        <GradientStop Color="#1A0033" Offset="0"/>
+        <GradientStop Color="#000000" Offset="0.7"/>
+    </RadialGradientBrush>
+    
+    <!-- Login Screen Background -->
+    <LinearGradientBrush x:Key="LoginBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#0A0A0A" Offset="0"/>
+        <GradientStop Color="#1A1A1A" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Panel Background with Transparency -->
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#D9001400" Opacity="0.85"/>
+    
+    <!-- Card Background -->
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#CC001100" Opacity="0.8"/>
+    
+    <!-- Form Background -->
+    <SolidColorBrush x:Key="FormBackgroundBrush" Color="#E6001100" Opacity="0.9"/>
+    
+    <!-- Input Background -->
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#CC000000" Opacity="0.8"/>
+
+    <!-- ========================================
+         GRADIENT BRUSHES - BUTTONS
+         ======================================== -->
+    
+    <!-- Primary Button Gradient -->
+    <LinearGradientBrush x:Key="PrimaryButtonBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#003300" Offset="0"/>
+        <GradientStop Color="#006600" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Primary Button Hover Gradient -->
+    <LinearGradientBrush x:Key="PrimaryButtonHoverBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#004400" Offset="0"/>
+        <GradientStop Color="#008800" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Success Button Gradient -->
+    <LinearGradientBrush x:Key="SuccessButtonBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#003300" Offset="0"/>
+        <GradientStop Color="#006600" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Danger Button Gradient -->
+    <LinearGradientBrush x:Key="DangerButtonBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#330000" Offset="0"/>
+        <GradientStop Color="#660000" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Warning Button Gradient -->
+    <LinearGradientBrush x:Key="WarningButtonBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#333300" Offset="0"/>
+        <GradientStop Color="#666600" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Notification Button Gradient -->
+    <LinearGradientBrush x:Key="NotificationButtonBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FF6B6B" Offset="0"/>
+        <GradientStop Color="#FF8E53" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- ========================================
+         GRADIENT BRUSHES - PLANET EFFECTS
+         ======================================== -->
+    
+    <!-- Planet Surface Gradient -->
+    <RadialGradientBrush x:Key="PlanetSurfaceBrush" 
+                         GradientOrigin="0.3,0.3" 
+                         Center="0.5,0.5" 
+                         RadiusX="1" 
+                         RadiusY="1">
+        <GradientStop Color="#4A90E2" Offset="0"/>
+        <GradientStop Color="#2C5AA0" Offset="0.3"/>
+        <GradientStop Color="#1E3A8A" Offset="0.6"/>
+        <GradientStop Color="#0F172A" Offset="1"/>
+    </RadialGradientBrush>
+    
+    <!-- Nebula Effect Brushes -->
+    <RadialGradientBrush x:Key="NebulaPinkBrush" 
+                         GradientOrigin="0.5,0.5" 
+                         Center="0.5,0.5" 
+                         RadiusX="1" 
+                         RadiusY="1">
+        <GradientStop Color="#4DFF6B9D" Offset="0"/>
+        <GradientStop Color="#00FF6B9D" Offset="0.7"/>
+    </RadialGradientBrush>
+    
+    <RadialGradientBrush x:Key="NebulaCyanBrush" 
+                         GradientOrigin="0.5,0.5" 
+                         Center="0.5,0.5" 
+                         RadiusX="1" 
+                         RadiusY="1">
+        <GradientStop Color="#3300FFFF" Offset="0"/>
+        <GradientStop Color="#0000FFFF" Offset="0.7"/>
+    </RadialGradientBrush>
+    
+    <RadialGradientBrush x:Key="NebulaGoldBrush" 
+                         GradientOrigin="0.5,0.5" 
+                         Center="0.5,0.5" 
+                         RadiusX="1" 
+                         RadiusY="1">
+        <GradientStop Color="#33FFD700" Offset="0"/>
+        <GradientStop Color="#00FFD700" Offset="0.7"/>
+    </RadialGradientBrush>
+
+    <!-- ========================================
+         FONT FAMILIES
+         ======================================== -->
+    
+    <FontFamily x:Key="MonospaceFontFamily">Consolas, Courier New, monospace</FontFamily>
+    <FontFamily x:Key="SystemFontFamily">Segoe UI, Arial, sans-serif</FontFamily>
+
+    <!-- ========================================
+         FONT SIZES
+         ======================================== -->
+    
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeSmall">11</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeNormal">14</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeMedium">16</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeLarge">20</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeXLarge">24</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeXXLarge">32</System:Double>
+    <System:Double xmlns:System="clr-namespace:System;assembly=mscorlib" x:Key="FontSizeTitle">48</System:Double>
+
+    <!-- ========================================
+         SPACING & DIMENSIONS
+         ======================================== -->
+    
+    <Thickness x:Key="SmallPadding">5</Thickness>
+    <Thickness x:Key="MediumPadding">10</Thickness>
+    <Thickness x:Key="LargePadding">15</Thickness>
+    <Thickness x:Key="XLargePadding">20</Thickness>
+    <Thickness x:Key="XXLargePadding">30</Thickness>
+    
+    <Thickness x:Key="SmallMargin">5</Thickness>
+    <Thickness x:Key="MediumMargin">10</Thickness>
+    <Thickness x:Key="LargeMargin">15</Thickness>
+    <Thickness x:Key="XLargeMargin">20</Thickness>
+    
+    <CornerRadius x:Key="SmallCornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="MediumCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="LargeCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="XLargeCornerRadius">15</CornerRadius>
+    <CornerRadius x:Key="XXLargeCornerRadius">20</CornerRadius>
+
+    <!-- ========================================
+         BORDER THICKNESSES
+         ======================================== -->
+    
+    <Thickness x:Key="ThinBorder">1</Thickness>
+    <Thickness x:Key="MediumBorder">2</Thickness>
+    <Thickness x:Key="ThickBorder">3</Thickness>
+
+    <!-- ========================================
+         DROP SHADOW EFFECTS
+         ======================================== -->
+    
+    <!-- Neon Green Glow -->
+    <DropShadowEffect x:Key="NeonGreenGlowEffect" 
+                      Color="{StaticResource NeonGreenColor}" 
+                      BlurRadius="20" 
+                      ShadowDepth="0" 
+                      Opacity="0.6"/>
+    
+    <DropShadowEffect x:Key="NeonGreenGlowSmallEffect" 
+                      Color="{StaticResource NeonGreenColor}" 
+                      BlurRadius="10" 
+                      ShadowDepth="0" 
+                      Opacity="0.4"/>
+    
+    <DropShadowEffect x:Key="NeonGreenGlowLargeEffect" 
+                      Color="{StaticResource NeonGreenColor}" 
+                      BlurRadius="30" 
+                      ShadowDepth="0" 
+                      Opacity="0.5"/>
+    
+    <!-- Cyan Glow -->
+    <DropShadowEffect x:Key="CyanGlowEffect" 
+                      Color="{StaticResource CyanAccentColor}" 
+                      BlurRadius="15" 
+                      ShadowDepth="0" 
+                      Opacity="0.5"/>
+    
+    <!-- Red Glow -->
+    <DropShadowEffect x:Key="RedGlowEffect" 
+                      Color="{StaticResource RedAccentColor}" 
+                      BlurRadius="15" 
+                      ShadowDepth="0" 
+                      Opacity="0.5"/>
+    
+    <!-- Gold Glow -->
+    <DropShadowEffect x:Key="GoldGlowEffect" 
+                      Color="{StaticResource GoldAccentColor}" 
+                      BlurRadius="15" 
+                      ShadowDepth="0" 
+                      Opacity="0.5"/>
+    
+    <!-- Panel Shadow -->
+    <DropShadowEffect x:Key="PanelShadowEffect" 
+                      Color="{StaticResource NeonGreenColor}" 
+                      BlurRadius="30" 
+                      ShadowDepth="0" 
+                      Opacity="0.4"/>
+    
+    <!-- Card Shadow -->
+    <DropShadowEffect x:Key="CardShadowEffect" 
+                      Color="{StaticResource NeonGreenColor}" 
+                      BlurRadius="20" 
+                      ShadowDepth="0" 
+                      Opacity="0.2"/>
+
+    <!-- ========================================
+         BLUR EFFECTS
+         ======================================== -->
+    
+    <BlurEffect x:Key="LightBlurEffect" Radius="2"/>
+    <BlurEffect x:Key="MediumBlurEffect" Radius="5"/>
+    <BlurEffect x:Key="HeavyBlurEffect" Radius="10"/>
+
+    <!-- ========================================
+         ANIMATIONS - STORYBOARDS
+         ======================================== -->
+    
+    <!-- Gentle Float Animation -->
+    <Storyboard x:Key="GentleFloatAnimation" RepeatBehavior="Forever" AutoReverse="True">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                         From="0" To="-10" Duration="0:0:3"
+                         EasingFunction="{StaticResource SineEase}"/>
+    </Storyboard>
+    
+    <!-- Pulse Animation -->
+    <Storyboard x:Key="PulseAnimation" RepeatBehavior="Forever" AutoReverse="True">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0.3" To="1.0" Duration="0:0:2"
+                         EasingFunction="{StaticResource SineEase}"/>
+    </Storyboard>
+    
+    <!-- Twinkle Animation (for stars) -->
+    <Storyboard x:Key="TwinkleAnimation" RepeatBehavior="Forever" AutoReverse="True">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0.3" To="1.0" Duration="0:0:4"
+                         EasingFunction="{StaticResource SineEase}"/>
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                         From="0.8" To="1.2" Duration="0:0:4"
+                         EasingFunction="{StaticResource SineEase}"/>
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                         From="0.8" To="1.2" Duration="0:0:4"
+                         EasingFunction="{StaticResource SineEase}"/>
+    </Storyboard>
+    
+    <!-- Rotate Animation -->
+    <Storyboard x:Key="RotateAnimation" RepeatBehavior="Forever">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                         From="0" To="360" Duration="0:2:0"/>
+    </Storyboard>
+    
+    <!-- Slow Rotate Animation -->
+    <Storyboard x:Key="SlowRotateAnimation" RepeatBehavior="Forever">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                         From="0" To="360" Duration="0:5:0"/>
+    </Storyboard>
+    
+    <!-- Fade In Animation -->
+    <Storyboard x:Key="FadeInAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0" To="1" Duration="0:0:0.5"/>
+    </Storyboard>
+    
+    <!-- Fade Out Animation -->
+    <Storyboard x:Key="FadeOutAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1" To="0" Duration="0:0:0.3"/>
+    </Storyboard>
+    
+    <!-- Scale Up Animation -->
+    <Storyboard x:Key="ScaleUpAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                         From="0.95" To="1.0" Duration="0:0:1"
+                         EasingFunction="{StaticResource ExponentialEase}"/>
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                         From="0.95" To="1.0" Duration="0:0:1"
+                         EasingFunction="{StaticResource ExponentialEase}"/>
+    </Storyboard>
+
+    <!-- ========================================
+         EASING FUNCTIONS
+         ======================================== -->
+    
+    <SineEase x:Key="SineEase" EasingMode="EaseInOut"/>
+    <ExponentialEase x:Key="ExponentialEase" EasingMode="EaseOut"/>
+    <QuadraticEase x:Key="QuadraticEase" EasingMode="EaseInOut"/>
+    <CubicEase x:Key="CubicEase" EasingMode="EaseInOut"/>
+    <ElasticEase x:Key="ElasticEase" EasingMode="EaseOut" Oscillations="3" Springiness="5"/>
+
+    <!-- ========================================
+         BUTTON STYLES
+         ======================================== -->
+    
+    <!-- Primary Button Style -->
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="18,12"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource MediumCornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryButtonHoverBrush}"/>
+                            <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="-2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Success Button Style -->
+    <Style x:Key="SuccessButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+        <Setter Property="Background" Value="{StaticResource SuccessButtonBrush}"/>
+    </Style>
+    
+    <!-- Danger Button Style -->
+    <Style x:Key="DangerButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource DangerButtonBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource SmallCornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#440000" Offset="0"/>
+                                        <GradientStop Color="#880000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="border" Property="Effect" Value="{StaticResource RedGlowEffect}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Warning Button Style -->
+    <Style x:Key="WarningButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource WarningButtonBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource YellowAccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource YellowAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource SmallCornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#444400" Offset="0"/>
+                                        <GradientStop Color="#888800" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="border" Property="Effect" Value="{StaticResource GoldGlowEffect}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Notification Button Style -->
+    <Style x:Key="NotificationButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource NotificationButtonBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PinkAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource MediumCornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#FF8E53" Offset="0"/>
+                                        <GradientStop Color="#FF6B6B" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="-2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================
+         TEXTBOX STYLES
+         ======================================== -->
+    
+    <!-- Primary TextBox Style -->
+    <Style x:Key="PrimaryTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource NeonGreenTransparent30}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource MediumCornerRadius}">
+                        <ScrollViewer x:Name="PART_ContentHost" 
+                                    Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+                            <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- PasswordBox Style -->
+    <Style x:Key="PrimaryPasswordBoxStyle" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource NeonGreenTransparent30}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource MediumCornerRadius}">
+                        <ScrollViewer x:Name="PART_ContentHost" 
+                                    Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+                            <Setter TargetName="border" Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================
+         COMBOBOX STYLES
+         ======================================== -->
+    
+    <!-- Primary ComboBox Style -->
+    <Style x:Key="PrimaryComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+    </Style>
+
+    <!-- ========================================
+         LABEL STYLES
+         ======================================== -->
+    
+    <!-- Primary Label Style -->
+    <Style x:Key="PrimaryLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+    
+    <!-- Title Label Style -->
+    <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeTitle}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+    
+    <!-- Subtitle Label Style -->
+    <Style x:Key="SubtitleLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ========================================
+         TEXTBLOCK STYLES
+         ======================================== -->
+    
+    <!-- Primary TextBlock Style -->
+    <Style x:Key="PrimaryTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+    </Style>
+    
+    <!-- Title TextBlock Style -->
+    <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeTitle}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+    
+    <!-- Subtitle TextBlock Style -->
+    <Style x:Key="SubtitleTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
+    <!-- Error TextBlock Style -->
+    <Style x:Key="ErrorTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+    </Style>
+
+    <!-- ========================================
+         BORDER STYLES
+         ======================================== -->
+    
+    <!-- Panel Border Style -->
+    <Style x:Key="PanelBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource PanelBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource XLargeCornerRadius}"/>
+        <Setter Property="Padding" Value="{StaticResource XXLargePadding}"/>
+        <Setter Property="Effect" Value="{StaticResource PanelShadowEffect}"/>
+    </Style>
+    
+    <!-- Card Border Style -->
+    <Style x:Key="CardBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource XLargeCornerRadius}"/>
+        <Setter Property="Padding" Value="{StaticResource XLargePadding}"/>
+        <Setter Property="Effect" Value="{StaticResource CardShadowEffect}"/>
+    </Style>
+    
+    <!-- Form Border Style -->
+    <Style x:Key="FormBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource FormBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource XLargeCornerRadius}"/>
+        <Setter Property="Padding" Value="{StaticResource XXLargePadding}"/>
+        <Setter Property="Effect" Value="{StaticResource CardShadowEffect}"/>
+    </Style>
+    
+    <!-- Login Container Border Style -->
+    <Style x:Key="LoginContainerBorderStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#001400" Opacity="0.95"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource XXLargeCornerRadius}"/>
+        <Setter Property="Padding" Value="50"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowLargeEffect}"/>
+    </Style>
+
+    <!-- ========================================
+         STATUS INDICATOR STYLES
+         ======================================== -->
+    
+    <!-- Connected Status Style -->
+    <Style x:Key="ConnectedStatusStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#001100" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource MediumCornerRadius}"/>
+        <Setter Property="Padding" Value="8,12"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+    
+    <!-- Disconnected Status Style -->
+    <Style x:Key="DisconnectedStatusStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#110000" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource MediumCornerRadius}"/>
+        <Setter Property="Padding" Value="8,12"/>
+        <Setter Property="Effect" Value="{StaticResource RedGlowEffect}"/>
+    </Style>
+
+    <!-- ========================================
+         MESSAGE BOX STYLES
+         ======================================== -->
+    
+    <!-- Success Message Style -->
+    <Style x:Key="SuccessMessageStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#003300" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource SuccessGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="Padding" Value="15,25"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+    
+    <!-- Error Message Style -->
+    <Style x:Key="ErrorMessageStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#330000" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="Padding" Value="15,25"/>
+        <Setter Property="Effect" Value="{StaticResource RedGlowEffect}"/>
+    </Style>
+    
+    <!-- Info Message Style -->
+    <Style x:Key="InfoMessageStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#003333" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource InfoCyanBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="Padding" Value="15,25"/>
+        <Setter Property="Effect" Value="{StaticResource CyanGlowEffect}"/>
+    </Style>
+
+    <!-- ========================================
+         SCROLLBAR STYLES
+         ======================================== -->
+    
+    <!-- ScrollBar Style -->
+    <Style x:Key="PrimaryScrollBarStyle" TargetType="ScrollBar">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="Width" Value="12"/>
+    </Style>
+
+    <!-- ========================================
+         LISTBOX STYLES
+         ======================================== -->
+    
+    <!-- Primary ListBox Style -->
+    <Style x:Key="PrimaryListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+    </Style>
+    
+    <!-- ListBoxItem Style -->
+    <Style x:Key="PrimaryListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Margin" Value="0,0,0,3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="{StaticResource SmallCornerRadius}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#001100" Opacity="0.8"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#002200" Opacity="0.8"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================
+         DATAGRID STYLES
+         ======================================== -->
+    
+    <!-- Primary DataGrid Style -->
+    <Style x:Key="PrimaryDataGridStyle" TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="RowBackground" Value="Transparent"/>
+        <Setter Property="AlternatingRowBackground">
+            <Setter.Value>
+                <SolidColorBrush Color="#001100" Opacity="0.3"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#333333"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- DataGrid Column Header Style -->
+    <Style x:Key="PrimaryDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#002200" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#333333"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+    
+    <!-- DataGrid Row Style -->
+    <Style x:Key="PrimaryDataGridRowStyle" TargetType="DataGridRow">
+        <Setter Property="Background" Value="Transparent"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#001100" Opacity="0.8"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- DataGrid Cell Style -->
+    <Style x:Key="PrimaryDataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#003300" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================
+         CHECKBOX STYLES
+         ======================================== -->
+    
+    <!-- Primary CheckBox Style -->
+    <Style x:Key="PrimaryCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- ========================================
+         RADIOBUTTON STYLES
+         ======================================== -->
+    
+    <!-- Primary RadioButton Style -->
+    <Style x:Key="PrimaryRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- ========================================
+         TABCONTROL STYLES
+         ======================================== -->
+    
+    <!-- Primary TabControl Style -->
+    <Style x:Key="PrimaryTabControlStyle" TargetType="TabControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="0,2,0,0"/>
+    </Style>
+    
+    <!-- TabItem Style -->
+    <Style x:Key="PrimaryTabItemStyle" TargetType="TabItem">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#001100" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="2,2,2,0"/>
+        <Setter Property="Padding" Value="10,20"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5,5,0,0"
+                            Margin="0,0,5,0">
+                        <ContentPresenter x:Name="ContentSite"
+                                        ContentSource="Header"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#003300" Opacity="0.8"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#002200" Opacity="0.8"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================
+         PROGRESSBAR STYLES
+         ======================================== -->
+    
+    <!-- Primary ProgressBar Style -->
+    <Style x:Key="PrimaryProgressBarStyle" TargetType="ProgressBar">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource MediumCornerRadius}">
+                        <Grid>
+                            <Border x:Name="PART_Track"/>
+                            <Border x:Name="PART_Indicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    HorizontalAlignment="Left"
+                                    CornerRadius="{StaticResource MediumCornerRadius}">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{StaticResource NeonGreenColor}" 
+                                                    BlurRadius="10" 
+                                                    ShadowDepth="0" 
+                                                    Opacity="0.6"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================
+         SLIDER STYLES
+         ======================================== -->
+    
+    <!-- Primary Slider Style -->
+    <Style x:Key="PrimarySliderStyle" TargetType="Slider">
+        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+    </Style>
+
+    <!-- ========================================
+         TOOLTIP STYLES
+         ======================================== -->
+    
+    <!-- Primary ToolTip Style -->
+    <Style x:Key="PrimaryToolTipStyle" TargetType="ToolTip">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#001100" Opacity="0.95"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource ThinBorder}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+
+    <!-- ========================================
+         CONTEXTMENU STYLES
+         ======================================== -->
+    
+    <!-- Primary ContextMenu Style -->
+    <Style x:Key="PrimaryContextMenuStyle" TargetType="ContextMenu">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#001100" Opacity="0.95"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+        <Setter Property="Effect" Value="{StaticResource NeonGreenGlowSmallEffect}"/>
+    </Style>
+    
+    <!-- MenuItem Style -->
+    <Style x:Key="PrimaryMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#002200" Opacity="0.8"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================
+         WINDOW STYLES
+         ======================================== -->
+    
+    <!-- Primary Window Style -->
+    <Style x:Key="PrimaryWindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource SpaceBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+    </Style>
+
+    <!-- ========================================
+         SPECIAL EFFECT STYLES
+         ======================================== -->
+    
+    <!-- Floating Logo Style -->
+    <Style x:Key="FloatingLogoStyle" TargetType="Image">
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Margin" Value="0,0,0,40"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                       From="0" To="-8" Duration="0:0:4">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                           To="1.05" Duration="0:0:0.3"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                           To="1.05" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                           To="1.0" Duration="0:0:0.3"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                           To="1.0" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Star Style (for background decoration) -->
+    <Style x:Key="StarStyle" TargetType="Ellipse">
+        <Setter Property="Fill" Value="White"/>
+        <Setter Property="Width" Value="2"/>
+        <Setter Property="Height" Value="2"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                       From="0.3" To="1.0" Duration="0:0:4">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                       From="0.8" To="1.2" Duration="0:0:4">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                       From="0.8" To="1.2" Duration="0:0:4">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================
+         TIME SLOT STYLES (for schedule display)
+         ======================================== -->
+    
+    <!-- Available Time Slot Style -->
+    <Style x:Key="AvailableTimeSlotStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#002200" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource ThinBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource SmallCornerRadius}"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Margin" Value="3,0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#003300" Opacity="0.8"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform X="3"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Booked Time Slot Style -->
+    <Style x:Key="BookedTimeSlotStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#220000" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource ErrorRedBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource ThinBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource SmallCornerRadius}"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Margin" Value="3,0"/>
+        <Setter Property="Cursor" Value="No"/>
+    </Style>
+    
+    <!-- Closed Time Slot Style -->
+    <Style x:Key="ClosedTimeSlotStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#111111" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#333333"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource ThinBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource SmallCornerRadius}"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Margin" Value="3,0"/>
+        <Setter Property="Cursor" Value="No"/>
+    </Style>
+    
+    <!-- Closed But Bookable Time Slot Style -->
+    <Style x:Key="ClosedButBookableTimeSlotStyle" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#221100" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource OrangeAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource ThinBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource SmallCornerRadius}"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Margin" Value="3,0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#331900" Opacity="0.8"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform X="3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="{StaticResource OrangeAccentColor}" 
+                                        BlurRadius="10" 
+                                        ShadowDepth="0" 
+                                        Opacity="0.3"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================
+         VENUE CARD STYLES
+         ======================================== -->
+    
+    <!-- Venue Card Style -->
+    <Style x:Key="VenueCardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource MediumBorder}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource XLargeCornerRadius}"/>
+        <Setter Property="Padding" Value="{StaticResource XLargePadding}"/>
+        <Setter Property="Margin" Value="{StaticResource MediumMargin}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="-5"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="{StaticResource NeonGreenColor}" 
+                                        BlurRadius="25" 
+                                        ShadowDepth="0" 
+                                        Opacity="0.2"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

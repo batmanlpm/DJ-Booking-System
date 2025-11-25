@@ -1,0 +1,270 @@
+<Window x:Class="DJBookingSystem.CandyBotCodeAssistant"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="?? Candy-Bot Coding Expert" 
+        Height="800" Width="1200"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="WindowBg" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="EditorBg" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="PanelBg" Color="#252526"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#FF00D26A"/>
+        <SolidColorBrush x:Key="TextColor" Color="#D4D4D4"/>
+        <SolidColorBrush x:Key="CommentColor" Color="#6A9955"/>
+        <SolidColorBrush x:Key="KeywordColor" Color="#569CD6"/>
+    </Window.Resources>
+
+    <Border Background="{StaticResource WindowBg}" 
+            BorderBrush="{StaticResource AccentColor}" 
+            BorderThickness="2" 
+            CornerRadius="10">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Grid Grid.Row="0" Background="{StaticResource PanelBg}" 
+                  MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                    <TextBlock Text="??" FontSize="24" Margin="0,0,10,0"/>
+                    <TextBlock Text="Candy-Bot Coding Expert" 
+                               FontSize="18" FontWeight="Bold" 
+                               Foreground="{StaticResource TextColor}"/>
+                    <TextBlock Text="  Your AI Programming Assistant" 
+                               FontSize="14" Foreground="#AAA" 
+                               VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Content="??" x:Name="VoiceToggleButton"
+                            Click="ToggleVoice_Click"
+                            Width="40" Height="40"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="20"
+                            ToolTip="Toggle voice"
+                            Margin="0,0,5,0"/>
+                    <Button Content="?" 
+                            Click="Close_Click"
+                            Width="40" Height="40"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="20"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Toolbar -->
+            <Grid Grid.Row="1" Background="{StaticResource PanelBg}" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Language:" 
+                               VerticalAlignment="Center" 
+                               Margin="0,0,10,0"
+                               Foreground="{StaticResource TextColor}"/>
+                    <ComboBox x:Name="LanguageComboBox" 
+                              Width="150" 
+                              SelectionChanged="Language_Changed"
+                              Background="{StaticResource EditorBg}"
+                              Foreground="{StaticResource TextColor}"
+                              BorderBrush="{StaticResource AccentColor}">
+                        <ComboBoxItem Content="C#" Tag="csharp" IsSelected="True"/>
+                        <ComboBoxItem Content="Python" Tag="python"/>
+                        <ComboBoxItem Content="JavaScript" Tag="javascript"/>
+                        <ComboBoxItem Content="TypeScript" Tag="typescript"/>
+                        <ComboBoxItem Content="HTML" Tag="html"/>
+                        <ComboBoxItem Content="CSS" Tag="css"/>
+                        <ComboBoxItem Content="SQL" Tag="sql"/>
+                        <ComboBoxItem Content="Java" Tag="java"/>
+                        <ComboBoxItem Content="PHP" Tag="php"/>
+                        <ComboBoxItem Content="C++" Tag="cpp"/>
+                    </ComboBox>
+
+                    <Separator Margin="15,0" Width="2"/>
+
+                    <TextBlock Text="Generate:" 
+                               VerticalAlignment="Center" 
+                               Margin="0,0,10,0"
+                               Foreground="{StaticResource TextColor}"/>
+                    <ComboBox x:Name="TemplateComboBox" 
+                              Width="150"
+                              Background="{StaticResource EditorBg}"
+                              Foreground="{StaticResource TextColor}"
+                              BorderBrush="{StaticResource AccentColor}">
+                        <ComboBoxItem Content="Class" Tag="class"/>
+                        <ComboBoxItem Content="Method/Function" Tag="method"/>
+                        <ComboBoxItem Content="Webpage" Tag="page"/>
+                        <ComboBoxItem Content="API Endpoint" Tag="api"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10">
+                    <Button Content="? Generate Code" 
+                            Click="GenerateCode_Click"
+                            Background="{StaticResource AccentColor}"
+                            Foreground="White"
+                            Padding="15,8"
+                            Margin="0,0,10,0"
+                            BorderThickness="0"
+                            Cursor="Hand"/>
+                    <Button Content="?? Analyze Code" 
+                            Click="AnalyzeCode_Click"
+                            Padding="15,8"
+                            Margin="0,0,10,0"/>
+                    <Button Content="?? Save" 
+                            Click="SaveCode_Click"
+                            Padding="15,8"
+                            Margin="0,0,10,0"/>
+                    <Button Content="?? Copy" 
+                            Click="CopyCode_Click"
+                            Padding="15,8"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Code Editor -->
+            <GroupBox Grid.Row="2" Header="?? Code Editor" 
+                      Foreground="{StaticResource TextColor}"
+                      BorderBrush="{StaticResource AccentColor}"
+                      Margin="0,5,0,0">
+                <TextBox x:Name="CodeEditor"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         Background="{StaticResource EditorBg}"
+                         Foreground="{StaticResource TextColor}"
+                         FontFamily="Consolas"
+                         FontSize="14"
+                         Padding="10"
+                         BorderThickness="0"
+                         TextWrapping="NoWrap"/>
+            </GroupBox>
+
+            <!-- Candy's Chat/Output -->
+            <GroupBox Grid.Row="3" Header="?? Candy's Assistant Chat" 
+                      Foreground="{StaticResource TextColor}"
+                      BorderBrush="{StaticResource AccentColor}"
+                      Margin="0,5,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Chat History -->
+                    <ScrollViewer Grid.Row="0" 
+                                  x:Name="ChatScrollViewer"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Background="{StaticResource EditorBg}">
+                        <ItemsControl x:Name="ChatHistory" Margin="10">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,5" 
+                                            Padding="10" 
+                                            Background="#2D2D30" 
+                                            CornerRadius="5">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" 
+                                                       Text="{Binding Sender}" 
+                                                       FontWeight="Bold"
+                                                       Foreground="{Binding SenderColor}"/>
+                                            <TextBlock Grid.Row="1" 
+                                                       Text="{Binding Message}" 
+                                                       TextWrapping="Wrap"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       Margin="0,5,0,0"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <!-- Input Box -->
+                    <Grid Grid.Row="1" Background="{StaticResource PanelBg}" Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="QuestionInput"
+                                 Grid.Column="0"
+                                 Background="{StaticResource EditorBg}"
+                                 Foreground="{StaticResource TextColor}"
+                                 BorderBrush="{StaticResource AccentColor}"
+                                 Padding="10"
+                                 FontSize="14"
+                                 VerticalContentAlignment="Center"
+                                 KeyDown="QuestionInput_KeyDown"/>
+
+                        <Button Grid.Column="1"
+                                Content="Ask Candy ??"
+                                Click="AskCandy_Click"
+                                Background="{StaticResource AccentColor}"
+                                Foreground="White"
+                                Width="120"
+                                Height="50"
+                                BorderThickness="0"
+                                FontWeight="Bold"
+                                Cursor="Hand"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+            <!-- Status Bar -->
+            <Grid Grid.Row="4" Background="{StaticResource PanelBg}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="StatusText" 
+                           Text="?? Ready to code! Ask me anything or click Generate Code." 
+                           Foreground="{StaticResource TextColor}"
+                           VerticalAlignment="Center"
+                           Margin="15,0"/>
+
+                <TextBlock x:Name="LineCountText" 
+                           Grid.Column="1"
+                           Text="Lines: 0" 
+                           Foreground="#AAA"
+                           VerticalAlignment="Center"
+                           Margin="15,0"/>
+
+                <TextBlock x:Name="LanguageText" 
+                           Grid.Column="2"
+                           Text="Language: C#" 
+                           Foreground="{StaticResource AccentColor}"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="15,0"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

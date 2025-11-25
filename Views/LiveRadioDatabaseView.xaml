@@ -1,0 +1,190 @@
+<UserControl x:Class="DJBookingSystem.Views.LiveRadioDatabaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1160"
+             Background="Black">
+    
+    <UserControl.Resources>
+        <!-- Button Style -->
+        <Style x:Key="SpaceButton" TargetType="Button">
+            <Setter Property="Background" Value="#001100"/>
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="BorderBrush" Value="#00FF00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#003300"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#005500"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Control Bar -->
+            <RowDefinition Height="*"/>
+            <!-- Web Browser -->
+        </Grid.RowDefinitions>
+
+        <!-- Control Bar -->
+        <Border Grid.Row="0" 
+                Background="#0A0A0A" 
+                BorderBrush="#00FF00" 
+                BorderThickness="0,0,0,2" 
+                Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Navigation Buttons -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button x:Name="GoBackButton"
+                           Content="BACK"
+                           Width="80"
+                           Height="35"
+                           Margin="5,0"
+                           Click="GoBack_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <Button x:Name="GoForwardButton"
+                           Content="FORWARD"
+                           Width="100"
+                           Height="35"
+                           Margin="5,0"
+                           Click="GoForward_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <Button x:Name="RefreshButton"
+                           Content="REFRESH"
+                           Width="90"
+                           Height="35"
+                           Margin="5,0"
+                           Click="Refresh_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <Button x:Name="HomeButton"
+                           Content="HOME"
+                           Width="80"
+                           Height="35"
+                           Margin="5,0"
+                           Click="Home_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <!-- Quick Access Buttons -->
+                    <Button x:Name="LPM1Button"
+                           Content="LPM1"
+                           Width="80"
+                           Height="35"
+                           Margin="10,0,0,0"
+                           Click="LPM1_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="LPM Station 1 - c40.radioboss.fm"/>
+                    
+                    <Button x:Name="LPM2Button"
+                           Content="LPM2"
+                           Width="80"
+                           Height="35"
+                           Margin="5,0"
+                           Click="LPM2_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="LPM Station 2 - c19.radioboss.fm"/>
+                    
+                    <Button x:Name="RadioGardenButton"
+                           Content="GARDEN"
+                           Width="90"
+                           Height="35"
+                           Margin="5,0"
+                           Click="RadioGarden_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="Radio.Garden - Global Radio Map"/>
+                </StackPanel>
+
+                <!-- Title with URL Input -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="LIVE RADIO DATABASE"
+                              FontSize="18"
+                              FontWeight="Bold"
+                              Foreground="#00FF00"
+                              FontFamily="Consolas"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,5"/>
+                    
+                    <!-- URL Input Bar -->
+                    <Grid Width="400">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox x:Name="UrlTextBox"
+                                Grid.Column="0"
+                                Height="30"
+                                FontFamily="Consolas"
+                                FontSize="11"
+                                Background="#001100"
+                                Foreground="#00FF00"
+                                BorderBrush="#00FF00"
+                                BorderThickness="2"
+                                Padding="5"
+                                VerticalContentAlignment="Center"
+                                Text="https://radio.garden"/>
+                        
+                        <Button x:Name="GoButton"
+                               Grid.Column="1"
+                               Content="GO"
+                               Width="60"
+                               Height="30"
+                               Margin="5,0,0,0"
+                               Click="Go_Click"
+                               Style="{StaticResource SpaceButton}"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Full Screen Button -->
+                <Button x:Name="FullScreenButton"
+                       Grid.Column="2"
+                       Content="FULL SCREEN"
+                       Width="140"
+                       Height="35"
+                       Margin="5,0"
+                       Click="ToggleFullScreen_Click"
+                       Style="{StaticResource SpaceButton}"/>
+            </Grid>
+        </Border>
+
+        <!-- Web Browser (Replaced WebView2) -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                BorderBrush="#00FF00" 
+                BorderThickness="2" 
+                Margin="0">
+            <WebBrowser x:Name="LiveRadioWebBrowser"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,29 @@
+<UserControl x:Class="DJBookingSystem.Controls.AnimatedBanner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="80" Width="500">
+    <Grid>
+        <TextBlock x:Name="BannerText" Text="Fallen Collective"
+                   FontSize="48" FontWeight="Bold" FontFamily="Castellar"
+                   Foreground="{DynamicResource AccentBrush}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#00FFF0" BlurRadius="20" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever">
+                        <ColorAnimation Storyboard.TargetName="BannerText"
+                                        Storyboard.TargetProperty="(TextBlock.Effect).(DropShadowEffect.Color)"
+                                        From="#00FFF0" To="#00FF99" Duration="0:0:1" AutoReverse="True"/>
+                        <DoubleAnimation Storyboard.TargetName="BannerText"
+                                         Storyboard.TargetProperty="(TextBlock.Effect).(DropShadowEffect.BlurRadius)"
+                                         From="20" To="40" Duration="0:0:1" AutoReverse="True"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+    </Grid>
+</UserControl>

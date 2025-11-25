@@ -1,0 +1,556 @@
+<Window x:Class="DJBookingSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DJ Booking System - RadioBoss Edition" 
+        Height="1080" 
+        Width="1920"
+        Style="{StaticResource PrimaryWindowStyle}">
+    
+    <!-- ========================================
+         USAGE EXAMPLES FOR DJ BOOKING THEME
+         
+         This file demonstrates how to use the
+         DJBookingTheme.xaml resource dictionary
+         in your WPF application.
+         ======================================== -->
+    
+    <Window.Resources>
+        <!-- Merge the theme dictionary -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DJBookingTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <!-- Space Background -->
+        <Grid.Background>
+            <StaticResource ResourceKey="SpaceBackgroundBrush"/>
+        </Grid.Background>
+        
+        <!-- Main Content Container -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="40" 
+                        HorizontalAlignment="Center" 
+                        MaxWidth="1600">
+                
+                <!-- ========================================
+                     EXAMPLE 1: LOGIN SCREEN
+                     ======================================== -->
+                <Border Style="{StaticResource LoginContainerBorderStyle}"
+                        Width="500"
+                        Margin="0,50,0,50">
+                    <StackPanel>
+                        <!-- Logo -->
+                        <Image Source="logo.png" 
+                               Style="{StaticResource FloatingLogoStyle}"/>
+                        
+                        <!-- Title -->
+                        <TextBlock Text="🎧 DJ Booking System 🎧"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   Margin="0,0,0,10"/>
+                        
+                        <!-- Subtitle -->
+                        <TextBlock Text="RadioBoss Edition - Secure Login"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Margin="0,0,0,40"/>
+                        
+                        <!-- Username Input -->
+                        <Label Content="Username:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                                 Margin="0,0,0,20"/>
+                        
+                        <!-- Password Input -->
+                        <Label Content="Password:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        <PasswordBox Style="{StaticResource PrimaryPasswordBoxStyle}"
+                                     Margin="0,0,0,20"/>
+                        
+                        <!-- Login Button -->
+                        <Button Content="🚀 Login to System 🚀"
+                                Style="{StaticResource PrimaryButtonStyle}"/>
+                        
+                        <!-- Error Message (hidden by default) -->
+                        <Border Style="{StaticResource ErrorMessageStyle}"
+                                Margin="0,20,0,0"
+                                Visibility="Collapsed">
+                            <TextBlock Text="Invalid username or password. Please try again."
+                                       Style="{StaticResource ErrorTextBlockStyle}"
+                                       TextAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 2: MAIN PANEL WITH FORM
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <!-- Header -->
+                        <TextBlock Text="🎧 DJ Booking System v3.1.2 🎧"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   Margin="0,0,0,15"/>
+                        
+                        <TextBlock Text="Book your slot at our premium venues"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Margin="0,0,0,30"/>
+                        
+                        <!-- Booking Form -->
+                        <Border Style="{StaticResource FormBorderStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Make a Booking"
+                                           Style="{StaticResource TitleTextBlockStyle}"
+                                           FontSize="32"
+                                           Margin="0,0,0,25"/>
+                                
+                                <!-- DJ Name -->
+                                <Label Content="DJ Name:" 
+                                       Style="{StaticResource PrimaryLabelStyle}"/>
+                                <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                                         Margin="0,0,0,25"/>
+                                
+                                <!-- Venue Selection -->
+                                <Label Content="Select Venue:" 
+                                       Style="{StaticResource PrimaryLabelStyle}"/>
+                                <ComboBox Style="{StaticResource PrimaryComboBoxStyle}"
+                                          Margin="0,0,0,25">
+                                    <ComboBoxItem Content="Choose a venue..."/>
+                                    <ComboBoxItem Content="Club Neon"/>
+                                    <ComboBoxItem Content="Space Station"/>
+                                    <ComboBoxItem Content="Cyber Lounge"/>
+                                </ComboBox>
+                                
+                                <!-- Day Selection -->
+                                <Label Content="Select Day:" 
+                                       Style="{StaticResource PrimaryLabelStyle}"/>
+                                <ComboBox Style="{StaticResource PrimaryComboBoxStyle}"
+                                          Margin="0,0,0,25">
+                                    <ComboBoxItem Content="Select venue first..."/>
+                                </ComboBox>
+                                
+                                <!-- Time Selection -->
+                                <Label Content="Select Time:" 
+                                       Style="{StaticResource PrimaryLabelStyle}"/>
+                                <ComboBox Style="{StaticResource PrimaryComboBoxStyle}"
+                                          Margin="0,0,0,25">
+                                    <ComboBoxItem Content="Select day first..."/>
+                                </ComboBox>
+                                
+                                <!-- Streaming Link -->
+                                <Label Content="Streaming Link:" 
+                                       Style="{StaticResource PrimaryLabelStyle}"/>
+                                <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                                         Text="https://your-stream.link"
+                                         Margin="0,0,0,25"/>
+                                
+                                <!-- Submit Button -->
+                                <Button Content="🎵 Book Slot 🎵"
+                                        Style="{StaticResource PrimaryButtonStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 3: VENUE CARDS GRID
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Available Venues"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Venue Card 1 -->
+                            <Border Grid.Column="0" 
+                                    Style="{StaticResource VenueCardStyle}">
+                                <StackPanel>
+                                    <TextBlock Text="Club Neon"
+                                               Style="{StaticResource TitleTextBlockStyle}"
+                                               FontSize="24"
+                                               Margin="0,0,0,10"/>
+                                    
+                                    <TextBlock Text="Open: Friday - Sunday, 18:00 - 02:00"
+                                               Style="{StaticResource SubtitleTextBlockStyle}"
+                                               FontSize="14"
+                                               Margin="0,0,0,20"/>
+                                    
+                                    <!-- Time Slots -->
+                                    <StackPanel>
+                                        <TextBlock Text="Available Slots:"
+                                                   Style="{StaticResource PrimaryTextBlockStyle}"
+                                                   FontWeight="Bold"
+                                                   Margin="0,0,0,10"/>
+                                        
+                                        <Border Style="{StaticResource AvailableTimeSlotStyle}"
+                                                Margin="0,0,0,5">
+                                            <TextBlock Text="Friday 20:00"
+                                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                                       TextAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <Border Style="{StaticResource BookedTimeSlotStyle}"
+                                                Margin="0,0,0,5">
+                                            <StackPanel>
+                                                <TextBlock Text="Friday 22:00"
+                                                           Style="{StaticResource PrimaryTextBlockStyle}"
+                                                           Foreground="{StaticResource ErrorRedBrush}"
+                                                           TextAlignment="Center"/>
+                                                <TextBlock Text="DJ Nexus"
+                                                           Style="{StaticResource PrimaryTextBlockStyle}"
+                                                           Foreground="{StaticResource ErrorRedBrush}"
+                                                           FontSize="10"
+                                                           TextAlignment="Center"
+                                                           FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <Border Style="{StaticResource ClosedTimeSlotStyle}"
+                                                Margin="0,0,0,5">
+                                            <TextBlock Text="Monday 20:00 (Closed)"
+                                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                                       Foreground="#666666"
+                                                       TextAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Venue Card 2 -->
+                            <Border Grid.Column="1" 
+                                    Style="{StaticResource VenueCardStyle}">
+                                <StackPanel>
+                                    <TextBlock Text="Space Station"
+                                               Style="{StaticResource TitleTextBlockStyle}"
+                                               FontSize="24"
+                                               Margin="0,0,0,10"/>
+                                    
+                                    <TextBlock Text="Open: Thursday - Saturday, 19:00 - 03:00"
+                                               Style="{StaticResource SubtitleTextBlockStyle}"
+                                               FontSize="14"
+                                               Margin="0,0,0,20"/>
+                                    
+                                    <!-- Time Slots -->
+                                    <StackPanel>
+                                        <TextBlock Text="Available Slots:"
+                                                   Style="{StaticResource PrimaryTextBlockStyle}"
+                                                   FontWeight="Bold"
+                                                   Margin="0,0,0,10"/>
+                                        
+                                        <Border Style="{StaticResource AvailableTimeSlotStyle}"
+                                                Margin="0,0,0,5">
+                                            <TextBlock Text="Thursday 21:00"
+                                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                                       TextAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <Border Style="{StaticResource ClosedButBookableTimeSlotStyle}"
+                                                Margin="0,0,0,5">
+                                            <TextBlock Text="Sunday 20:00 (Special Event)"
+                                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                                       Foreground="{StaticResource OrangeAccentBrush}"
+                                                       TextAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 4: BUTTON STYLES SHOWCASE
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Button Styles"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <UniformGrid Columns="2" 
+                                     Rows="3">
+                            <!-- Primary Button -->
+                            <Button Content="Primary Button"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="10"/>
+                            
+                            <!-- Success Button -->
+                            <Button Content="Success Button"
+                                    Style="{StaticResource SuccessButtonStyle}"
+                                    Margin="10"/>
+                            
+                            <!-- Danger Button -->
+                            <Button Content="Danger Button"
+                                    Style="{StaticResource DangerButtonStyle}"
+                                    Margin="10"/>
+                            
+                            <!-- Warning Button -->
+                            <Button Content="Warning Button"
+                                    Style="{StaticResource WarningButtonStyle}"
+                                    Margin="10"/>
+                            
+                            <!-- Notification Button -->
+                            <Button Content="📢 Notification Button"
+                                    Style="{StaticResource NotificationButtonStyle}"
+                                    Margin="10"/>
+                            
+                            <!-- Disabled Button -->
+                            <Button Content="Disabled Button"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    IsEnabled="False"
+                                    Margin="10"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 5: STATUS INDICATORS
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Status Indicators"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center">
+                            <!-- Connected Status -->
+                            <Border Style="{StaticResource ConnectedStatusStyle}"
+                                    Margin="10">
+                                <TextBlock Text="Connected to RadioBoss"
+                                           Style="{StaticResource PrimaryTextBlockStyle}"
+                                           FontWeight="Bold"/>
+                            </Border>
+                            
+                            <!-- Disconnected Status -->
+                            <Border Style="{StaticResource DisconnectedStatusStyle}"
+                                    Margin="10">
+                                <TextBlock Text="Disconnected"
+                                           Style="{StaticResource PrimaryTextBlockStyle}"
+                                           Foreground="{StaticResource ErrorRedBrush}"
+                                           FontWeight="Bold"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 6: MESSAGE BOXES
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Message Styles"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <!-- Success Message -->
+                        <Border Style="{StaticResource SuccessMessageStyle}"
+                                Margin="0,0,0,15">
+                            <TextBlock Text="✓ Booking successful! Discord notification sent! 🎵"
+                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"/>
+                        </Border>
+                        
+                        <!-- Error Message -->
+                        <Border Style="{StaticResource ErrorMessageStyle}"
+                                Margin="0,0,0,15">
+                            <TextBlock Text="✗ This time slot is already booked!"
+                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                       Foreground="{StaticResource ErrorRedBrush}"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"/>
+                        </Border>
+                        
+                        <!-- Info Message -->
+                        <Border Style="{StaticResource InfoMessageStyle}">
+                            <TextBlock Text="ℹ Please fill in all required fields"
+                                       Style="{StaticResource PrimaryTextBlockStyle}"
+                                       Foreground="{StaticResource InfoCyanBrush}"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 7: DATA GRID
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Bookings Table"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <DataGrid Style="{StaticResource PrimaryDataGridStyle}"
+                                  ColumnHeaderStyle="{StaticResource PrimaryDataGridColumnHeaderStyle}"
+                                  RowStyle="{StaticResource PrimaryDataGridRowStyle}"
+                                  CellStyle="{StaticResource PrimaryDataGridCellStyle}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="DJ Name" 
+                                                    Binding="{Binding DjName}" 
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Venue" 
+                                                    Binding="{Binding Venue}" 
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Day" 
+                                                    Binding="{Binding Day}" 
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Time" 
+                                                    Binding="{Binding Time}" 
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Streaming Link" 
+                                                    Binding="{Binding StreamingLink}" 
+                                                    Width="2*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 8: TAB CONTROL
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Admin Panel"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <TabControl Style="{StaticResource PrimaryTabControlStyle}">
+                            <TabItem Header="Venues" 
+                                     Style="{StaticResource PrimaryTabItemStyle}">
+                                <Border Padding="20">
+                                    <TextBlock Text="Venue management content goes here..."
+                                               Style="{StaticResource PrimaryTextBlockStyle}"/>
+                                </Border>
+                            </TabItem>
+                            
+                            <TabItem Header="Bookings" 
+                                     Style="{StaticResource PrimaryTabItemStyle}">
+                                <Border Padding="20">
+                                    <TextBlock Text="Bookings management content goes here..."
+                                               Style="{StaticResource PrimaryTextBlockStyle}"/>
+                                </Border>
+                            </TabItem>
+                            
+                            <TabItem Header="Past Links" 
+                                     Style="{StaticResource PrimaryTabItemStyle}">
+                                <Border Padding="20">
+                                    <TextBlock Text="Past links archive content goes here..."
+                                               Style="{StaticResource PrimaryTextBlockStyle}"/>
+                                </Border>
+                            </TabItem>
+                            
+                            <TabItem Header="DJ Logos" 
+                                     Style="{StaticResource PrimaryTabItemStyle}">
+                                <Border Padding="20">
+                                    <TextBlock Text="DJ logos management content goes here..."
+                                               Style="{StaticResource PrimaryTextBlockStyle}"/>
+                                </Border>
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 9: PROGRESS BAR
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="Progress Indicators"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <Label Content="Upload Progress:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        <ProgressBar Style="{StaticResource PrimaryProgressBarStyle}"
+                                     Value="65"
+                                     Maximum="100"
+                                     Margin="0,0,0,20"/>
+                        
+                        <Label Content="Loading Data:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        <ProgressBar Style="{StaticResource PrimaryProgressBarStyle}"
+                                     Value="30"
+                                     Maximum="100"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- ========================================
+                     EXAMPLE 10: CHECKBOXES AND RADIO BUTTONS
+                     ======================================== -->
+                <Border Style="{StaticResource PanelBorderStyle}"
+                        Margin="0,0,0,50">
+                    <StackPanel>
+                        <TextBlock Text="Form Controls"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   FontSize="32"
+                                   Margin="0,0,0,30"/>
+                        
+                        <Label Content="Weekly Schedule:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        
+                        <UniformGrid Columns="2" 
+                                     Rows="2"
+                                     Margin="0,0,0,30">
+                            <CheckBox Content="Week 1 of Month"
+                                      Style="{StaticResource PrimaryCheckBoxStyle}"
+                                      Margin="5"/>
+                            <CheckBox Content="Week 2 of Month"
+                                      Style="{StaticResource PrimaryCheckBoxStyle}"
+                                      Margin="5"/>
+                            <CheckBox Content="Week 3 of Month"
+                                      Style="{StaticResource PrimaryCheckBoxStyle}"
+                                      Margin="5"/>
+                            <CheckBox Content="Week 4 of Month"
+                                      Style="{StaticResource PrimaryCheckBoxStyle}"
+                                      Margin="5"/>
+                        </UniformGrid>
+                        
+                        <Label Content="Notification Preference:" 
+                               Style="{StaticResource PrimaryLabelStyle}"/>
+                        
+                        <StackPanel>
+                            <RadioButton Content="Email Notifications"
+                                         Style="{StaticResource PrimaryRadioButtonStyle}"
+                                         Margin="5"/>
+                            <RadioButton Content="Discord Notifications"
+                                         Style="{StaticResource PrimaryRadioButtonStyle}"
+                                         Margin="5"
+                                         IsChecked="True"/>
+                            <RadioButton Content="Both"
+                                         Style="{StaticResource PrimaryRadioButtonStyle}"
+                                         Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

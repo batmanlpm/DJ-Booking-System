@@ -1,0 +1,378 @@
+<Window x:Class="DJBookingSystem.Views.OnlineUsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Online Users - Admin Monitor" 
+        Height="700" 
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResize">
+    
+    <Window.Resources>
+        <Style x:Key="StatusButton" TargetType="Button">
+            <Setter Property="Background" Value="#001100"/>
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="BorderBrush" Value="#00FF00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#003300"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#005500"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StatusTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#0A0A0A"/>
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="BorderBrush" Value="#00FF00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="CaretBrush" Value="#00FF00"/>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#0A0A0A" BorderBrush="#00BFFF" BorderThickness="3" CornerRadius="10">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar with Drag -->
+            <Grid Grid.Row="0" Background="#0F0F0F" Margin="-15,-15,-15,0" Height="50" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                    <TextBlock Text="??" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="ONLINE USERS - ADMIN MONITOR" 
+                              FontSize="18" 
+                              FontWeight="Bold" 
+                              Foreground="#00BFFF" 
+                              FontFamily="Consolas"
+                              VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Button Grid.Column="1" 
+                       Content="?" 
+                       Width="40" 
+                       Height="40"
+                       Background="Transparent"
+                       BorderBrush="Transparent"
+                       Foreground="#FF6B6B"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Cursor="Hand"
+                       Click="Close_Click"
+                       Margin="0,0,10,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF6B6B"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+
+            <!-- Stats Panel -->
+            <Border Grid.Row="1" 
+                   Background="#0F0F0F" 
+                   BorderBrush="#00FF00" 
+                   BorderThickness="2" 
+                   Padding="15" 
+                   Margin="0,15,0,0"
+                   CornerRadius="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Total Users Online -->
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                        <TextBlock Text="Total Online" 
+                                  FontSize="11" 
+                                  Foreground="#888888" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TotalOnlineTextBlock" 
+                                  Text="0" 
+                                  FontSize="28" 
+                                  FontWeight="Bold"
+                                  Foreground="#00FF00" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- Admins Online -->
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                        <TextBlock Text="Admins Online" 
+                                  FontSize="11" 
+                                  Foreground="#888888" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="AdminsOnlineTextBlock" 
+                                  Text="0" 
+                                  FontSize="28" 
+                                  FontWeight="Bold"
+                                  Foreground="#FFD700" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- DJs Online -->
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <TextBlock Text="DJs Online" 
+                                  FontSize="11" 
+                                  Foreground="#888888" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="DJsOnlineTextBlock" 
+                                  Text="0" 
+                                  FontSize="28" 
+                                  FontWeight="Bold"
+                                  Foreground="#FF69B4" 
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- Refresh Button -->
+                    <Button Grid.Column="3" 
+                           Content="?? REFRESH" 
+                           Style="{StaticResource StatusButton}"
+                           Click="Refresh_Click"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"/>
+                </Grid>
+            </Border>
+
+            <!-- Search and Filter -->
+            <Grid Grid.Row="2" Margin="0,15,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Search Box -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="?? Search:" 
+                              FontSize="12" 
+                              Foreground="#00BFFF" 
+                              FontFamily="Consolas"
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+                    <TextBox x:Name="SearchTextBox" 
+                            Style="{StaticResource StatusTextBox}"
+                            Width="300"
+                            TextChanged="SearchTextBox_TextChanged"
+                            VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Role Filter -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="15,0,0,0">
+                    <TextBlock Text="Role:" 
+                              FontSize="12" 
+                              Foreground="#00BFFF" 
+                              FontFamily="Consolas"
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RoleFilterComboBox" 
+                             Width="150"
+                             SelectionChanged="RoleFilter_SelectionChanged"
+                             Background="#0A0A0A"
+                             Foreground="#00FF00"
+                             BorderBrush="#00FF00"
+                             FontFamily="Consolas">
+                        <ComboBoxItem Content="All Roles" IsSelected="True"/>
+                        <ComboBoxItem Content="SysAdmin"/>
+                        <ComboBoxItem Content="Manager"/>
+                        <ComboBoxItem Content="Venue Owner"/>
+                        <ComboBoxItem Content="DJ"/>
+                        <ComboBoxItem Content="User"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Auto Refresh Toggle -->
+                <CheckBox x:Name="AutoRefreshCheckBox" 
+                         Grid.Column="2"
+                         Content="Auto-Refresh (5s)" 
+                         Foreground="#00FF00"
+                         FontFamily="Consolas"
+                         FontSize="12"
+                         VerticalAlignment="Center"
+                         Margin="15,0,0,0"
+                         IsChecked="True"
+                         Checked="AutoRefresh_Changed"
+                         Unchecked="AutoRefresh_Changed"/>
+            </Grid>
+
+            <!-- Online Users List -->
+            <Border Grid.Row="3" 
+                   Background="#0F0F0F" 
+                   BorderBrush="#00FF00" 
+                   BorderThickness="2" 
+                   CornerRadius="5">
+                <DataGrid x:Name="OnlineUsersDataGrid"
+                         AutoGenerateColumns="False"
+                         Background="#0A0A0A"
+                         Foreground="#00FF00"
+                         BorderBrush="Transparent"
+                         GridLinesVisibility="Horizontal"
+                         HorizontalGridLinesBrush="#1a1a1a"
+                         RowBackground="#0A0A0A"
+                         AlternatingRowBackground="#0F0F0F"
+                         HeadersVisibility="Column"
+                         CanUserAddRows="False"
+                         CanUserDeleteRows="False"
+                         IsReadOnly="True"
+                         SelectionMode="Single"
+                         FontFamily="Consolas"
+                         FontSize="12">
+                    
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#00FF00"/>
+                            <Setter Property="Foreground" Value="#000000"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontFamily" Value="Consolas"/>
+                            <Setter Property="Padding" Value="10,8"/>
+                            <Setter Property="BorderBrush" Value="#00FF00"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.Columns>
+                        <!-- Status Indicator -->
+                        <DataGridTextColumn Header="?" Width="40">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="?"/>
+                                    <Setter Property="Foreground" Value="#00FF00"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Username -->
+                        <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="150"/>
+
+                        <!-- Full Name -->
+                        <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="180"/>
+
+                        <!-- Role -->
+                        <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="120"/>
+
+                        <!-- Location -->
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="150"/>
+
+                        <!-- IP Address -->
+                        <DataGridTextColumn Header="IP Address" Binding="{Binding IPAddress}" Width="120"/>
+
+                        <!-- Online Duration -->
+                        <DataGridTextColumn Header="Online For" Binding="{Binding OnlineDuration}" Width="120"/>
+
+                        <!-- Last Activity -->
+                        <DataGridTextColumn Header="Last Activity" Binding="{Binding LastActivity}" Width="150"/>
+
+                        <!-- Actions -->
+                        <DataGridTemplateColumn Header="Actions" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Content="?? Details" 
+                                               Style="{StaticResource StatusButton}"
+                                               Tag="{Binding Username}"
+                                               Click="ViewDetails_Click"
+                                               Padding="10,5"
+                                               FontSize="10"
+                                               Margin="5,0"/>
+                                        <Button Content="?? Message" 
+                                               Style="{StaticResource StatusButton}"
+                                               Tag="{Binding Username}"
+                                               Click="SendMessage_Click"
+                                               Padding="10,5"
+                                               FontSize="10"
+                                               Margin="5,0"
+                                               BorderBrush="#00BFFF"
+                                               Foreground="#00BFFF"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- Status Bar -->
+            <Border Grid.Row="4" 
+                   Background="#0F0F0F" 
+                   BorderBrush="#00FF00" 
+                   BorderThickness="2,0,2,2" 
+                   Padding="10"
+                   Margin="0,10,0,-15"
+                   CornerRadius="0,0,8,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" 
+                              x:Name="StatusTextBlock"
+                              Text="Ready" 
+                              FontSize="11" 
+                              Foreground="#888888" 
+                              FontFamily="Consolas"
+                              VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="2" 
+                              x:Name="LastUpdateTextBlock"
+                              Text="Last Updated: Never" 
+                              FontSize="11" 
+                              Foreground="#666666" 
+                              FontFamily="Consolas"
+                              VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,58 @@
+# ?? DOWNLOAD CURRENT RELEASE NOTES FROM HOSTINGER
+# Gets current index.html and extracts release notes for editing
+
+$HostingerUrl = "https://c40.radioboss.fm/u/98/index.html"
+
+Write-Host "`n??????????????????????????????????????????????????????????????????" -ForegroundColor Cyan
+Write-Host "?           ?? DOWNLOADING CURRENT RELEASE NOTES                 ?" -ForegroundColor Cyan
+Write-Host "??????????????????????????????????????????????????????????????????" -ForegroundColor Cyan
+
+try {
+    Write-Host "`nDownloading from: $HostingerUrl" -ForegroundColor Yellow
+    
+    $currentHtml = Invoke-WebRequest -Uri $HostingerUrl -UseBasicParsing
+    
+    Write-Host "? Downloaded successfully!" -ForegroundColor Green
+    
+    # Save full HTML
+    $currentHtml.Content | Out-File -FilePath "current-index.html" -Encoding UTF8
+    
+    # Extract "What's New" section
+    if ($currentHtml.Content -match '(<h3>.*What''s New.*?</h3>.*?<ul>.*?</ul>)') {
+        $whatsNewSection = $matches[1]
+        
+        # Convert HTML to readable text
+        $releaseNotes = $whatsNewSection -replace '<h3>', "`n" -replace '</h3>', "`n" -replace '<li>', '• ' -replace '</li>', "`n" -replace '<ul>|</ul>|<strong>|</strong>|?\s*', '' -replace '\s+', ' '
+        
+        $releaseNotes | Out-File -FilePath "current-release-notes.txt" -Encoding UTF8
+        
+        Write-Host "`n??????????????????????????????????????????????????????????????????" -ForegroundColor Green
+        Write-Host "?                    ?? CURRENT RELEASE NOTES                    ?" -ForegroundColor Green
+        Write-Host "??????????????????????????????????????????????????????????????????" -ForegroundColor Green
+        
+        Write-Host $releaseNotes -ForegroundColor White
+        
+        Write-Host "`n?? FILES CREATED:" -ForegroundColor Cyan
+        Write-Host "   ? current-index.html (full HTML backup)" -ForegroundColor White
+        Write-Host "   ? current-release-notes.txt (editable text)" -ForegroundColor White
+        
+        Write-Host "`n?? OPENING IN NOTEPAD..." -ForegroundColor Yellow
+        Start-Process notepad "current-release-notes.txt"
+        
+    } else {
+        Write-Host "`n??  Could not extract 'What's New' section" -ForegroundColor Yellow
+        Write-Host "Saving full HTML to: current-index.html" -ForegroundColor Yellow
+    }
+    
+} catch {
+    Write-Host "`n? ERROR: Could not download from Hostinger" -ForegroundColor Red
+    Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
+    
+    Write-Host "`n?? MANUAL ALTERNATIVE:" -ForegroundColor Cyan
+    Write-Host "1. Go to: $HostingerUrl" -ForegroundColor White
+    Write-Host "2. View source (Ctrl+U)" -ForegroundColor White
+    Write-Host "3. Copy the 'What's New' section" -ForegroundColor White
+    Write-Host "4. Paste into Notepad" -ForegroundColor White
+}
+
+Write-Host "`n? DONE!" -ForegroundColor Green

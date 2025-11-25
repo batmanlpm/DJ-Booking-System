@@ -1,0 +1,24 @@
+<Application x:Class="DJBookingSystem.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Default Color: Green - Must be loaded FIRST -->
+                <ResourceDictionary Source="Themes/GreenTheme.xaml"/>
+                <!-- Base Space Theme Styles - Uses colors from GreenTheme -->
+                <ResourceDictionary Source="Themes/SpaceTheme.xaml"/>
+                <!-- Custom Tab Styles (Red/Blue Borders) -->
+                <ResourceDictionary Source="Themes/CustomTabStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Dynamic Theme Colors - Updated by Settings -->
+            <Color x:Key="AppBackgroundColor">#000000</Color>
+            <Color x:Key="AppPrimaryColor">#00FF00</Color>
+            <SolidColorBrush x:Key="AppBackgroundBrush" Color="{DynamicResource AppBackgroundColor}"/>
+            <SolidColorBrush x:Key="AppPrimaryBrush" Color="{DynamicResource AppPrimaryColor}"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

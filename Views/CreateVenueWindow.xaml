@@ -1,0 +1,355 @@
+<Window x:Class="DJBookingSystem.Views.CreateVenueWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Create Venue" 
+        Height="650" 
+        Width="550"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#000000"
+        WindowStyle="None"
+        AllowsTransparency="True">
+
+    <Border BorderBrush="#00FF00" BorderThickness="3" Background="#000000">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FF00" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Title Bar -->
+                <RowDefinition Height="*"/>    <!-- Content -->
+                <RowDefinition Height="Auto"/> <!-- Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Border Grid.Row="0" 
+                   Background="#000000" 
+                   BorderBrush="#00FF00" 
+                   BorderThickness="0,0,0,2" 
+                   MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Height="40">
+                    <TextBlock Text="CREATE VENUE" 
+                              FontFamily="Consolas" 
+                              FontSize="16" 
+                              FontWeight="Bold" 
+                              Foreground="#00FF00" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#00FF00" BlurRadius="10" ShadowDepth="0"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button Content="X" 
+                           Click="Close_Click"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Width="40"
+                           Height="30"
+                           Background="Transparent"
+                           Foreground="#FF0000"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           BorderThickness="0"
+                           Cursor="Hand"
+                           Margin="0,0,5,0"/>
+                </Grid>
+            </Border>
+
+            <!-- Content - Scrollable -->
+            <ScrollViewer Grid.Row="1" 
+                         VerticalScrollBarVisibility="Auto" 
+                         HorizontalScrollBarVisibility="Disabled"
+                         Margin="10">
+                <StackPanel Margin="30,10">
+                    
+                    <!-- Venue Name -->
+                    <TextBlock Text="Venue Name *:" 
+                              Foreground="#00FF00" 
+                              FontFamily="Consolas" 
+                              FontWeight="Bold" 
+                              FontSize="12"
+                              Margin="0,0,0,5"/>
+                    <TextBox x:Name="VenueNameTextBox" 
+                            Background="#000000" 
+                            Foreground="#00FF00" 
+                            BorderBrush="#00FF00" 
+                            BorderThickness="2" 
+                            Padding="10" 
+                            FontFamily="Consolas"
+                            FontSize="12"
+                            Margin="0,0,0,20"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="Description *:" 
+                              Foreground="#00FF00" 
+                              FontFamily="Consolas" 
+                              FontWeight="Bold" 
+                              FontSize="12"
+                              Margin="0,0,0,5"/>
+                    <TextBox x:Name="DescriptionTextBox" 
+                            Background="#000000" 
+                            Foreground="#00FF00" 
+                            BorderBrush="#00FF00" 
+                            BorderThickness="2" 
+                            Padding="10" 
+                            FontFamily="Consolas"
+                            FontSize="12"
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            Height="80"
+                            Margin="0,0,0,20"/>
+
+                    <!-- Open Days with Times -->
+                    <TextBlock Text="Open Days &amp; Hours *:" 
+                              Foreground="#00FF00" 
+                              FontFamily="Consolas" 
+                              FontWeight="Bold" 
+                              FontSize="12"
+                              Margin="0,0,0,10"/>
+
+                    <!-- Day: Monday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="MondayCheckBox" 
+                                     Content="Monday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="MondayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="MondayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="MondayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Tuesday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="TuesdayCheckBox" 
+                                     Content="Tuesday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="TuesdayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="TuesdayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="TuesdayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Wednesday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="WednesdayCheckBox" 
+                                     Content="Wednesday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="WednesdayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="WednesdayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="WednesdayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Thursday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="ThursdayCheckBox" 
+                                     Content="Thursday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="ThursdayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="ThursdayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="ThursdayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Friday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="FridayCheckBox" 
+                                     Content="Friday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="FridayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="FridayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="FridayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Saturday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,5">
+                        <StackPanel>
+                            <CheckBox x:Name="SaturdayCheckBox" 
+                                     Content="Saturday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     IsChecked="True"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="SaturdayTimePanel" Visibility="Visible" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="SaturdayStartTextBox" Text="20:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="SaturdayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Sunday -->
+                    <Border Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="1" Padding="10" Margin="0,0,0,20">
+                        <StackPanel>
+                            <CheckBox x:Name="SundayCheckBox" 
+                                     Content="Sunday" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold"
+                                     Checked="DayCheckBox_Changed"
+                                     Unchecked="DayCheckBox_Changed"/>
+                            <Grid x:Name="SundayTimePanel" Visibility="Collapsed" Margin="20,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox Grid.Column="1" x:Name="SundayStartTextBox" Text="18:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                                <TextBlock Grid.Column="2" Text="Finish:" Foreground="#00FF00" FontFamily="Consolas" VerticalAlignment="Center" Margin="15,0,10,0"/>
+                                <TextBox Grid.Column="3" x:Name="SundayFinishTextBox" Text="02:00" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" Padding="5" FontFamily="Consolas"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Active Weeks -->
+                    <TextBlock Text="Active Weeks of Month *:" 
+                              Foreground="#00FF00" 
+                              FontFamily="Consolas" 
+                              FontWeight="Bold" 
+                              FontSize="12"
+                              Margin="0,0,0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <CheckBox x:Name="Week1CheckBox" Content="Week 1" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,15,0" IsChecked="True"/>
+                        <CheckBox x:Name="Week2CheckBox" Content="Week 2" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,15,0" IsChecked="True"/>
+                        <CheckBox x:Name="Week3CheckBox" Content="Week 3" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,15,0" IsChecked="True"/>
+                        <CheckBox x:Name="Week4CheckBox" Content="Week 4" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,15,0" IsChecked="True"/>
+                    </StackPanel>
+
+                    <!-- Status Message -->
+                    <TextBlock x:Name="StatusText"
+                              Text=""
+                              Foreground="#FF0000"
+                              FontFamily="Consolas"
+                              FontSize="11"
+                              TextWrapping="Wrap"
+                              Margin="0,10,0,0"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Action Buttons -->
+            <Border Grid.Row="2" 
+                   Background="#000000" 
+                   BorderBrush="#00FF00" 
+                   BorderThickness="0,2,0,0" 
+                   Padding="20,15">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="CREATE VENUE" 
+                           Click="CreateVenue_Click"
+                           Background="#00FF00"
+                           Foreground="#000000"
+                           FontFamily="Consolas"
+                           FontWeight="Bold"
+                           FontSize="12"
+                           Padding="30,10"
+                           Margin="10,0"
+                           Cursor="Hand"
+                           BorderThickness="0">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#00FF00" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <Button Content="CANCEL" 
+                           Click="Close_Click"
+                           Background="#FF0000"
+                           Foreground="#000000"
+                           FontFamily="Consolas"
+                           FontWeight="Bold"
+                           FontSize="12"
+                           Padding="30,10"
+                           Margin="10,0"
+                           Cursor="Hand"
+                           BorderThickness="0">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#FF0000" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

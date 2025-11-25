@@ -1,0 +1,422 @@
+<Window x:Class="DJBookingSystem.UpdaterAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Update Manager - Admin Panel" 
+        Height="700" 
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource WindowBackground}"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+        <!-- Styles -->
+        <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#B0B0B0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+
+        <Style x:Key="InfoTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#C0C0C0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="AdminButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3E3E42"/>
+                                <Setter Property="BorderBrush" Value="#1E90FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#007ACC"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource AdminButtonStyle}">
+            <Setter Property="BorderBrush" Value="#DC3545"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF4555"/>
+                    <Setter Property="Background" Value="#3E2D2F"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#DC3545"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SuccessButtonStyle" TargetType="Button" BasedOn="{StaticResource AdminButtonStyle}">
+            <Setter Property="BorderBrush" Value="#28A745"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#38B755"/>
+                    <Setter Property="Background" Value="#2D3E30"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#28A745"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{DynamicResource WindowBackground}" 
+            BorderBrush="#007ACC" 
+            BorderThickness="1"
+            CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Border Grid.Row="0" 
+                    Background="#2D2D30" 
+                    CornerRadius="5,5,0,0"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icon and Title -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="15,0">
+                        <TextBlock Text="??" FontSize="24" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="Update Manager" Style="{StaticResource TitleTextStyle}" VerticalAlignment="Center"/>
+                        <Border Background="#DC3545" CornerRadius="10" Padding="8,2" Margin="10,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="ADMIN ONLY" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Close Button -->
+                    <Button Grid.Column="2" 
+                            Content="?" 
+                            Width="45" 
+                            Height="45"
+                            Background="Transparent"
+                            Foreground="#E0E0E0"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Click="Close_Click"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#DC3545"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Main Content -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Current Version Info -->
+                    <Border Grid.Row="0" 
+                            Background="#252526" 
+                            BorderBrush="#3E3E42" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="20"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="?? Current Version Information" Style="{StaticResource SectionHeaderStyle}"/>
+                            <Separator Background="#3E3E42" Margin="0,5,0,10"/>
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Version:" Style="{StaticResource InfoTextStyle}" FontWeight="Bold" Margin="0,5"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CurrentVersionText" Text="Loading..." Style="{StaticResource InfoTextStyle}" Margin="10,5,0,5"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Release Date:" Style="{StaticResource InfoTextStyle}" FontWeight="Bold" Margin="0,5"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ReleaseDateText" Text="Loading..." Style="{StaticResource InfoTextStyle}" Margin="10,5,0,5"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Build Type:" Style="{StaticResource InfoTextStyle}" FontWeight="Bold" Margin="0,5"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="BuildTypeText" Text="Release" Style="{StaticResource InfoTextStyle}" Margin="10,5,0,5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Security Status -->
+                    <Border Grid.Row="1" 
+                            Background="#252526" 
+                            BorderBrush="#3E3E42" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="20"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="?? Security Status" Style="{StaticResource SectionHeaderStyle}"/>
+                            <Separator Background="#3E3E42" Margin="0,5,0,10"/>
+                            
+                            <TextBlock x:Name="SecurityStatusText" 
+                                      Style="{StaticResource InfoTextStyle}" 
+                                      TextWrapping="Wrap"
+                                      Margin="0,5"/>
+
+                            <Button Content="?? Test SSL Connection" 
+                                   Style="{StaticResource AdminButtonStyle}"
+                                   Click="TestSslConnection_Click"
+                                   HorizontalAlignment="Left"
+                                   Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Upload New Update -->
+                    <Border Grid.Row="2" 
+                            Background="#252526" 
+                            BorderBrush="#3E3E42" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="20"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="?? Deploy New Update" Style="{StaticResource SectionHeaderStyle}"/>
+                            <Separator Background="#3E3E42" Margin="0,5,0,10"/>
+
+                            <TextBlock Text="Upload a new version to the update server:" 
+                                      Style="{StaticResource InfoTextStyle}"
+                                      Margin="0,0,0,10"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Version -->
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="New Version:" Style="{StaticResource InfoTextStyle}" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="NewVersionTextBox" 
+                                        Height="30" Margin="0,5"
+                                        Background="#1E1E1E" Foreground="#E0E0E0"
+                                        BorderBrush="#3E3E42"
+                                        Padding="5"/>
+
+                                <!-- Release Notes -->
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Release Notes:" Style="{StaticResource InfoTextStyle}" VerticalAlignment="Top" Margin="0,5,10,5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="ReleaseNotesTextBox"
+                                        Height="80" Margin="0,5"
+                                        Background="#1E1E1E" Foreground="#E0E0E0"
+                                        BorderBrush="#3E3E42"
+                                        AcceptsReturn="True"
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto"
+                                        Padding="5"/>
+
+                                <!-- File Selection -->
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Update File:" Style="{StaticResource InfoTextStyle}" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,5">
+                                    <TextBox x:Name="UpdateFilePathTextBox" 
+                                            Width="400"
+                                            Height="30"
+                                            Background="#1E1E1E" Foreground="#E0E0E0"
+                                            BorderBrush="#3E3E42"
+                                            IsReadOnly="True"
+                                            Padding="5"/>
+                                    <Button Content="?? Browse" 
+                                           Style="{StaticResource AdminButtonStyle}"
+                                           Click="BrowseUpdateFile_Click"
+                                           Margin="10,0,0,0"/>
+                                </StackPanel>
+
+                                <!-- Critical Update Checkbox -->
+                                <CheckBox Grid.Row="3" Grid.Column="1" 
+                                         x:Name="IsCriticalCheckBox"
+                                         Content="Mark as Critical Update (Forces installation)"
+                                         Foreground="#E0E0E0"
+                                         Margin="0,10,0,5"/>
+
+                                <!-- Upload Progress -->
+                                <ProgressBar Grid.Row="4" Grid.Column="1" 
+                                            x:Name="UploadProgressBar"
+                                            Height="25"
+                                            Margin="0,10,0,5"
+                                            Visibility="Collapsed"
+                                            Foreground="#007ACC"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" 
+                                          x:Name="UploadStatusText"
+                                          Style="{StaticResource InfoTextStyle}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Visibility="Collapsed"/>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                <Button Content="?? Deploy Update to Server" 
+                                       Style="{StaticResource SuccessButtonStyle}"
+                                       Click="DeployUpdate_Click"
+                                       Width="200"/>
+                                <Button Content="?? Validate Update File" 
+                                       Style="{StaticResource AdminButtonStyle}"
+                                       Click="ValidateUpdate_Click"
+                                       Width="180"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Server Management -->
+                    <Border Grid.Row="3" 
+                            Background="#252526" 
+                            BorderBrush="#3E3E42" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="20"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="?? Server Management" Style="{StaticResource SectionHeaderStyle}"/>
+                            <Separator Background="#3E3E42" Margin="0,5,0,10"/>
+
+                            <TextBlock Text="Server Information:" Style="{StaticResource InfoTextStyle}" FontWeight="Bold" Margin="0,5"/>
+                            <Grid Margin="0,5,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="URL:" Style="{StaticResource InfoTextStyle}" Margin="0,3,10,3"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="https://djbookupdates.com" Style="{StaticResource InfoTextStyle}" Margin="0,3"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="SFTP Host:" Style="{StaticResource InfoTextStyle}" Margin="0,3,10,3"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="153.92.10.234:65002" Style="{StaticResource InfoTextStyle}" Margin="0,3"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Status:" Style="{StaticResource InfoTextStyle}" Margin="0,3,10,3"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="ServerStatusText" Text="Not Connected" Style="{StaticResource InfoTextStyle}" Margin="0,3"/>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="?? Test Connection" 
+                                       Style="{StaticResource AdminButtonStyle}"
+                                       Click="TestConnection_Click"
+                                       Width="150"/>
+                                <Button Content="?? View Server Logs" 
+                                       Style="{StaticResource AdminButtonStyle}"
+                                       Click="ViewServerLogs_Click"
+                                       Width="150"
+                                       Margin="10,0,0,0"/>
+                                <Button Content="?? Refresh Status" 
+                                       Style="{StaticResource AdminButtonStyle}"
+                                       Click="RefreshStatus_Click"
+                                       Width="150"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Danger Zone -->
+                    <Border Grid.Row="4" 
+                            Background="#2D2020" 
+                            BorderBrush="#DC3545" 
+                            BorderThickness="2" 
+                            CornerRadius="5" 
+                            Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="?? Danger Zone" Style="{StaticResource SectionHeaderStyle}" Foreground="#DC3545"/>
+                            <Separator Background="#DC3545" Margin="0,5,0,10"/>
+
+                            <TextBlock Text="These actions can affect all users. Use with caution!" 
+                                      Style="{StaticResource InfoTextStyle}"
+                                      Foreground="#FFC107"
+                                      Margin="0,0,0,10"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="??? Rollback Update" 
+                                       Style="{StaticResource DangerButtonStyle}"
+                                       Click="RollbackUpdate_Click"
+                                       Width="150"/>
+                                <Button Content="?? Force Update All Clients" 
+                                       Style="{StaticResource DangerButtonStyle}"
+                                       Click="ForceUpdate_Click"
+                                       Width="180"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

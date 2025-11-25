@@ -1,0 +1,30 @@
+{
+  "version": "1.2.5",
+  "releaseDate": "2025-01-21T00:00:00Z",
+  "downloadUrl": "https://c40.radioboss.fm/u/98/DJBookingSystem.exe",
+  "fullPackageUrl": "https://c40.radioboss.fm/u/98/DJBookingSystem-Full-v1.2.5.zip",
+  "changelogUrl": "https://c40.radioboss.fm/u/98/CHANGELOG.txt",
+  "isCritical": false,
+  "minimumVersion": "1.0.0",
+  "fileSize": 0,
+  "sha256Hash": "",
+  "releaseNotes": "Version 1.2.5 - Tutorial System Complete\n\nMAJOR FEATURES:\n? Mandatory auto-playing tutorial with CandyBot voice narration\n? Interactive UI highlighting with pink spotlight\n? 100% black overlay outside MainWindow\n? Users panel pop-out maximizable window\n? Tutorial checkbox for admin re-training\n\nBUG FIXES:\n? Fixed logout DialogResult error\n? Fixed tutorial audio playback (absolute paths)\n? Fixed element highlighting (added x:Name attributes)\n? Fixed panel positioning (inside MainWindow, not taskbar)\n? Fixed voice file paths (InteractiveGuide/Voices/)\n\nIMPROVEMENTS:\n? Tutorial cannot be skipped (mandatory completion)\n? Tutorial cannot be closed early\n? Auto-advances when voice finishes\n? 1 second pause between steps\n? Fallback timers for missing audio files",
+  "features": [
+    "Mandatory tutorial system with voice narration",
+    "Auto-playing tutorial (no manual clicks)",
+    "UI element highlighting",
+    "Users panel maximizable pop-out window",
+    "Tutorial re-training for admins",
+    "100% black overlay outside application",
+    "Pink spotlight highlighting",
+    "CandyBot voice narration for all steps"
+  ],
+  "bugFixes": [
+    "Fixed logout DialogResult error",
+    "Fixed tutorial audio playback",
+    "Fixed element highlighting",
+    "Fixed CandyBot panel positioning",
+    "Fixed voice file paths",
+    "Fixed tutorial closing prevention"
+  ]
+}

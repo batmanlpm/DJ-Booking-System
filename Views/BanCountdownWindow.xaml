@@ -1,0 +1,196 @@
+<Window x:Class="DJBookingSystem.Views.BanCountdownWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Account Temporarily Banned"
+        Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="Black"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    
+    <Border BorderBrush="#00FF00" BorderThickness="3">
+        <Grid Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="#FF0000" BorderThickness="0,0,0,2" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="? ACCOUNT BANNED" 
+                              FontSize="32" 
+                              FontWeight="Bold" 
+                              Foreground="#FF0000" 
+                              FontFamily="Consolas" 
+                              HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="StrikeText" 
+                              Text="Strike 1 of 3" 
+                              FontSize="16" 
+                              Foreground="#FFA500" 
+                              FontFamily="Consolas" 
+                              HorizontalAlignment="Center" 
+                              Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Countdown Timer -->
+            <Border Grid.Row="1" BorderBrush="#00FF00" BorderThickness="3" Margin="50,30">
+                <Grid Background="#1A1A1A">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <!-- Title -->
+                        <TextBlock Text="Banned" 
+                                  FontSize="28" 
+                                  FontWeight="Bold" 
+                                  Foreground="#FF0000" 
+                                  FontFamily="Consolas" 
+                                  HorizontalAlignment="Center" 
+                                  Margin="0,0,0,5"/>
+                        <TextBlock Text="Time Remaining" 
+                                  FontSize="24" 
+                                  FontWeight="Bold" 
+                                  Foreground="#FF0000" 
+                                  FontFamily="Consolas" 
+                                  HorizontalAlignment="Center" 
+                                  Margin="0,0,0,30"/>
+
+                        <!-- Flip Clock Display -->
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Days -->
+                            <StackPanel Grid.Column="0">
+                                <Border x:Name="DaysBorder" Background="#FF8800" CornerRadius="8" Padding="20,15" BorderBrush="#FF6600" BorderThickness="3">
+                                    <TextBlock x:Name="DaysText" Text="00" FontSize="60" FontWeight="Bold" Foreground="White" FontFamily="Consolas"/>
+                                </Border>
+                                <TextBlock Text="DAYS" FontSize="12" Foreground="#888" HorizontalAlignment="Center" Margin="0,5,0,0" FontFamily="Consolas"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text=":" FontSize="60" Foreground="#666" VerticalAlignment="Center" Margin="0,0,0,20"/>
+
+                            <!-- Hours -->
+                            <StackPanel Grid.Column="2">
+                                <Border x:Name="HoursBorder" Background="#00AA00" CornerRadius="8" Padding="20,15" BorderBrush="#008800" BorderThickness="3">
+                                    <TextBlock x:Name="HoursText" Text="00" FontSize="60" FontWeight="Bold" Foreground="White" FontFamily="Consolas"/>
+                                </Border>
+                                <TextBlock Text="HOURS" FontSize="12" Foreground="#888" HorizontalAlignment="Center" Margin="0,5,0,0" FontFamily="Consolas"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="3" Text=":" FontSize="60" Foreground="#666" VerticalAlignment="Center" Margin="0,0,0,20"/>
+
+                            <!-- Minutes -->
+                            <StackPanel Grid.Column="4">
+                                <Border x:Name="MinutesBorder" Background="#CC0000" CornerRadius="8" Padding="20,15" BorderBrush="#AA0000" BorderThickness="3">
+                                    <TextBlock x:Name="MinutesText" Text="00" FontSize="60" FontWeight="Bold" Foreground="White" FontFamily="Consolas"/>
+                                </Border>
+                                <TextBlock Text="MINUTES" FontSize="12" Foreground="#888" HorizontalAlignment="Center" Margin="0,5,0,0" FontFamily="Consolas"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="5" Text=":" FontSize="60" Foreground="#666" VerticalAlignment="Center" Margin="0,0,0,20"/>
+
+                            <!-- Seconds -->
+                            <StackPanel Grid.Column="6">
+                                <Border x:Name="SecondsBorder" Background="#AA00AA" CornerRadius="8" Padding="20,15" BorderBrush="#880088" BorderThickness="3">
+                                    <TextBlock x:Name="SecondsText" Text="00" FontSize="60" FontWeight="Bold" Foreground="White" FontFamily="Consolas"/>
+                                </Border>
+                                <TextBlock Text="SECONDS" FontSize="12" Foreground="#888" HorizontalAlignment="Center" Margin="0,5,0,0" FontFamily="Consolas"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Ban Reason -->
+            <Border Grid.Row="2" Background="#0A0A0A" BorderBrush="#FF0000" BorderThickness="0,2,0,2" Padding="30,20">
+                <StackPanel>
+                    <TextBlock Text="Reason for Ban:" FontSize="14" FontWeight="Bold" Foreground="#FFA500" FontFamily="Consolas"/>
+                    <TextBlock x:Name="ReasonText" 
+                              Text="Policy violation" 
+                              FontSize="13" 
+                              Foreground="White" 
+                              FontFamily="Consolas" 
+                              TextWrapping="Wrap"
+                              Margin="0,10,0,0"/>
+                    
+                    <TextBlock x:Name="WarningText" 
+                              Text="? Next ban will be longer! Final strike results in permanent ban." 
+                              FontSize="12" 
+                              Foreground="#FF6600" 
+                              FontFamily="Consolas" 
+                              TextWrapping="Wrap"
+                              Margin="0,15,0,0"
+                              FontStyle="Italic"/>
+                    
+                    <TextBlock Text="??? DUAL-LAYER BAN ENFORCEMENT ???" 
+                              FontSize="11" 
+                              FontWeight="Bold"
+                              Foreground="#FF00FF" 
+                              FontFamily="Consolas" 
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,5"/>
+                    
+                    <TextBlock Text="&#x2022; Machine ID (Hardware) - Blocks THIS computer" 
+                              FontSize="10" 
+                              Foreground="#888" 
+                              FontFamily="Consolas" 
+                              Margin="0,3,0,0"/>
+                    
+                    <TextBlock Text="&#x2022; IP/Network (WAN) - Blocks ALL computers on your network" 
+                              FontSize="10" 
+                              Foreground="#888" 
+                              FontFamily="Consolas" 
+                              Margin="0,3,0,0"/>
+                    
+                    <TextBlock Text="VPN or switching computers will NOT bypass this ban." 
+                              FontSize="10" 
+                              FontWeight="Bold"
+                              Foreground="#FF0000" 
+                              FontFamily="Consolas" 
+                              HorizontalAlignment="Center"
+                              Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                <Button Content="?? APPEAL BAN" 
+                       Click="AppealBan_Click"
+                       Background="#FF8C00"
+                       Foreground="White"
+                       BorderBrush="#FFA500"
+                       BorderThickness="3"
+                       FontWeight="Bold"
+                       FontFamily="Consolas"
+                       FontSize="14"
+                       Padding="30,15"
+                       Margin="0,0,15,0"
+                       Cursor="Hand"
+                       ToolTip="Submit an appeal to contest this ban"/>
+                
+                <Button Content="?? CONTACT SUPPORT" 
+                       Click="Support_Click"
+                       Background="#CC4400"
+                       Foreground="White"
+                       BorderBrush="#FF0000"
+                       BorderThickness="2"
+                       FontFamily="Consolas"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Padding="30,15"
+                       Cursor="Hand"
+                       ToolTip="General support contact information"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

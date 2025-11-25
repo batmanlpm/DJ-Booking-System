@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <!-- Suppress target execution messages -->
+    <MSBuildLogTaskInputs>false</MSBuildLogTaskInputs>
+    <MSBuildLogTaskOutputs>false</MSBuildLogTaskOutputs>
+    <MSBuildLogPropertyAndItemValues>false</MSBuildLogPropertyAndItemValues>
+    <MSBuildLogImports>false</MSBuildLogImports>
+    <MSBuildLogCriticalEvents>false</MSBuildLogCriticalEvents>
+  </PropertyGroup>
+  
+  <!-- Suppress property reassignment messages -->
+  <Target Name="SuppressMessages" BeforeTargets="Build">
+    <PropertyGroup>
+      <SuppressReassignmentMessages>true</SuppressReassignmentMessages>
+    </PropertyGroup>
+  </Target>
+</Project>

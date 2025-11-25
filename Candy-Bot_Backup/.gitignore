@@ -1,0 +1,42 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# virtual environment
+venv/
+env/
+ENV/
+
+# ide
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# environment variables
+.env
+
+# logs
+*.log
+
+# local development
+.DS_Store
+Thumbs.db

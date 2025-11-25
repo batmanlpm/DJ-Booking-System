@@ -1,0 +1,295 @@
+﻿<UserControl x:Class="DJBookingSystem.Views.Radio.RadioUnifiedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1160"
+             Background="Black">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../../New-BG.png" Stretch="UniformToFill" Opacity="0.6"/>
+        </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="0,0,0,2" Padding="15" Margin="10,10,10,5">
+            <Grid>
+                <TextBlock Text="RADIO CONTROL CENTER"
+                          FontSize="20"
+                          FontWeight="Bold"
+                          Foreground="#00FF00"
+                          FontFamily="Consolas"
+                          HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#00FF00" BlurRadius="10" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                
+                <!-- Close Button -->
+                <Button Content="✖ CLOSE"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#8B0000"
+                        Foreground="White"
+                        FontFamily="Consolas"
+                        FontWeight="Bold"
+                        FontSize="12"
+                        Padding="15,5"
+                        BorderBrush="#FF0000"
+                        BorderThickness="2"
+                        Cursor="Hand"
+                        Click="CloseRadioView_Click">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF0000" BlurRadius="8" ShadowDepth="0"/>
+                    </Button.Effect>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#B22222"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="#DC143C"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- 3-Section Grid - Clickable Buttons -->
+        <Grid Grid.Row="1" Margin="10,5,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Section: LivePartyMusic.fm -->
+            <Button Grid.Column="0" 
+                    Click="OpenLivePartyMusic_Click"
+                    Background="Transparent"
+                    BorderBrush="#FF1493"
+                    BorderThickness="3"
+                    Cursor="Hand"
+                    Padding="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#20FF1493"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#40FF1493"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                
+                <!-- Button Content -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0" 
+                              Text="LivePartyMusic.fm"
+                              FontFamily="Consolas"
+                              FontWeight="Bold"
+                              FontSize="24"
+                              Foreground="#FF1493"
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,10"/>
+                    
+                    <!-- Image -->
+                    <Image Grid.Row="1" 
+                           Source="/Views/Radio/character-logo-1.gif"
+                           Stretch="Uniform"
+                           MaxHeight="300"
+                           Margin="20"/>
+                    
+                    <!-- Subtitle -->
+                    <TextBlock Grid.Row="2"
+                              Text="STREAMING NOW ALL YOUR PARTY ANTHEMS"
+                              FontFamily="Consolas"
+                              FontSize="10"
+                              FontWeight="Bold"
+                              Foreground="#00FF00"
+                              HorizontalAlignment="Center"
+                              TextWrapping="Wrap"
+                              TextAlignment="Center"
+                              Margin="10,0,10,20"/>
+                </Grid>
+            </Button>
+
+            <!-- Middle Section: Radio Station Listener -->
+            <Button Grid.Column="2" 
+                    Click="OpenRadioStationListener_Click"
+                    Background="Transparent"
+                    BorderBrush="#00BFFF"
+                    BorderThickness="3"
+                    Cursor="Hand"
+                    Padding="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#2000BFFF"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#4000BFFF"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0" 
+                              Text="Radio Station Listener"
+                              FontFamily="Consolas"
+                              FontWeight="Bold"
+                              FontSize="24"
+                              Foreground="#00BFFF"
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,10"/>
+                    
+                    <!-- Radio Tower Icon (Text-based since no image) -->
+                    <Viewbox Grid.Row="1" Stretch="Uniform" Margin="50">
+                        <TextBlock Text="??"
+                                  FontSize="200"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Viewbox>
+                </Grid>
+            </Button>
+
+            <!-- Right Section: Candy-Bot Radio Relay (C40) -->
+            <Button Grid.Column="4" 
+                    Click="OpenCandyBotRelay_Click"
+                    Background="Transparent"
+                    BorderBrush="#5865F2"
+                    BorderThickness="3"
+                    Cursor="Hand"
+                    Padding="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#205865F2"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#405865F2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0" 
+                              Text="Candy-Bot Radio"
+                              FontFamily="Consolas"
+                              FontWeight="Bold"
+                              FontSize="24"
+                              Foreground="#FF1493"
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,5"/>
+                    
+                    <TextBlock Grid.Row="0" 
+                              Text="Relay (C40)"
+                              FontFamily="Consolas"
+                              FontWeight="Bold"
+                              FontSize="20"
+                              Foreground="#FF1493"
+                              HorizontalAlignment="Center"
+                              Margin="0,50,0,10"/>
+                    
+                    <!-- Candy Bot Image -->
+                    <Image Grid.Row="1" 
+                           Source="../../Images/candy-bot-avatar.png"
+                           Stretch="Uniform"
+                           MaxHeight="300"
+                           Margin="20"/>
+                    
+                    <!-- Small Candy Bot Image (bottom right) -->
+                    <Image Grid.Row="2"
+                           Source="../../Images/candy-bot-avatar.png"
+                           Stretch="Uniform"
+                           Width="60"
+                           Height="60"
+                           HorizontalAlignment="Right"
+                           Margin="0,0,20,20"/>
+                </Grid>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

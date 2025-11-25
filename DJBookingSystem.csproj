@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+    
+    <!-- Version Information -->
+    <Version>1.2.5</Version>
+    <AssemblyVersion>1.2.5.0</AssemblyVersion>
+    <FileVersion>1.2.5.0</FileVersion>
+    <ProductVersion>1.2.5</ProductVersion>
+    
+    <!-- Application Metadata -->
+    <Company>Fallen Collective</Company>
+    <Product>CandyBot DJ Booking System</Product>
+    <Description>AI-powered DJ booking and management system with Discord integration</Description>
+    <Copyright>Copyright © 2024 Fallen Collective. All rights reserved.</Copyright>
+    <Authors>Fallen Collective Development Team</Authors>
+    
+    <!-- Disable ALL auto-generated assembly attributes -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    
+    <!-- MAXIMUM MESSAGE SUPPRESSION -->
+    <NoWarn>$(NoWarn);NU1701;MSB3277;MSB3245;CS8032;MSB3026;MSB3202;MSB3243;MSB3644;MSB3270;NU5048;CS4014</NoWarn>
+    <MSBuildWarningsAsMessages>MSB3026;MSB3202;MSB3243;MSB3270;MSB3644;MSB3884;MSB4011</MSBuildWarningsAsMessages>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugType>embedded</DebugType>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <ReportAnalyzer>false</ReportAnalyzer>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <Deterministic>true</Deterministic>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Screenshot 2025-11-03 204531.png" />
+    <!-- Exclude UsageExamples from build to avoid MainWindow conflict -->
+    <None Remove="ExtractedTheme\UsageExamples.xaml" />
+    <None Remove="Views\Radio\character-logo-1.gif" />
+    <None Include="ExtractedTheme\UsageExamples.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Tools\MigrationTool.csproj" />
+    <!-- Exclude Tools folder from compilation -->
+    <Compile Remove="Tools\**\*.cs" />
+    <EmbeddedResource Remove="Tools\**\*" />
+    <None Include="Tools\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.18.0" />
+    <PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.55.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.400" />
+    <PackageReference Include="System.Management" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PNG_Version.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\SplashLogo.png" />
+    <Resource Include="Assets\AppIcon.ico" />
+    <Resource Include="Screenshot 2025-11-03 204531.png" />
+    <Resource Include="New-BG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\CandyBotAvatar.png" />
+    <!-- Candy-Bot Video for Avatar -->
+    <Resource Include="Resources\Candy-Bot.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <!-- New CandyBot Widget Avatar -->
+    <Resource Include="candy-bot-avatar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Radio\character-logo-1.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Voices\**" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="InteractiveGuide\Voices\**" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Audio\**" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="CandyBot_Training_Guides\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

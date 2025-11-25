@@ -1,0 +1,163 @@
+<UserControl x:Class="DJBookingSystem.Views.Radio.RadioBossCloudView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1160"
+             Background="Black">
+    
+    <UserControl.Resources>
+        <!-- Button Style -->
+        <Style x:Key="SpaceButton" TargetType="Button">
+            <Setter Property="Background" Value="#001100"/>
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="BorderBrush" Value="#00FF00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#003300"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#005500"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Control Bar -->
+            <RowDefinition Height="*"/>
+            <!-- Web Browser -->
+        </Grid.RowDefinitions>
+
+        <!-- Control Bar -->
+        <Border Grid.Row="0" 
+                Background="#0A0A0A" 
+                BorderBrush="#00FF00" 
+                BorderThickness="0,0,0,2" 
+                Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Navigation Buttons -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button x:Name="GoBackButton"
+                           Content="BACK"
+                           Width="80"
+                           Height="35"
+                           Margin="5,0"
+                           Click="GoBack_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <Button x:Name="GoForwardButton"
+                           Content="FORWARD"
+                           Width="100"
+                           Height="35"
+                           Margin="5,0"
+                           Click="GoForward_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <Button x:Name="RefreshButton"
+                           Content="REFRESH"
+                           Width="90"
+                           Height="35"
+                           Margin="5,0"
+                           Click="Refresh_Click"
+                           Style="{StaticResource SpaceButton}"/>
+                    
+                    <!-- Zoom Buttons -->
+                    <Button x:Name="ZoomOutButton"
+                           Content="ZOOM OUT -"
+                           Width="120"
+                           Height="35"
+                           Margin="15,0,5,0"
+                           Click="ZoomOut_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="Zoom Out (Show More Content)"/>
+                    
+                    <Button x:Name="ZoomInButton"
+                           Content="ZOOM IN +"
+                           Width="120"
+                           Height="35"
+                           Margin="5,0"
+                           Click="ZoomIn_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="Zoom In (Show Larger Text)"/>
+                    
+                    <Button x:Name="ZoomResetButton"
+                           Content="RESET"
+                           Width="80"
+                           Height="35"
+                           Margin="5,0"
+                           Click="ZoomReset_Click"
+                           Style="{StaticResource SpaceButton}"
+                           ToolTip="Reset Zoom to Default (30%)"/>
+                </StackPanel>
+
+                <!-- Title -->
+                <TextBlock Grid.Column="1"
+                          Text="LPM.FM Relay Station (c19)"
+                          FontSize="18"
+                          FontWeight="Bold"
+                          Foreground="#00FF00"
+                          FontFamily="Consolas"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+
+                <!-- Full Screen Button -->
+                <Button x:Name="FullScreenButton"
+                       Grid.Column="2"
+                       Content="FULL SCREEN"
+                       Width="140"
+                       Height="35"
+                       Margin="5,0"
+                       Click="ToggleFullScreen_Click"
+                       Style="{StaticResource SpaceButton}"/>
+            </Grid>
+        </Border>
+
+        <!-- WebView2 - Modern Chromium-based browser -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                BorderBrush="#00FF00" 
+                BorderThickness="2" 
+                Margin="0">
+            <Grid>
+                <wv2:WebView2 x:Name="RadioBossCloudBrowser" Panel.ZIndex="0"/>
+                
+                <!-- Read-Only Overlay (visible for non-admin users) -->
+                <Border x:Name="ReadOnlyOverlay"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        Panel.ZIndex="999">
+                    <!-- Transparent blocker to prevent interaction -->
+                    <Rectangle Fill="Transparent" IsHitTestVisible="True"/>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

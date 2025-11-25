@@ -1,0 +1,326 @@
+<Window x:Class="DJBookingSystem.AdminVenueManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:DJBookingSystem.Converters"
+        Title="Admin Venue Management" 
+        Height="800" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        Background="#000000"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    
+    <Window.Resources>
+        <!-- Converters -->
+        <converters:BoolToStatusConverter x:Key="BoolToStatusConverter"/>
+        
+        <!-- Admin Button Style -->
+        <Style x:Key="AdminButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#00FF00"/>
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#00FF00" BlurRadius="10" ShadowDepth="0" Opacity="0.6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Danger Button Style -->
+        <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource AdminButtonStyle}">
+            <Setter Property="Background" Value="#FF0000"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#FF0000" BlurRadius="10" ShadowDepth="0" Opacity="0.6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <!-- Main Border with Neon Glow -->
+    <Border BorderBrush="#00FF00" BorderThickness="2" Background="#000000">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FF00" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+        </Border.Effect>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Title Bar -->
+                <RowDefinition Height="*"/>    <!-- Content -->
+            </Grid.RowDefinitions>
+            
+            <!-- Title Bar -->
+            <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="0,0,0,2" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Height="40">
+                    <TextBlock Text="?? ADMIN VENUE MANAGEMENT" 
+                              FontFamily="Consolas" 
+                              FontSize="18" 
+                              FontWeight="Bold" 
+                              Foreground="#00FF00" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#00FF00" BlurRadius="15" ShadowDepth="0"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button Content="?" 
+                           Click="Close_Click"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Width="40"
+                           Height="30"
+                           Background="Transparent"
+                           Foreground="#FF0000"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           BorderThickness="0"
+                           Cursor="Hand"/>
+                </Grid>
+            </Border>
+            
+            <!-- Main Content -->
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400"/> <!-- Venue List -->
+                    <ColumnDefinition Width="*"/>   <!-- Venue Editor -->
+                </Grid.ColumnDefinitions>
+                
+                <!-- LEFT PANEL: Venue List -->
+                <Border Grid.Column="0" BorderBrush="#00FF00" BorderThickness="2" Background="#0A0A0A" CornerRadius="8" Margin="0,0,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Header -->
+                        <TextBlock Grid.Row="0" 
+                                  Text="?? VENUES" 
+                                  FontFamily="Consolas" 
+                                  FontSize="16" 
+                                  FontWeight="Bold" 
+                                  Foreground="#00FF00" 
+                                  Margin="15,15,15,10"/>
+                        
+                        <!-- Venue List -->
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ListBox x:Name="VenuesListBox"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="#00FF00"
+                                    FontFamily="Consolas"
+                                    SelectionChanged="VenuesListBox_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#001100" 
+                                               BorderBrush="#00FF00" 
+                                               BorderThickness="1" 
+                                               CornerRadius="4" 
+                                               Padding="10" 
+                                               Margin="5">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding RoomName}" 
+                                                          FontWeight="Bold" 
+                                                          FontSize="14"/>
+                                                <TextBlock Text="{Binding RoomDescription}" 
+                                                          FontSize="11" 
+                                                          Foreground="#888888" 
+                                                          TextWrapping="Wrap" 
+                                                          Margin="0,5,0,0"/>
+                                                <TextBlock FontSize="10" Foreground="#00FF00" Margin="0,5,0,0">
+                                                    <Run Text="Status: "/>
+                                                    <Run Text="{Binding IsOpen, Converter={StaticResource BoolToStatusConverter}}" FontWeight="Bold"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                        
+                        <!-- Action Buttons -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                            <Button Content="? New Venue" Click="CreateVenue_Click" Style="{StaticResource AdminButtonStyle}"/>
+                            <Button Content="??? Delete" Click="DeleteVenue_Click" Style="{StaticResource DangerButtonStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
+                <!-- RIGHT PANEL: Venue Editor -->
+                <Border Grid.Column="1" BorderBrush="#00FF00" BorderThickness="2" Background="#0A0A0A" CornerRadius="8" Margin="10,0,0,0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="VenueEditorPanel" Margin="20">
+                            <TextBlock Text="??? VENUE EDITOR" 
+                                      FontFamily="Consolas" 
+                                      FontSize="18" 
+                                      FontWeight="Bold" 
+                                      Foreground="#00FF00" 
+                                      HorizontalAlignment="Center"
+                                      Margin="0,0,0,20">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="#00FF00" BlurRadius="15" ShadowDepth="0"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            
+                            <!-- Basic Info -->
+                            <TextBlock Text="BASIC INFORMATION" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00FF00" Margin="0,0,0,10"/>
+                            
+                            <TextBlock Text="Venue Name:" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,0,5"/>
+                            <TextBox x:Name="VenueNameTextBox" 
+                                    Background="#000000" 
+                                    Foreground="#00FF00" 
+                                    BorderBrush="#00FF00" 
+                                    BorderThickness="2" 
+                                    Padding="10" 
+                                    FontFamily="Consolas" 
+                                    Margin="0,0,0,15"/>
+                            
+                            <TextBlock Text="Description:" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,0,5"/>
+                            <TextBox x:Name="VenueDescriptionTextBox" 
+                                    Background="#000000" 
+                                    Foreground="#00FF00" 
+                                    BorderBrush="#00FF00" 
+                                    BorderThickness="2" 
+                                    Padding="10" 
+                                    FontFamily="Consolas" 
+                                    Height="80" 
+                                    TextWrapping="Wrap" 
+                                    AcceptsReturn="True" 
+                                    Margin="0,0,0,15"/>
+                            
+                            <TextBlock Text="Discord Webhook URL (Optional):" Foreground="#00FF00" FontFamily="Consolas" Margin="0,0,0,5"/>
+                            <TextBox x:Name="DiscordWebhookTextBox" 
+                                    Background="#000000" 
+                                    Foreground="#00FF00" 
+                                    BorderBrush="#00FF00" 
+                                    BorderThickness="2" 
+                                    Padding="10" 
+                                    FontFamily="Consolas" 
+                                    Margin="0,0,0,15"/>
+                            
+                            <CheckBox x:Name="VenueIsOpenCheckBox" 
+                                     Content="Venue is Open for Bookings" 
+                                     Foreground="#00FF00" 
+                                     FontFamily="Consolas" 
+                                     FontWeight="Bold" 
+                                     Margin="0,0,0,20"/>
+                            
+                            <!-- Weekly Schedule -->
+                            <TextBlock Text="?? WEEKLY SCHEDULE" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00FF00" Margin="0,20,0,10"/>
+                            <TextBlock Text="Set opening hours for each day independently" Foreground="#888888" FontFamily="Consolas" FontSize="11" Margin="0,0,0,15"/>
+                            
+                            <!-- Monday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="MondayOpenCheckBox" Content="Monday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="MondayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="MondayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Tuesday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="TuesdayOpenCheckBox" Content="Tuesday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TuesdayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="TuesdayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Wednesday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="WednesdayOpenCheckBox" Content="Wednesday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="WednesdayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="WednesdayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Thursday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="ThursdayOpenCheckBox" Content="Thursday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="ThursdayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="ThursdayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Friday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="FridayOpenCheckBox" Content="Friday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="FridayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="FridayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Saturday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="SaturdayOpenCheckBox" Content="Saturday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="SaturdayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="SaturdayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Sunday -->
+                            <Border BorderBrush="#00FF00" BorderThickness="1" Background="#001100" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <CheckBox x:Name="SundayOpenCheckBox" Content="Sunday - OPEN" Foreground="#00FF00" FontFamily="Consolas" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Text="Open:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="SundayOpenTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="20:00"/>
+                                        <TextBlock Text="Close:" Foreground="#00FF00" FontFamily="Consolas" Width="60" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        <TextBox x:Name="SundayCloseTimeTextBox" Width="80" Background="#000000" Foreground="#00FF00" BorderBrush="#00FF00" Padding="5" Text="02:00"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Save Button -->
+                            <Button Content="?? SAVE VENUE" 
+                                   Click="SaveVenue_Click" 
+                                   Style="{StaticResource AdminButtonStyle}" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,20,0,0" 
+                                   Width="200"/>
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,338 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ?? COSMIC SPACE THEME - BASE STYLES -->
+    
+    <!-- Dark Background Colors (Same for all themes) -->
+    <Color x:Key="SpaceBlack">#0a0a0a</Color>
+    <Color x:Key="DeepSpace">#1a1a2e</Color>
+    <Color x:Key="DarkPanel">#16213e</Color>
+    <Color x:Key="DarkerPanel">#0f1724</Color>
+    
+    <SolidColorBrush x:Key="SpaceBlackBrush" Color="{StaticResource SpaceBlack}"/>
+    <SolidColorBrush x:Key="DeepSpaceBrush" Color="{StaticResource DeepSpace}"/>
+    <SolidColorBrush x:Key="DarkPanelBrush" Color="{StaticResource DarkPanel}"/>
+    
+    <!-- Gradient Background -->
+    <LinearGradientBrush x:Key="SpaceBackground" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#0a0a0a" Offset="0"/>
+        <GradientStop Color="#1a1a2e" Offset="0.3"/>
+        <GradientStop Color="#16213e" Offset="0.6"/>
+        <GradientStop Color="#240046" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- ?? BUTTON STYLES -->
+    <Style x:Key="SpaceButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="15,8"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="{DynamicResource AccentColor}" BlurRadius="15" ShadowDepth="0" Opacity="0.6"/>
+                        </Border.Effect>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource SpaceBlackBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentBrush}"/>
+                            <Setter TargetName="border" Property="Opacity" Value="0.8"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ?? TEXTBOX STYLES -->
+    <Style x:Key="SpaceTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="{DynamicResource AccentColor}" BlurRadius="10" ShadowDepth="0" Opacity="0.3"/>
+                        </Border.Effect>
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ?? PASSWORDBOX STYLE -->
+    <Style x:Key="SpacePasswordBox" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+
+    <!-- ?? COMBOBOX STYLES (Enhanced with Dropdown Styling) -->
+    <Style x:Key="SpaceComboBox" TargetType="ComboBox">
+        <Setter Property="Background" Value="#000000"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton x:Name="ToggleButton"
+                                    Grid.Column="2"
+                                    Focusable="false"
+                                    IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    ClickMode="Press">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border x:Name="Border"
+                                          Background="#000000"
+                                          BorderBrush="{DynamicResource AccentBrush}"
+                                          BorderThickness="2"
+                                          CornerRadius="3">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="20" />
+                                            </Grid.ColumnDefinitions>
+                                            <Path x:Name="Arrow"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Data="M 0 0 L 4 4 L 8 0 Z"
+                                                Fill="{DynamicResource AccentBrush}" />
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#001100"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <ContentPresenter x:Name="ContentSite"
+                                        IsHitTestVisible="False"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                        Margin="10,3,23,3"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                               Style="{x:Null}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="3,3,23,3"
+                               Focusable="True"
+                               Background="#000000"
+                               Foreground="{DynamicResource AccentBrush}"
+                               Visibility="Hidden"
+                               IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup x:Name="Popup"
+                             Placement="Bottom"
+                             IsOpen="{TemplateBinding IsDropDownOpen}"
+                             AllowsTransparency="True"
+                             Focusable="False"
+                             PopupAnimation="Slide">
+                            <Grid x:Name="DropDown"
+                                SnapsToDevicePixels="True"
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border x:Name="DropDownBorder"
+                                      Background="#000000"
+                                      BorderBrush="{DynamicResource AccentBrush}"
+                                      BorderThickness="2">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="{DynamicResource AccentColor}" 
+                                                        BlurRadius="15" 
+                                                        ShadowDepth="0" 
+                                                        Opacity="0.8"/>
+                                    </Border.Effect>
+                                    <ScrollViewer Margin="4,6,4,6" 
+                                                SnapsToDevicePixels="True"
+                                                HorizontalScrollBarVisibility="Auto"
+                                                VerticalScrollBarVisibility="Auto"
+                                                CanContentScroll="True">
+                                        <StackPanel IsItemsHost="True" 
+                                                  KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ComboBoxItem Style for Dropdown Items -->
+    <Style x:Key="SpaceComboBoxItem" TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="#000000"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="Border"
+                          Background="{TemplateBinding Background}"
+                          BorderThickness="0"
+                          Padding="{TemplateBinding Padding}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#001100"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#002200"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#003300"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Default ComboBox Style (Applied to all ComboBoxes automatically) -->
+    <Style TargetType="ComboBox" BasedOn="{StaticResource SpaceComboBox}"/>
+    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource SpaceComboBoxItem}"/>
+
+    <!-- ?? DATAGRID STYLES -->
+    <Style x:Key="SpaceDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="RowBackground" Value="#1a1a2e"/>
+        <Setter Property="AlternatingRowBackground" Value="#16213e"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource AccentColor}" Opacity="0.2"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+    </Style>
+
+    <!-- ?? WINDOW STYLES -->
+    <Style x:Key="SpaceWindow" TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource SpaceBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+    </Style>
+
+    <!-- ?? BORDER/PANEL STYLES -->
+    <Style x:Key="SpacePanel" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="{DynamicResource AccentColor}" BlurRadius="15" ShadowDepth="0" Opacity="0.4"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ? CHECKBOX STYLE -->
+    <Style x:Key="SpaceCheckBox" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- ?? RADIOBUTTON STYLE -->
+    <Style x:Key="SpaceRadioButton" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- ?? LISTBOX STYLE -->
+    <Style x:Key="SpaceListBox" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource DeepSpaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <!-- ?? LABEL/TEXTBLOCK STYLES -->
+    <Style x:Key="SpaceLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="SpaceTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="{DynamicResource AccentColor}" BlurRadius="20" ShadowDepth="0" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SpaceSubTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="{DynamicResource AccentColor}" BlurRadius="15" ShadowDepth="0" Opacity="0.6"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

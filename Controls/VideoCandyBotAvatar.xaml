@@ -1,0 +1,168 @@
+<UserControl x:Class="DJBookingSystem.Controls.VideoCandyBotAvatar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="120" Height="120"
+             Background="Transparent"
+             Cursor="Hand">
+    
+    <UserControl.Resources>
+        <!-- Converter for submenu arrow visibility -->
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        
+        <!-- Glow Pulse Animation for Outer Ring -->
+        <Storyboard x:Key="GlowPulseAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="OuterGlow"
+                           Storyboard.TargetProperty="Opacity"
+                           From="0.4" To="1.0" Duration="0:0:2"
+                           AutoReverse="True">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <!-- Active Bounce Animation -->
+        <Storyboard x:Key="ActiveBounceAnimation">
+            <DoubleAnimation Storyboard.TargetName="AvatarScale"
+                           Storyboard.TargetProperty="ScaleX"
+                           From="1" To="1.2" Duration="0:0:0.3"
+                           AutoReverse="True">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="2" EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="AvatarScale"
+                           Storyboard.TargetProperty="ScaleY"
+                           From="1" To="1.2" Duration="0:0:0.3"
+                           AutoReverse="True">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="2" EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <!-- Context Menu Style -->
+        <Style x:Key="CandyBotMenuStyle" TargetType="ContextMenu">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="BorderBrush" Value="#FF69B4"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#FF69B4" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="CandyBotMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Foreground" Value="#FF69B4"/>
+            <Setter Property="FontFamily" Value="Segoe UI Emoji, Consolas"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" Background="#1A1A1A" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="Header" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#FF69B4"/>
+                                <Setter Property="Foreground" Value="#000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="CandyBotSeparatorStyle" TargetType="Separator">
+            <Setter Property="Background" Value="#FF69B4"/>
+            <Setter Property="Height" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <!-- Context Menu -->
+    <UserControl.ContextMenu>
+        <ContextMenu Style="{StaticResource CandyBotMenuStyle}">
+            <MenuItem Header="Desktop Mode" Click="DesktopMode_Click" Style="{StaticResource CandyBotMenuItemStyle}"/>
+            <Separator Style="{StaticResource CandyBotSeparatorStyle}"/>
+            <MenuItem Header="Search Web" Click="SearchWeb_Click" Style="{StaticResource CandyBotMenuItemStyle}"/>
+            <MenuItem Header="Open Chat" Click="OpenChat_Click" Style="{StaticResource CandyBotMenuItemStyle}"/>
+            <Separator Style="{StaticResource CandyBotSeparatorStyle}"/>
+            <MenuItem Header="Personality Modes" Style="{StaticResource CandyBotMenuItemStyle}">
+                <MenuItem Header="Normal" Click="SetPersonality_Normal" Style="{StaticResource CandyBotMenuItemStyle}"/>
+                <MenuItem Header="Shy" Click="SetPersonality_Shy" Style="{StaticResource CandyBotMenuItemStyle}"/>
+                <MenuItem Header="Funny" Click="SetPersonality_Funny" Style="{StaticResource CandyBotMenuItemStyle}"/>
+                <MenuItem Header="Professional" Click="SetPersonality_Professional" Style="{StaticResource CandyBotMenuItemStyle}"/>
+            </MenuItem>
+            <Separator Style="{StaticResource CandyBotSeparatorStyle}"/>
+            <MenuItem Header="Settings" Click="OpenSettings_Click" Style="{StaticResource CandyBotMenuItemStyle}"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    
+    <!-- Main Avatar Container -->
+    <Grid MouseEnter="Avatar_MouseEnter"
+          MouseLeave="Avatar_MouseLeave"
+          MouseRightButtonDown="Avatar_MouseRightButtonDown"
+          MouseLeftButtonDown="VideoCandyBotAvatar_MouseLeftButtonDown">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="AvatarScale" ScaleX="1" ScaleY="1"/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform x:Name="AvatarTransform"/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        
+        <!-- Outer Glow Ring -->
+        <Ellipse x:Name="OuterGlow"
+                 Width="120" Height="120"
+                 Fill="Transparent"
+                 Stroke="#FF69B4"
+                 StrokeThickness="3"
+                 Opacity="0.6">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="#FF69B4" BlurRadius="20" ShadowDepth="0"/>
+            </Ellipse.Effect>
+        </Ellipse>
+        
+        <!-- Video Container -->
+        <Border Width="100" Height="100"
+                CornerRadius="50"
+                ClipToBounds="True"
+                BorderBrush="#FF69B4"
+                BorderThickness="2">
+            <Border.Effect>
+                <DropShadowEffect Color="#FF69B4" BlurRadius="10" ShadowDepth="0" Opacity="0.8"/>
+            </Border.Effect>
+            
+            <!-- MediaElement for Video Playback -->
+            <MediaElement x:Name="VideoPlayer"
+                         Source="/Resources/Candy-Bot.mp4"
+                         LoadedBehavior="Manual"
+                         UnloadedBehavior="Manual"
+                         Stretch="UniformToFill"
+                         MediaEnded="VideoPlayer_MediaEnded"
+                         MediaOpened="VideoPlayer_MediaOpened"
+                         MediaFailed="VideoPlayer_MediaFailed"
+                         Volume="0.5"
+                         IsMuted="False"/>
+        </Border>
+        
+        <!-- Status Indicator (small dot in corner) -->
+        <Ellipse x:Name="StatusIndicator"
+                 Width="18" Height="18"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,5,5"
+                 Fill="#00FF00"
+                 Stroke="#000000"
+                 StrokeThickness="2">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="#00FF00" BlurRadius="8" ShadowDepth="0"/>
+            </Ellipse.Effect>
+        </Ellipse>
+    </Grid>
+</UserControl>

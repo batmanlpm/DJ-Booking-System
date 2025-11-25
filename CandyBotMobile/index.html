@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Candy-Bot Mobile</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #0F0;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(180deg, #000 0%, #001a00 100%);
+        }
+
+        .header {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 15px;
+            border-bottom: 2px solid #0F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            text-shadow: 0 0 10px #0F0;
+        }
+
+        .personality-btn {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #0F0;
+            color: #0F0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            text-shadow: 0 0 5px #0F0;
+        }
+
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-bubble {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #0F0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .message.bot .message-bubble {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0F0;
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+        }
+
+        .input-area {
+            padding: 15px;
+            background: rgba(0, 255, 0, 0.05);
+            border-top: 2px solid #0F0;
+            display: flex;
+            gap: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0F0;
+            color: #0F0;
+            padding: 12px;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #userInput::placeholder {
+            color: rgba(0, 255, 0, 0.5);
+        }
+
+        #sendBtn {
+            background: rgba(0, 255, 0, 0.3);
+            border: 1px solid #0F0;
+            color: #0F0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            transition: all 0.3s;
+        }
+
+        #sendBtn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            padding: 10px 15px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .quick-actions::-webkit-scrollbar {
+            display: none;
+        }
+
+        .quick-btn {
+            background: rgba(0, 255, 0, 0.15);
+            border: 1px solid #0F0;
+            color: #0F0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            font-size: 13px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0F0;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .personality-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .personality-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #000;
+            border: 2px solid #0F0;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 90%;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+
+        .personality-option {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0F0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .personality-option:active {
+            background: rgba(0, 255, 0, 0.3);
+        }
+
+        .install-prompt {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 15px;
+            right: 15px;
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #0F0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+            z-index: 999;
+        }
+
+        .install-prompt.active {
+            display: block;
+        }
+
+        .install-btn {
+            background: rgba(0, 255, 0, 0.3);
+            border: 1px solid #0F0;
+            color: #0F0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>🍬 Candy-Bot</h1>
+            <button class="personality-btn" onclick="openPersonalityModal()">Personality</button>
+        </div>
+
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('Help me book a DJ slot')">📅 Book Slot</button>
+            <button class="quick-btn" onclick="sendQuickMessage('What venues are available?')">🎵 Find Venues</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Give me DJ tips')">💡 DJ Tips</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Organize my files')">📁 Organize Files</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Search Google for me')">🔍 Google Search</button>
+        </div>
+
+        <div class="chat-area" id="chatArea">
+            <div class="message bot">
+                <div class="message-bubble">
+                    🍬 Hi there! I'm Candy-Bot, your sweet AI assistant! How can I help you today?
+                </div>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button id="sendBtn" onclick="sendMessage()">▶</button>
+        </div>
+    </div>
+
+    <div class="personality-modal" id="personalityModal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 15px;">Choose Personality</h2>
+            <div class="personality-option" onclick="setPersonality('Normal')">
+                <strong>😊 Normal</strong><br>
+                Friendly and helpful
+            </div>
+            <div class="personality-option" onclick="setPersonality('Shy')">
+                <strong>😳 Shy</strong><br>
+                Gentle and timid
+            </div>
+            <div class="personality-option" onclick="setPersonality('Funny')">
+                <strong>😄 Funny</strong><br>
+                Jokes and puns
+            </div>
+            <div class="personality-option" onclick="setPersonality('Professional')">
+                <strong>💼 Professional</strong><br>
+                Formal and efficient
+            </div>
+            <div class="personality-option" onclick="setPersonality('Raunchy')">
+                <strong>😈 Raunchy</strong><br>
+                Flirty (18+)
+            </div>
+            <button class="install-btn" onclick="closePersonalityModal()" style="margin-top: 20px;">Cancel</button>
+        </div>
+    </div>
+
+    <div class="install-prompt" id="installPrompt">
+        <strong>Install Candy-Bot</strong>
+        <p>Add to your home screen for quick access!</p>
+        <button class="install-btn" onclick="installApp()">Install</button>
+        <button class="install-btn" onclick="dismissInstall()" style="background: transparent;">Maybe Later</button>
+    </div>
+
+    <script>
+        let currentPersonality = 'Normal';
+        let deferredPrompt;
+        let audioContext;
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker error:', err));
+        }
+
+        // PWA install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').classList.add('active');
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                    document.getElementById('installPrompt').classList.remove('active');
+                });
+            }
+        }
+
+        function dismissInstall() {
+            document.getElementById('installPrompt').classList.remove('active');
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('userInput').value = message;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            document.getElementById('typingIndicator').classList.add('active');
+
+            // Simulate AI response (replace with actual Claude API call)
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                document.getElementById('typingIndicator').classList.remove('active');
+                addMessage(response, 'bot');
+                playVoice();
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const chatArea = document.getElementById('chatArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            const lower = message.toLowerCase();
+            
+            // File organizer responses
+            if (lower.includes('organize') || lower.includes('file')) {
+                return `🗂️ I can help organize your files! I'll sort them by:\n• Type (docs, images, videos)\n• Date\n• Remove duplicates\n\nWhich folder should I organize?`;
+            }
+            
+            // Google search responses
+            if (lower.includes('search') || lower.includes('google')) {
+                return `🔍 I'll search Google for you! What would you like me to research?`;
+            }
+            
+            // Booking responses
+            if (lower.includes('book') || lower.includes('venue')) {
+                return `📅 Great! Let's get that booking set up. What date are you looking at?`;
+            }
+            
+            // Default personality-based response
+            const responses = {
+                'Normal': "That's interesting! How can I help you with that?",
+                'Shy': "U-um... I think I can help with that...",
+                'Funny': "Ha! That reminds me of a DJ joke! But seriously, I'm here to help!",
+                'Professional': "I understand. How may I assist you with this matter?",
+                'Raunchy': "Ooh, I like where this is going... Tell me more! 😉"
+            };
+            
+            return responses[currentPersonality] || responses['Normal'];
+        }
+
+        function playVoice() {
+            // Voice playback would integrate with voice files here
+            // For now, just a beep sound
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        function openPersonalityModal() {
+            document.getElementById('personalityModal').classList.add('active');
+        }
+
+        function closePersonalityModal() {
+            document.getElementById('personalityModal').classList.remove('active');
+        }
+
+        function setPersonality(personality) {
+            currentPersonality = personality;
+            closePersonalityModal();
+            addMessage(`Personality changed to ${personality} mode! 🎭`, 'bot');
+        }
+
+        // Auto-scroll to bottom on load
+        window.addEventListener('load', () => {
+            const chatArea = document.getElementById('chatArea');
+            chatArea.scrollTop = chatArea.scrollHeight;
+        });
+    </script>
+</body>
+</html>

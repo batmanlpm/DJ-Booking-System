@@ -1,0 +1,140 @@
+"""lockdown functionality for moderation"""
+import discord
+from discord.ext import commands, tasks
+from discord import app_commands
+from typing import Optional, Dict, List, Tuple, Union, Any
+import logging
+from datetime import datetime, timedelta
+import re
+import asyncio
+from modules.database.database import db
+
+logger = logging.getLogger(__name__)
+
+# Time conversion factors (in seconds)
+TIME_UNITS = {
+    's': 1,
+    'm': 60,
+    'h': 60 * 60,
+    'd': 24 * 60 * 60,
+    'w': 7 * 24 * 60 * 60,
+    'M': 30 * 24 * 60 * 60,  # Approximate month
+    'y': 365 * 24 * 60 * 60,  # Approximate year
+}
+
+class Lockdown(commands.Cog):
+    """handles channel and server lockdowns"""
+    
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
+        self._create_tables()
+        self.active_lockdowns: Dict[int, asyncio.Task] = {}
+        self.check_lockdowns.start()
+    
+    def cog_unload(self) -> None:
+        """cancel the background task when the cog is unloaded"""
+        self.check_lockdowns.cancel()
+        for task in self.active_lockdowns.values():
+            task.cancel()
+    
+    def _create_tables(self) -> None:
+        """create necessary database tables if they don't exist"""
+        try:
+            # Create lockdowns table
+            db.execute_query("""
+                CREATE TABLE IF NOT EXISTS lockdowns (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    guild_id INTEGER NOT NULL,
+                    target_id INTEGER NOT NULL,
+                    moderator_id INTEGER NOT NULL,
+                    reason TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    expires_at TIMESTAMP,
+                    active BOOLEAN DEFAULT 1,
+                    target_type TEXT NOT NULL,  # 'channel' or 'server'
+                    UNIQUE(guild_id, target_id, active)
+                )
+            """, commit=True)
+            logger.info("ensured lockdowns table exists")
+            
+            # Create lockdown_permissions table
+            db.execute_query("""
+                CREATE TABLE IF NOT EXISTS lockdown_permissions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    lockdown_id INTEGER NOT NULL,
+                    permission_type TEXT NOT NULL,
+                    allow BOOLEAN DEFAULT 0,
+                    FOREIGN KEY (lockdown_id) REFERENCES lockdowns(id) ON DELETE CASCADE
+                )
+            """, commit=True)
+            logger.info("ensured lockdown_permissions table exists")
+            
+        except Exception as e:
+            logger.error(f"failed to create lockdown tables: {e}")
+            raise
+
+    @tasks.loop(minutes=1)
+    async def check_lockdowns(self) -> None:
+        """check for expired lockdowns and remove them"""
+        try:
+            now = datetime.utcnow()
+            expired = db.execute_query(
+                "SELECT id, guild_id, target_id, target_type FROM lockdowns WHERE expires_at <= ? AND active = 1",
+                (now,),
+                fetch=True
+            )
+            
+            for row in expired:
+                lockdown_id = row['id']
+                guild = self.bot.get_guild(row['guild_id'])
+                if not guild:
+                    continue
+                    
+                if row['target_type'] == 'channel':
+                    target = guild.get_channel(row['target_id'])
+                else:
+                    target = guild
+                    
+                if target:
+                    try:
+                        await self.remove_lockdown(guild, target, "Lockdown expired")
+                        logger.info(f"removed expired lockdown for {target} in {guild}")
+                    except Exception as e:
+                        logger.error(f"failed to remove expired lockdown: {e}")
+                
+                # Mark as inactive
+                db.execute_query(
+                    "UPDATE lockdowns SET active = 0 WHERE id = ?",
+                    (lockdown_id,),
+                    commit=True
+                )
+                
+        except Exception as e:
+            logger.error(f"error checking lockdowns: {e}")
+
+    async def remove_lockdown(self, guild: discord.Guild, target: Union[discord.TextChannel, discord.Guild], reason: str) -> None:
+        """remove a lockdown from a channel or server"""
+        # Implementation for removing lockdown
+        pass
+
+    @app_commands.command(name="lockdown", description="lock down a channel or server")
+    @app_commands.checks.has_permissions(manage_channels=True)
+    @app_commands.describe(
+        target="the channel to lock down (leave empty for server-wide)",
+        duration="how long to lock down for (e.g., 1h, 30m, 1d)",
+        reason="reason for the lockdown"
+    )
+    async def lockdown(
+        self,
+        interaction: discord.Interaction,
+        target: Optional[discord.TextChannel] = None,
+        duration: Optional[str] = None,
+        reason: Optional[str] = None
+    ) -> None:
+        """lock down a channel or the entire server"""
+        # Implementation for lockdown command
+        pass
+
+async def setup(bot: commands.Bot) -> None:
+    """load the Lockdown cog"""
+    await bot.add_cog(Lockdown(bot))

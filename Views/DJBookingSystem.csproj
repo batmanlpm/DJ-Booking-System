@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Screenshot 2025-11-03 204531.png" />
+    <!-- Exclude UsageExamples from build to avoid MainWindow conflict -->
+    <None Remove="ExtractedTheme\UsageExamples.xaml" />
+    <None Include="ExtractedTheme\UsageExamples.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.39.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PNG_Version.png" />
+    <Resource Include="Assets\SplashLogo.png" />
+    <Resource Include="Assets\AppIcon.ico" />
+    <Resource Include="Screenshot 2025-11-03 204531.png" />
+  </ItemGroup>
+
+</Project>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\CandyBotAvatar.png" />
+  </ItemGroup>

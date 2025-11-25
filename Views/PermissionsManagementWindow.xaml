@@ -1,0 +1,148 @@
+<Window x:Class="DJBookingSystem.Views.PermissionsManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage User Permissions" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="Black" Foreground="#00FF00"
+        FontFamily="Consolas">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="USER PERMISSIONS MANAGEMENT" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,20"/>
+
+        <!-- User Selection -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,20">
+            <TextBlock Text="Select User:" Margin="0,0,0,5"/>
+            <ComboBox x:Name="UserComboBox" 
+                      Background="#0A0A0A" 
+                      Foreground="#00FF00" 
+                      BorderBrush="#00FF00"
+                      SelectionChanged="UserComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Permissions Grid -->
+        <Border Grid.Row="2" 
+                Background="#0A0A0A" 
+                BorderBrush="#00FF00" 
+                BorderThickness="2" 
+                Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="PermissionsPanel">
+                    <!-- System Permissions -->
+                    <TextBlock Text="SYSTEM PERMISSIONS" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#00BFFF" 
+                               Margin="0,0,0,10"/>
+                    <CheckBox x:Name="CanManageUsersCheck" Content="Manage Users" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanAccessSettingsCheck" Content="Access Settings" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanViewReportsCheck" Content="View Error Reports" Foreground="#00FF00" Margin="0,5"/>
+
+                    <Separator Margin="0,15" Background="#00FF00"/>
+
+                    <!-- Booking Permissions -->
+                    <TextBlock Text="BOOKING PERMISSIONS" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#00BFFF" 
+                               Margin="0,0,0,10"/>
+                    <CheckBox x:Name="CanViewBookingsCheck" Content="View Bookings" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanCreateBookingsCheck" Content="Create Bookings" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanEditBookingsCheck" Content="Edit Bookings" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanDeleteBookingsCheck" Content="Delete Bookings" Foreground="#00FF00" Margin="0,5"/>
+
+                    <Separator Margin="0,15" Background="#00FF00"/>
+
+                    <!-- Venue Permissions -->
+                    <TextBlock Text="VENUE PERMISSIONS" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#00BFFF" 
+                               Margin="0,0,0,10"/>
+                    <CheckBox x:Name="CanViewVenuesCheck" Content="View Venues" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanRegisterVenuesCheck" Content="Register Venues" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanEditVenuesCheck" Content="Edit Venues" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanDeleteVenuesCheck" Content="Delete Venues" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanToggleVenueStatusCheck" Content="Toggle Venue Status" Foreground="#00FF00" Margin="0,5"/>
+
+                    <Separator Margin="0,15" Background="#00FF00"/>
+
+                    <!-- Moderation Permissions -->
+                    <TextBlock Text="MODERATION PERMISSIONS" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#00BFFF" 
+                               Margin="0,0,0,10"/>
+                    <CheckBox x:Name="CanBanUsersCheck" Content="Ban Users" Foreground="#00FF00" Margin="0,5"/>
+                    <CheckBox x:Name="CanMuteUsersCheck" Content="Mute Users" Foreground="#00FF00" Margin="0,5"/>
+
+                    <Separator Margin="0,15" Background="#00FF00"/>
+
+                    <!-- Customization Permissions -->
+                    <TextBlock Text="CUSTOMIZATION PERMISSIONS" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#00BFFF" 
+                               Margin="0,0,0,10"/>
+                    <CheckBox x:Name="CanCustomizeAppCheck" Content="Customize App (Themes, etc.)" Foreground="#00FF00" Margin="0,5"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Save Permissions" Click="SaveButton_Click" Width="150" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#001100"/>
+                        <Setter Property="Foreground" Value="#00FF00"/>
+                        <Setter Property="FontFamily" Value="Consolas"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderBrush" Value="#00FF00"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Reset to Role Default" Click="ResetButton_Click" Width="180" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#001100"/>
+                        <Setter Property="Foreground" Value="#00FF00"/>
+                        <Setter Property="FontFamily" Value="Consolas"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderBrush" Value="#00FF00"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Close" Click="CloseButton_Click" Width="100">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#001100"/>
+                        <Setter Property="Foreground" Value="#00FF00"/>
+                        <Setter Property="FontFamily" Value="Consolas"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderBrush" Value="#00FF00"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

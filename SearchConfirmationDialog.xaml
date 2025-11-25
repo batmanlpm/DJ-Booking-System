@@ -1,0 +1,82 @@
+<Window x:Class="DJBookingSystem.SearchConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirm Search" 
+        Height="500" Width="550"
+        WindowStartupLocation="CenterOwner"
+        Background="#0A0A0A"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#FF69B4"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#00FF00"/>
+        <SolidColorBrush x:Key="PanelColor" Color="#1A1A1A"/>
+        <SolidColorBrush x:Key="TextColor" Color="#FFFFFF"/>
+    </Window.Resources>
+
+    <Border BorderBrush="{StaticResource PrimaryColor}" BorderThickness="2" CornerRadius="10">
+        <Border.Effect>
+            <DropShadowEffect Color="#FF69B4" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+        </Border.Effect>
+        
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource PanelColor}" CornerRadius="8" Padding="10" Margin="0,0,0,10" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <TextBlock Text="Confirm Search Configuration" FontSize="16" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center"/>
+                    <Button Content="✕" Click="Close_Click" Width="30" Height="30" HorizontalAlignment="Right" Background="Transparent" Foreground="{StaticResource PrimaryColor}" BorderThickness="0" FontSize="16" FontWeight="Bold"/>
+                </Grid>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Border Background="{StaticResource PanelColor}" CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="Selected Drives:" FontSize="14" FontWeight="Bold" Foreground="{StaticResource SecondaryColor}" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="DrivesText" Text="" FontSize="12" Foreground="{StaticResource TextColor}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{StaticResource PanelColor}" CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="File Extensions:" FontSize="14" FontWeight="Bold" Foreground="{StaticResource SecondaryColor}" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="ExtensionsText" Text="" FontSize="12" Foreground="{StaticResource TextColor}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{StaticResource PanelColor}" CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="Post-Search Action:" FontSize="14" FontWeight="Bold" Foreground="{StaticResource SecondaryColor}" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="ActionText" Text="" FontSize="12" Foreground="{StaticResource TextColor}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="DestinationInfo" Background="{StaticResource PanelColor}" CornerRadius="8" Padding="15" Margin="0,0,0,10" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Destination:" FontSize="14" FontWeight="Bold" Foreground="{StaticResource SecondaryColor}" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="DestinationText" Text="" FontSize="12" Foreground="{StaticResource TextColor}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Row="2" Background="{StaticResource PanelColor}" CornerRadius="8" Padding="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Start Search" Click="StartSearch_Click" FontSize="14" FontWeight="Bold" Background="{StaticResource PrimaryColor}" Foreground="Black" BorderThickness="0" Padding="20,10" Margin="5" Cursor="Hand"/>
+                    <Button Grid.Column="1" Content="Cancel" Click="Cancel_Click" FontSize="14" FontWeight="Bold" Background="#666666" Foreground="White" BorderThickness="0" Padding="20,10" Margin="5" Cursor="Hand"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

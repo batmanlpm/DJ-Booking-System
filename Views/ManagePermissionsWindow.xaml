@@ -1,0 +1,138 @@
+<Window x:Class="DJBookingSystem.Views.ManagePermissionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage User Permissions"
+        Height="700"
+        Width="600"
+        WindowStartupLocation="CenterOwner"
+        Background="#000000"
+        Foreground="#00FF00"
+        FontFamily="Consolas"
+        ResizeMode="CanResize">
+    <Window.Resources>
+        <Style x:Key="SpaceButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="BorderBrush" Value="#00FF00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#00FF00"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#009900"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CategoryHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#00BFFF"/>
+            <Setter Property="Margin" Value="0,15,0,10"/>
+        </Style>
+
+        <Style x:Key="PermissionCheckBox" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#00FF00"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="20,5,0,5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Border BorderBrush="#00FF00" BorderThickness="2" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="0,0,0,2" Padding="15" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="?? MANAGE USER PERMISSIONS"
+                              FontSize="20"
+                              FontWeight="Bold"
+                              Foreground="#00FF00"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,10"/>
+                    <TextBlock x:Name="UserInfoText"
+                              Text="User: [Loading...]"
+                              FontSize="14"
+                              Foreground="#00BFFF"
+                              HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="UserRoleText"
+                              Text="Role: [Loading...]"
+                              FontSize="12"
+                              Foreground="#888888"
+                              HorizontalAlignment="Center"
+                              Margin="0,3,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Permissions ScrollViewer -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
+                <StackPanel>
+                    <!-- Booking Permissions -->
+                    <TextBlock Text="?? BOOKING PERMISSIONS" Style="{StaticResource CategoryHeader}"/>
+                    <CheckBox x:Name="CanViewBookingsCheckBox" Content="View Bookings" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanCreateBookingsCheckBox" Content="Create Bookings" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanEditBookingsCheckBox" Content="Edit Bookings" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanDeleteBookingsCheckBox" Content="Delete Bookings" Style="{StaticResource PermissionCheckBox}"/>
+
+                    <!-- Venue Permissions -->
+                    <TextBlock Text="?? VENUE PERMISSIONS" Style="{StaticResource CategoryHeader}"/>
+                    <CheckBox x:Name="CanViewVenuesCheckBox" Content="View Venues" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanRegisterVenuesCheckBox" Content="Register Venues" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanEditVenuesCheckBox" Content="Edit Venues" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanDeleteVenuesCheckBox" Content="Delete Venues" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanToggleVenueStatusCheckBox" Content="Toggle Venue Status (Active/Inactive)" Style="{StaticResource PermissionCheckBox}"/>
+
+                    <!-- Admin Permissions -->
+                    <TextBlock Text="?? ADMIN PERMISSIONS" Style="{StaticResource CategoryHeader}"/>
+                    <CheckBox x:Name="CanManageUsersCheckBox" Content="Manage Users" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanCustomizeAppCheckBox" Content="Customize Application" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanAccessSettingsCheckBox" Content="Access Settings" Style="{StaticResource PermissionCheckBox}"/>
+
+                    <!-- Moderation Permissions -->
+                    <TextBlock Text="??? MODERATION PERMISSIONS" Style="{StaticResource CategoryHeader}"/>
+                    <CheckBox x:Name="CanBanUsersCheckBox" Content="Ban Users" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanMuteUsersCheckBox" Content="Mute Users" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanViewReportsCheckBox" Content="View Reports" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanResolveReportsCheckBox" Content="Resolve Reports" Style="{StaticResource PermissionCheckBox}"/>
+
+                    <!-- RadioBOSS Permissions -->
+                    <TextBlock Text="?? RADIOBOSS PERMISSIONS" Style="{StaticResource CategoryHeader}"/>
+                    <CheckBox x:Name="CanViewRadioBossCheckBox" Content="View RadioBOSS Panels" Style="{StaticResource PermissionCheckBox}"/>
+                    <CheckBox x:Name="CanControlRadioBossCheckBox" Content="Control RadioBOSS Stations" Style="{StaticResource PermissionCheckBox}"/>
+
+                    <!-- Quick Presets -->
+                    <TextBlock Text="? QUICK PRESETS" Style="{StaticResource CategoryHeader}"/>
+                    <StackPanel Orientation="Horizontal" Margin="20,5,0,5">
+                        <Button Content="Basic User" Click="ApplyBasicUserPreset_Click" Style="{StaticResource SpaceButton}" Padding="10,5"/>
+                        <Button Content="DJ" Click="ApplyDJPreset_Click" Style="{StaticResource SpaceButton}" Padding="10,5"/>
+                        <Button Content="Venue Owner" Click="ApplyVenueOwnerPreset_Click" Style="{StaticResource SpaceButton}" Padding="10,5"/>
+                        <Button Content="Moderator" Click="ApplyModeratorPreset_Click" Style="{StaticResource SpaceButton}" Padding="10,5"/>
+                        <Button Content="Admin" Click="ApplyAdminPreset_Click" Style="{StaticResource SpaceButton}" Padding="10,5"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Action Buttons -->
+            <Border Grid.Row="2" Background="#0A0A0A" BorderBrush="#00FF00" BorderThickness="0,2,0,0" Padding="15" Margin="0,15,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="?? SAVE PERMISSIONS" Click="SavePermissions_Click" Style="{StaticResource SpaceButton}" Width="200"/>
+                    <Button Content="? CANCEL" Click="Cancel_Click" Style="{StaticResource SpaceButton}" Width="150"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

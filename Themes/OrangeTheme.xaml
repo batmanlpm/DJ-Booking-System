@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 🧡 SUNSET ORANGE THEME -->
+    
+    <Color x:Key="AccentColor">#ff6b35</Color>
+    <Color x:Key="AccentDark">#e55525</Color>
+    <Color x:Key="AccentLight">#ff8c5a</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    
+</ResourceDictionary>

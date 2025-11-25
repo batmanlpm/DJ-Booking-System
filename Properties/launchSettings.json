@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DJBookingSystem": {
+      "commandName": "Project",
+      "nativeDebugging": true,
+      "jsWebView2Debugging": true
+    }
+  }
+}

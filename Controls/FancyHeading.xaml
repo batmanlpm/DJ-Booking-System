@@ -1,0 +1,33 @@
+<UserControl x:Class="DJBookingSystem.Controls.FancyHeading"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="70" Width="400">
+    <Grid>
+        <TextBlock x:Name="HeadingText" Text="Fancy Heading"
+                   FontSize="36" FontWeight="Bold" FontFamily="Castellar"
+                   Foreground="{DynamicResource AccentBrush}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Effect>
+                <DropShadowEffect x:Name="GlowEffect" Color="#00FFF0" BlurRadius="10" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="BlurRadius" To="30" Duration="0:0:0.2"/>
+                        <ColorAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="Color" To="#00FF99" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="BlurRadius" To="10" Duration="0:0:0.2"/>
+                        <ColorAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="Color" To="#00FFF0" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+    </Grid>
+</UserControl>

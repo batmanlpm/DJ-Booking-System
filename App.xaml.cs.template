@@ -1,0 +1,167 @@
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows;
+using DJBookingSystem.Services;
+using DJBookingSystem.Models;
+
+namespace DJBookingSystem
+{
+    public partial class App : Application
+    {
+        private static string _currentUsername = "System";
+
+        public App()
+        {
+            this.Exit += App_Exit;
+        }
+
+        private void App_Exit(object? sender, ExitEventArgs e)
+        {
+            // Ensure all windows are closed and process is terminated
+            Application.Current.Shutdown();
+        }
+
+        private async void Application_Startup(object sender, StartupEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("=== APPLICATION_STARTUP CALLED ===");
+            
+            try
+            {
+                // Initialize the application
+                await InitializeApplicationAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR in Application_Startup: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack: {ex.StackTrace}");
+                MessageBox.Show(
+                    $"Critical startup error:\n{ex.Message}\n\nThe application will now close.",
+                    "Startup Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                Application.Current.Shutdown();
+            }
+        }
+
+        private async Task InitializeApplicationAsync()
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("=== InitializeApplicationAsync Started ===");
+                
+                // ?? IMPORTANT: Configure your Azure Cosmos DB credentials
+                // 
+                // OPTION 1 (Recommended): Use environment variables
+                //   - Set COSMOS_DB_ENDPOINT environment variable
+                //   - Set COSMOS_DB_KEY environment variable
+                //
+                // OPTION 2: Create a local App.xaml.cs with hardcoded values
+                //   - Copy this file to App.xaml.cs (not committed to Git)
+                //   - Replace the placeholder values below
+                //   - This file is in .gitignore so it won't be uploaded
+                //
+                // See CONFIGURATION.md for detailed setup instructions
+                
+                string endpoint = Environment.GetEnvironmentVariable("COSMOS_DB_ENDPOINT") 
+                    ?? "https://YOUR-COSMOS-ACCOUNT.documents.azure.com:443/";
+                string accountKey = Environment.GetEnvironmentVariable("COSMOS_DB_KEY") 
+                    ?? "YOUR_COSMOS_DB_PRIMARY_KEY_HERE";
+                
+                // Validate credentials are configured
+                if (endpoint.Contains("YOUR-COSMOS-ACCOUNT") || accountKey.Contains("YOUR_COSMOS_DB"))
+                {
+                    MessageBox.Show(
+                        "Azure Cosmos DB credentials not configured!\n\n" +
+                        "Please set environment variables or create a local App.xaml.cs file.\n" +
+                        "See CONFIGURATION.md for instructions.",
+                        "Configuration Required",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    Application.Current.Shutdown();
+                    return;
+                }
+                
+                string connectionString = $"AccountEndpoint={endpoint};AccountKey={accountKey};";
+                var cosmosService = new CosmosDbService(connectionString);
+                System.Diagnostics.Debug.WriteLine("? CosmosDbService created");
+                
+                // Initialize OnlineUserStatusService with CosmosDbService for cloud sync
+                OnlineUserStatusService.Instance.Initialize(cosmosService);
+                System.Diagnostics.Debug.WriteLine("? OnlineUserStatusService initialized");
+                
+                // Show splash screen with connection checking
+                SplashScreen? splashScreen = null;
+                MainWindow? mainWindow = null;
+
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("Creating SplashScreen...");
+                    splashScreen = new SplashScreen(cosmosService);
+                    System.Diagnostics.Debug.WriteLine("? SplashScreen created");
+                    
+                    splashScreen.Show();
+                    System.Diagnostics.Debug.WriteLine("? SplashScreen shown");
+
+                    bool introCompleted = await splashScreen.ShowIntroAndTestConnectionsAsync();
+                    System.Diagnostics.Debug.WriteLine($"? Intro completed: {introCompleted}");
+
+                    System.Diagnostics.Debug.WriteLine("Creating MainWindow...");
+                    mainWindow = new MainWindow(cosmosService);
+                    System.Diagnostics.Debug.WriteLine("? MainWindow created");
+
+                    splashScreen?.Close();
+                    System.Diagnostics.Debug.WriteLine("? SplashScreen closed");
+
+                    mainWindow.Show();
+                    System.Diagnostics.Debug.WriteLine("? MainWindow shown");
+
+                    System.Diagnostics.Debug.WriteLine("Opening LoginWindow...");
+                    mainWindow.OpenLoginWindow();
+                    System.Diagnostics.Debug.WriteLine("? LoginWindow opened");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"ERROR creating windows: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Stack: {ex.StackTrace}");
+                    
+                    splashScreen?.Close();
+                    mainWindow?.Close();
+                    
+                    MessageBox.Show(
+                        $"Failed to initialize application:\n{ex.Message}",
+                        "Initialization Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                    Application.Current.Shutdown();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"CRITICAL ERROR in InitializeApplicationAsync: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack: {ex.StackTrace}");
+                
+                MessageBox.Show(
+                    $"Critical initialization error:\n{ex.Message}\n\nThe application will now close.",
+                    "Fatal Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                Application.Current.Shutdown();
+            }
+        }
+
+        public static void SetCurrentUsername(string username)
+        {
+            _currentUsername = username;
+        }
+
+        public static string GetCurrentUsername()
+        {
+            return _currentUsername;
+        }
+    }
+}

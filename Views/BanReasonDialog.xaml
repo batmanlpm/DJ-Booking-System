@@ -1,0 +1,75 @@
+<Window x:Class="DJBookingSystem.Views.BanReasonDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ban User - Provide Reason"
+        Height="350" Width="500"
+        WindowStartupLocation="CenterOwner"
+        Background="#0A0A0A"
+        ResizeMode="NoResize">
+    
+    <Border BorderBrush="#FF0000" BorderThickness="3" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock Text="? BAN USER" FontSize="24" FontWeight="Bold" Foreground="#FF0000" FontFamily="Consolas" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="UsernameText" Text="Username: " FontSize="14" Foreground="#00FF00" FontFamily="Consolas" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+
+            <!-- Instructions -->
+            <TextBlock Grid.Row="1" 
+                      Text="Please provide a reason for this ban. This will be shown to the user and saved to their record."
+                      FontSize="12" 
+                      Foreground="#CCC" 
+                      TextWrapping="Wrap"
+                      Margin="0,0,0,15"/>
+
+            <!-- Reason TextBox -->
+            <Border Grid.Row="2" BorderBrush="#FF0000" BorderThickness="2" Background="#1A1A1A">
+                <TextBox x:Name="ReasonTextBox"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontFamily="Consolas"
+                        FontSize="13"
+                        Padding="10"
+                        BorderThickness="0"
+                        Text="Reason for ban..."/>
+            </Border>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="? BAN USER" 
+                       Click="Ban_Click"
+                       Background="#8B0000"
+                       Foreground="White"
+                       BorderBrush="#FF0000"
+                       BorderThickness="2"
+                       FontWeight="Bold"
+                       FontFamily="Consolas"
+                       Padding="20,10"
+                       Margin="0,0,15,0"
+                       Cursor="Hand"/>
+                
+                <Button Content="? CANCEL"
+                       Click="Cancel_Click"
+                       Background="Transparent"
+                       Foreground="#888"
+                       BorderBrush="#888"
+                       BorderThickness="2"
+                       FontWeight="Bold"
+                       FontFamily="Consolas"
+                       Padding="20,10"
+                       Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

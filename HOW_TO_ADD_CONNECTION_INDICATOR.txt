@@ -1,0 +1,86 @@
+<!-- 🌟 HOW TO ADD CONNECTION INDICATOR TO ANY WINDOW 🌟 -->
+
+<!-- STEP 1: Add xmlns for controls at the top of your XAML -->
+<!-- Add this to your Window tag if not already there: -->
+<!-- xmlns:controls="clr-namespace:DJBookingSystem.Controls" -->
+
+<!-- STEP 2: Add ConnectionIndicator to your main Grid -->
+<!-- Place this AFTER all other content so it appears on top -->
+
+<Grid>
+    <!-- Your existing content here (rows, columns, etc.) -->
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>  <!-- Menu -->
+        <RowDefinition Height="Auto"/>  <!-- Header -->
+        <RowDefinition Height="*"/>     <!-- Content -->
+    </Grid.RowDefinitions>
+
+    <!-- ...all your existing content... -->
+
+    <!-- 🎪 CONNECTION INDICATOR - Sits on top in corner -->
+    <controls:ConnectionIndicator x:Name="ConnectionMonitor"
+                                   Grid.Row="0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Margin="0,5,10,0"
+                                   Panel.ZIndex="1000"/>
+</Grid>
+
+<!-- STEP 3: In your MainWindow.xaml.cs, start monitoring -->
+
+<!-- Add this to your MainWindow constructor or Loaded event: -->
+
+/*
+// Start connection monitoring
+ConnectionMonitor.SetConnected(true, false); // Initially set as connected to database
+
+// Optional: Start automatic monitoring
+ConnectionMonitor.StartMonitoring(
+    checkDatabaseConnection: async () =>
+    {
+        try
+        {
+            // Check if Cosmos DB is connected
+            if (_cosmosDbService != null)
+            {
+                await _cosmosDbService.GetAppSettingsAsync();
+                return true;
+            }
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
+    },
+    checkRadioConnection: async () =>
+    {
+        try
+        {
+            // Check if Radio is connected (if you have radio service)
+            // return await _radioService.IsConnectedAsync();
+            return false; // For now
+        }
+        catch
+        {
+            return false;
+        }
+    }
+);
+*/
+
+<!-- STEP 4: Manual updates (alternative to auto-monitoring) -->
+
+/*
+// Update status manually whenever connection changes:
+ConnectionMonitor.SetConnected(
+    databaseConnected: true,    // Green and happy if true, red and sad if false
+    radioConnected: false       // Optional radio status
+);
+*/
+
+<!-- 🎨 WHAT HAPPENS: -->
+<!-- While connecting: Claude bounces and spins -->
+<!-- When connected: Claude sits still, blinks gently, green glow -->
+<!-- When disconnected: Claude sits still with red/pink color and frown -->
+<!-- Hover for details: Tooltip shows database & radio status -->

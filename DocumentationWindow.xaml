@@ -1,0 +1,122 @@
+<Window x:Class="DJBookingSystem.DocumentationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="?? Documentation Center - Fallen Collective"
+        Height="800" Width="1200"
+        MinHeight="600" MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource AppBackgroundBrush}">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar - Categories -->
+        <Border Grid.Column="0" Background="#0F0F0F" BorderBrush="{DynamicResource AppPrimaryBrush}" BorderThickness="0,0,2,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="{DynamicResource AppPrimaryBrush}" BorderThickness="0,0,0,2" Padding="15">
+                    <StackPanel>
+                        <TextBlock Text="?? DOCUMENTATION" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource AppPrimaryBrush}" FontFamily="Consolas"/>
+                        <TextBlock Text="Select a category" FontSize="11" Foreground="#888" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Categories List -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
+                    <StackPanel>
+                        <TextBlock Text="CANDY-BOT GUIDES" FontSize="12" FontWeight="Bold" Foreground="#FF1493" Margin="0,10,0,5"/>
+                        <Button Content="?? Complete Training Guide" Click="Doc_Click" Tag="CANDYBOT_TRAINING_COMPLETE" Style="{StaticResource DocButton}"/>
+                        <Button Content="? Quick Start Guide" Click="Doc_Click" Tag="CANDYBOT_QUICK_START" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Settings Guide" Click="Doc_Click" Tag="CANDYBOT_SETTINGS_VISUAL_GUIDE" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Package Summary" Click="Doc_Click" Tag="CANDYBOT_PACKAGE_SUMMARY" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Troubleshooting" Click="Doc_Click" Tag="CANDYBOT_TROUBLESHOOTING_FLOWCHART" Style="{StaticResource DocButton}"/>
+                        
+                        <Separator Margin="0,15,0,10" Background="#333"/>
+                        
+                        <TextBlock Text="DJ BOOKING SYSTEM" FontSize="12" FontWeight="Bold" Foreground="#00BFFF" Margin="0,5,0,5"/>
+                        <Button Content="?? User Manual" Click="Doc_Click" Tag="CANDYBOT_DJ_BOOKING_SYSTEM_MANUAL" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Quick Reference Card" Click="Doc_Click" Tag="DJ_BOOKING_SYSTEM_QUICK_CARD" Style="{StaticResource DocButton}"/>
+                        
+                        <Separator Margin="0,15,0,10" Background="#333"/>
+                        
+                        <TextBlock Text="DISCORD INTEGRATION" FontSize="12" FontWeight="Bold" Foreground="#5865F2" Margin="0,5,0,5"/>
+                        <Button Content="?? Discord Training" Click="Doc_Click" Tag="CANDYBOT_DISCORD_TRAINING_GUIDE" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Discord Visual Guide" Click="Doc_Click" Tag="CANDYBOT_DISCORD_VISUAL_GUIDE" Style="{StaticResource DocButton}"/>
+                        <Button Content="?? Discord Quick Card" Click="Doc_Click" Tag="DISCORD_INTEGRATION_QUICK_CARD" Style="{StaticResource DocButton}"/>
+                        
+                        <Separator Margin="0,15,0,10" Background="#333"/>
+                        
+                        <TextBlock Text="REFERENCE" FontSize="12" FontWeight="Bold" Foreground="#FFA500" Margin="0,5,0,5"/>
+                        <Button Content="?? Documentation Index" Click="Doc_Click" Tag="CANDYBOT_DOCUMENTATION_INDEX" Style="{StaticResource DocButton}"/>
+                        <Button Content="??? Training Index" Click="Doc_Click" Tag="CANDYBOT_TRAINING_INDEX" Style="{StaticResource DocButton}"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Footer -->
+                <Border Grid.Row="2" Background="#0A0A0A" BorderBrush="{DynamicResource AppPrimaryBrush}" BorderThickness="0,2,0,0" Padding="15">
+                    <Button Content="? CLOSE" Click="Close_Click" Background="#8B0000" Foreground="White" BorderBrush="#FF0000" BorderThickness="2" FontWeight="Bold" Padding="10" Cursor="Hand"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Content Area -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Document Title -->
+            <Border Grid.Row="0" Background="#0A0A0A" BorderBrush="{DynamicResource AppPrimaryBrush}" BorderThickness="0,0,0,2" Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="DocTitle" Text="Select a document from the sidebar" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource AppPrimaryBrush}" FontFamily="Consolas"/>
+                    <StackPanel x:Name="ActionButtons" Orientation="Horizontal" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Button x:Name="OpenInEditorButton" Content="?? Open in Editor" Click="OpenInEditor_Click" Background="#004080" Foreground="White" Padding="12,6" Margin="0,0,10,0" FontSize="11"/>
+                        <Button x:Name="CopyPathButton" Content="?? Copy Path" Click="CopyPath_Click" Background="#404040" Foreground="White" Padding="12,6" FontSize="11"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Document Viewer -->
+            <ScrollViewer x:Name="ContentScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+                <TextBlock x:Name="DocContent" 
+                          Text="Welcome to the Documentation Center!&#x0a;&#x0a;Select a guide from the sidebar to view its contents.&#x0a;&#x0a;All documentation is embedded in the application for easy access."
+                          TextWrapping="Wrap" 
+                          FontSize="13" 
+                          FontFamily="Consolas"
+                          Foreground="#CCC"
+                          LineHeight="20"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+    <Window.Resources>
+        <Style x:Key="DocButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#CCC"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1A1A1A"/>
+                    <Setter Property="Foreground" Value="#00FF00"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+</Window>

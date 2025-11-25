@@ -1,0 +1,163 @@
+<Window x:Class="DJBookingSystem.DJStreamingLinksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:DJBookingSystem.Controls"
+        Title="DJ Streaming Links" Height="700" Width="900" MaxWidth="900" MaxHeight="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
+        Background="Black">
+    <Grid Background="Black">
+        <!-- Back Button -->
+        <Button Content="⬅ Back to Main Menu"
+                Click="BackToMainMenu_Click"
+                Padding="10,5"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Black"
+                Foreground="Lime"
+                FontWeight="Bold"
+                FontSize="14"
+                BorderBrush="Lime"
+                BorderThickness="1"/>
+
+        <!-- Header -->
+        <Border Grid.Row="1" Background="Black" Padding="15">
+            <StackPanel>
+                <TextBlock Text="🎧 DJ Streaming Links Directory"
+                          FontSize="20"
+                          FontWeight="Bold"
+                          Foreground="Lime"
+                          Margin="0,0,0,5"/>
+                <TextBlock Text="Quick access to all DJ streaming links for bookings and events"
+                          FontSize="12"
+                          Foreground="Lime"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Fancy Heading -->
+        <controls:FancyHeading Text="DJ Streaming Links" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+
+        <!-- Stay On Top Checkbox -->
+        <CheckBox x:Name="StayOnTopCheckBox" Content="Stay On Top" Margin="20,0,0,0" VerticalAlignment="Center"
+                  Checked="StayOnTopCheckBox_Checked"
+                  Unchecked="StayOnTopCheckBox_Unchecked"
+                  Foreground="#00FF00"
+                  Background="Black"/>
+
+        <!-- DJ List -->
+        <Border Grid.Row="2" Margin="10" Background="Black" BorderBrush="Lime" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Toolbar -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,10,10,10" Background="Black">
+                    <Button Content="🔄 Refresh"
+                           Click="Refresh_Click"
+                           Padding="10,5"
+                           Margin="0,0,10,0"
+                           Background="Black"
+                           Foreground="Lime"
+                           BorderBrush="Lime"
+                           BorderThickness="1"
+                           Cursor="Hand"/>
+                    <TextBlock Text="Total DJs:"
+                              FontWeight="Bold"
+                              VerticalAlignment="Center"
+                              Margin="15,0,5,0"
+                              Foreground="Lime"/>
+                    <TextBlock x:Name="TotalDJsTextBlock"
+                              Text="0"
+                              VerticalAlignment="Center"
+                              Foreground="Lime"
+                              FontWeight="Bold"/>
+                </StackPanel>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="DJLinksDataGrid"
+                         Grid.Row="1"
+                         Margin="10"
+                         AutoGenerateColumns="False"
+                         IsReadOnly="True"
+                         SelectionMode="Single"
+                         CanUserAddRows="False"
+                         CanUserDeleteRows="False"
+                         GridLinesVisibility="Horizontal"
+                         AlternatingRowBackground="#222"
+                         RowBackground="Black"
+                         HeadersVisibility="Column"
+                         RowHeight="45"
+                         Foreground="Lime"
+                         Background="Black">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DJ Name" Binding="{Binding Username}" Width="180" FontWeight="Bold">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Lime"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Header="Streaming Link" Binding="{Binding StreamingLink}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#00FF99"/>
+                                    <Setter Property="TextDecorations" Value="Underline"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Header="Member Since" Binding="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}" Width="130">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Lime"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTemplateColumn Header="Actions" Width="220">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Content="🔗 Copy Link"
+                                               Click="CopyLink_Click"
+                                               Tag="{Binding StreamingLink}"
+                                               Padding="8,4"
+                                               Margin="2"
+                                               Background="Black"
+                                               Foreground="Lime"
+                                               BorderBrush="Lime"
+                                               BorderThickness="1"
+                                               Cursor="Hand"
+                                               FontSize="11"/>
+                                        <Button Content="🌐 Open in Browser"
+                                               Click="OpenInBrowser_Click"
+                                               Tag="{Binding StreamingLink}"
+                                               Padding="8,4"
+                                               Margin="2"
+                                               Background="Black"
+                                               Foreground="#00FF99"
+                                               BorderBrush="#00FF99"
+                                               BorderThickness="1"
+                                               Cursor="Hand"
+                                               FontSize="11"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

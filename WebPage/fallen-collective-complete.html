@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fallen Collective - DJ Booking System</title>
+    <style>
+        /* ============================================
+           🌌 THE FALLEN COLLECTIVE - SPACE THEME
+           Neon Green Matrix Style - In Memory of DJCANDY
+           "To Help Others Find Their Voices"
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --space-black: #0a0a0a;
+            --deep-space: #1a1a2e;
+            --dark-panel: #16213e;
+            --darker-panel: #0f1724;
+            --accent-color: #00ff41;
+            --accent-dark: #00cc33;
+            --accent-light: #33ff66;
+            --candy-pink: #FF69B4;
+            --error-color: #ff0040;
+            --warning-color: #ffaa00;
+            --main-font: 'Consolas', 'Courier New', monospace;
+        }
+
+        body {
+            font-family: var(--main-font);
+            background: linear-gradient(135deg, var(--space-black) 0%, var(--deep-space) 30%, var(--dark-panel) 60%, #240046 100%);
+            background-attachment: fixed;
+            color: var(--accent-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px var(--accent-color))
+                        drop-shadow(0 0 15px var(--accent-color));
+            }
+            50% { 
+                filter: drop-shadow(0 0 10px var(--accent-color))
+                        drop-shadow(0 0 25px var(--accent-color));
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes candyFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Header */
+        .header {
+            background: var(--space-black);
+            border-bottom: 2px solid var(--accent-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0, 255, 65, 0.4);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            animation: neonGlow 3s infinite;
+        }
+
+        .logo .subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: var(--main-font);
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-color);
+            color: var(--space-black);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .panel {
+            background: var(--deep-space);
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        /* Auth Page */
+        .auth-container {
+            max-width: 450px;
+            margin: 100px auto;
+        }
+
+        .auth-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            animation: neonGlow 3s infinite;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: var(--darker-panel);
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            color: var(--accent-color);
+            font-family: var(--main-font);
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--deep-space);
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            color: var(--accent-color);
+            font-family: var(--main-font);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: var(--space-black);
+            box-shadow: 0 0 25px var(--accent-color);
+        }
+
+        .link-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--accent-light);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Radio Player */
+        .radio-player {
+            background: var(--space-black);
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+        }
+
+        .player-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            animation: neonGlow 3s infinite;
+            margin-bottom: 20px;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .player-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--deep-space);
+            border: 3px solid var(--accent-color);
+            color: var(--accent-color);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-btn:hover {
+            background: var(--accent-color);
+            color: var(--space-black);
+            box-shadow: 0 0 25px var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .volume-slider {
+            width: 200px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--darker-panel);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Candy-Bot Widget */
+        .candybot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .candybot-toggle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--candy-pink), #ff1493);
+            border: 4px solid var(--accent-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+            animation: candyFloat 3s ease-in-out infinite;
+            transition: all 0.3s;
+        }
+
+        .candybot-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+        }
+
+        .candybot-window {
+            position: fixed;
+            bottom: 130px;
+            right: 30px;
+            width: 400px;
+            height: 600px;
+            background: var(--deep-space);
+            border: 3px solid var(--candy-pink);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.5);
+            display: none;
+            flex-direction: column;
+            z-index: 10001;
+        }
+
+        .candybot-window.active {
+            display: flex;
+        }
+
+        .candybot-header {
+            background: linear-gradient(135deg, var(--candy-pink), #ff1493);
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .candybot-close {
+            cursor: pointer;
+            font-size: 24px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .candybot-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .candybot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: var(--space-black);
+        }
+
+        .candybot-message {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .candybot-message.user {
+            background: var(--dark-panel);
+            border-left: 4px solid var(--accent-color);
+            margin-left: auto;
+        }
+
+        .candybot-message.bot {
+            background: rgba(255, 105, 180, 0.1);
+            border-left: 4px solid var(--candy-pink);
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .message-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message-time {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+
+        .candybot-input-area {
+            padding: 15px;
+            background: var(--darker-panel);
+            border-top: 2px solid var(--candy-pink);
+            border-radius: 0 0 12px 12px;
+        }
+
+        .candybot-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .candybot-input {
+            flex: 1;
+            padding: 10px;
+            background: var(--space-black);
+            border: 2px solid var(--candy-pink);
+            border-radius: 20px;
+            color: var(--accent-color);
+            font-family: var(--main-font);
+            font-size: 14px;
+        }
+
+        .candybot-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--candy-pink);
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .candybot-send:hover {
+            background: #ff1493;
+            box-shadow: 0 0 15px var(--candy-pink);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 15px 15px 15px;
+            background: var(--darker-panel);
+        }
+
+        .quick-action-btn {
+            padding: 8px 15px;
+            background: var(--dark-panel);
+            border: 2px solid var(--candy-pink);
+            border-radius: 15px;
+            color: var(--candy-pink);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--candy-pink);
+            color: white;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th {
+            background: var(--darker-panel);
+            border: 2px solid var(--accent-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table td {
+            border: 1px solid var(--accent-dark);
+            padding: 12px;
+        }
+
+        .data-table tr:hover {
+            background: var(--dark-panel);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background: var(--accent-color);
+            color: var(--space-black);
+        }
+
+        .status-pending {
+            background: var(--warning-color);
+            color: var(--space-black);
+        }
+
+        .status-live {
+            background: var(--error-color);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        /* Memorial */
+        .memorial {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid var(--accent-color);
+            margin-top: 60px;
+            background: var(--space-black);
+        }
+
+        .memorial-title {
+            font-size: 24px;
+            color: var(--candy-pink);
+            margin-bottom: 15px;
+            animation: neonGlow 3s infinite;
+        }
+
+        .memorial-text {
+            font-size: 14px;
+            line-height: 2;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .candybot-window {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                🎵 THE FALLEN COLLECTIVE
+                <span class="subtitle">In Memory of DJCANDY - "To Help Others Find Their Voices"</span>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <button class="nav-btn" onclick="showPage('login')">Login</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div id="appContent">
+            <!-- Login Page -->
+            <div id="loginPage">
+                <div class="auth-container">
+                    <h1 class="auth-title">🎵 FALLEN COLLECTIVE</h1>
+                    <div class="panel">
+                        <form id="loginForm" onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-input" id="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" id="password" required>
+                            </div>
+                            <button type="submit" class="btn">🔐 LOGIN</button>
+                        </form>
+                        <a class="link-btn" onclick="showPage('register')">Don't have an account? Register here</a>
+                        <div id="loginError" class="error-message hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="hidden">
+                <!-- Radio Player -->
+                <div class="radio-player">
+                    <div class="player-title">🔴 LIVE: The Fallen Collective Radio</div>
+                    <div style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
+                        <span id="nowPlaying">Loading...</span>
+                    </div>
+                    <div class="player-controls">
+                        <button class="player-btn" id="playBtn" onclick="RadioPlayer.toggle()">▶</button>
+                    </div>
+                    <div class="volume-control">
+                        <span>🔊</span>
+                        <input type="range" class="volume-slider" id="volumeSlider" 
+                               min="0" max="100" value="30" 
+                               oninput="RadioPlayer.setVolume(this.value / 100)">
+                        <span id="volumeText">30%</span>
+                    </div>
+                </div>
+
+                <!-- Bookings -->
+                <div class="panel">
+                    <h2 style="margin-bottom: 20px;">📅 Today's DJ Schedule</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>DJ Name</th>
+                                <th>Venue</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTable">
+                            <tr>
+                                <td colspan="4" style="text-align: center; padding: 40px;">
+                                    Loading bookings...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memorial -->
+    <div class="memorial">
+        <div class="memorial-title">💫 In Loving Memory of DJCANDY 💫</div>
+        <div class="memorial-text">
+            Candy Fraser (DJCANDY) - Founder of LivePartyMusic.fm<br>
+            "To Help Others Find Their Voices"<br>
+            Forever in our hearts - A coder, DJ, and songwriter gone too soon at 21<br>
+            This system continues her legacy of bringing DJs and music lovers together 🎵
+        </div>
+    </div>
+
+    <!-- Candy-Bot Widget -->
+    <div class="candybot-widget">
+        <div class="candybot-toggle" onclick="toggleCandyBot()" title="Chat with Candy-Bot">
+            🍬
+        </div>
+        
+        <div class="candybot-window" id="candybotWindow">
+            <div class="candybot-header">
+                <span>🍬 Candy-Bot - Your DJ Assistant</span>
+                <div class="candybot-close" onclick="toggleCandyBot()">×</div>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="quick-action-btn" onclick="sendQuickMessage('How do I book a slot?')">
+                    📅 Book Slot
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('What venues are available?')">
+                    🏢 Find Venues
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Give me DJ tips')">
+                    💡 DJ Tips
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Help me')">
+                    ❓ Help
+                </button>
+            </div>
+            
+            <div class="candybot-messages" id="candybotMessages">
+                <div class="candybot-message bot">
+                    <div class="message-sender" style="color: #FF69B4;">🍬 Candy-Bot</div>
+                    <div class="message-text">
+                        Hi there! 🍬 I'm Candy-Bot, your friendly DJ assistant!<br><br>
+                        I'm here to help you with:<br>
+                        📅 Booking DJ slots<br>
+                        🏢 Finding venues<br>
+                        💡 DJ tips & tricks<br>
+                        ❓ Answering questions<br><br>
+                        What can I help you with today? 🎵
+                    </div>
+                    <div class="message-time"><?php echo date('H:i'); ?></div>
+                </div>
+            </div>
+            
+            <div class="candybot-input-area">
+                <div class="candybot-input-wrapper">
+                    <input 
+                        type="text" 
+                        class="candybot-input" 
+                        id="candybotInput" 
+                        placeholder="Ask me anything..."
+                        onkeypress="if(event.key === 'Enter') sendMessage()"
+                    >
+                    <button class="candybot-send" onclick="sendMessage()">
+                        ▶
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="radioStream" preload="none"></audio>
+
+    <script>
+        // ============================================
+        // APP CONFIGURATION
+        // ============================================
+        
+        const CONFIG = {
+            radioStreamUrl: 'https://c40.radioboss.fm/stream/98',
+            cosmosDbEndpoint: '/api', // Replace with your Azure Function URL
+            appVersion: '2.0.5'
+        };
+
+        const STATE = {
+            currentUser: null,
+            currentPage: 'login',
+            isPlaying: false,
+            volume: 0.3
+        };
+
+        // ============================================
+        // RADIO PLAYER
+        // ============================================
+        
+        const RadioPlayer = {
+            audio: null,
+
+            init() {
+                this.audio = document.getElementById('radioStream');
+                this.audio.volume = STATE.volume;
+                this.audio.src = CONFIG.radioStreamUrl;
+                
+                // Auto-play quietly after 1 second
+                setTimeout(() => this.play(), 1000);
+            },
+
+            play() {
+                this.audio.play().then(() => {
+                    STATE.isPlaying = true;
+                    this.updateUI();
+                }).catch(err => console.log('Autoplay prevented:', err));
+            },
+
+            pause() {
+                this.audio.pause();
+                STATE.isPlaying = false;
+                this.updateUI();
+            },
+
+            toggle() {
+                STATE.isPlaying ? this.pause() : this.play();
+            },
+
+            setVolume(value) {
+                STATE.volume = value;
+                this.audio.volume = value;
+                this.updateUI();
+            },
+
+            updateUI() {
+                document.getElementById('playBtn').textContent = STATE.isPlaying ? '⏸' : '▶';
+                document.getElementById('volumeText').textContent = Math.round(STATE.volume * 100) + '%';
+            }
+        };
+
+        // ============================================
+        // CANDY-BOT AI ASSISTANT
+        // ============================================
+        
+        const CandyBot = {
+            responses: {
+                book: [
+                    "Ready to book your DJ slot? 🍬 Just head to the 'Book New Slot' tab and follow the easy steps! 🎵",
+                    "Booking is super sweet! Click 'Book New Slot', pick your venue, choose your time, and you're all set! 🎉",
+                    "Let's get you booked! Go to 'Book New Slot' → Select Venue → Pick Date → Enter Details → Book! Easy! 🎧"
+                ],
+                venue: [
+                    "Check out 'Open Decks' to see all available venues! 🏢 Each one has different vibes and time slots! 🎵",
+                    "Venues are in the 'Open Decks' tab! Browse through and find the perfect spot for your set! 🎉",
+                    "Looking for venues? Head to 'Open Decks' - you'll see all the sweet spots available! 🍬"
+                ],
+                help: [
+                    "I'm here to help! 🍬 Ask me about booking slots, finding venues, DJ tips, or navigating the system! 🎵",
+                    "Happy to assist! 🎉 I can help with bookings, venues, tips, or any questions you have! 🎧",
+                    "Need guidance? I've got you covered! Ask me anything about the DJ Booking System! 🍬"
+                ],
+                tips: [
+                    "DJ tips! 🍬 1) Read the crowd 2) Have backup tracks 3) Practice transitions 4) Stay hydrated 5) Have fun! 🎵",
+                    "Here's some sweet advice: Know your audience, test your equipment, and always have a Plan B! 🎉",
+                    "Pro tips: Arrive early, organize your music, read the energy, and remember - confidence is key! 🎧"
+                ],
+                greeting: [
+                    "Hi there! 🍬 I'm Candy-Bot, your friendly DJ assistant! How can I help you today? 🎵",
+                    "Hello! 🎉 Welcome to the DJ Booking System! I'm here to make your experience sweet! 🍬",
+                    "Hey! 🎧 Ready to book some amazing DJ slots? I'm here to help! 🎵"
+                ],
+                thanks: [
+                    "You're very welcome! 🍬 Happy to help anytime! 🎵",
+                    "My pleasure! 🎉 That's what I'm here for! 🎧",
+                    "Anytime! 🍬 Feel free to ask me anything else! 🎵"
+                ],
+                default: [
+                    "Hmm, I'm not sure about that! 🍬 Try asking me about bookings, venues, or DJ tips! 🎵",
+                    "Interesting question! 🎉 I specialize in DJ bookings and venues. What would you like to know? 🎧",
+                    "I'm your DJ assistant! 🍬 Ask me about booking slots, finding venues, or getting tips! 🎵"
+                ]
+            },
+
+            getResponse(message) {
+                const msg = message.toLowerCase();
+                
+                if (msg.includes('book') || msg.includes('slot') || msg.includes('reservation')) {
+                    return this.randomResponse('book');
+                }
+                if (msg.includes('venue') || msg.includes('location') || msg.includes('place')) {
+                    return this.randomResponse('venue');
+                }
+                if (msg.includes('help') || msg.includes('how') || msg.includes('guide')) {
+                    return this.randomResponse('help');
+                }
+                if (msg.includes('tip') || msg.includes('advice') || msg.includes('suggestion')) {
+                    return this.randomResponse('tips');
+                }
+                if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+                    return this.randomResponse('greeting');
+                }
+                if (msg.includes('thank') || msg.includes('thanks')) {
+                    return this.randomResponse('thanks');
+                }
+                
+                return this.randomResponse('default');
+            },
+
+            randomResponse(category) {
+                const responses = this.responses[category];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        };
+
+        // ============================================
+        // CANDY-BOT UI
+        // ============================================
+        
+        function toggleCandyBot() {
+            document.getElementById('candybotWindow').classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('candybotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addCandyBotMessage(message, 'user');
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = CandyBot.getResponse(message);
+                addCandyBotMessage(response, 'bot');
+            }, 500);
+        }
+
+        function sendQuickMessage(message) {
+            addCandyBotMessage(message, 'user');
+            
+            setTimeout(() => {
+                const response = CandyBot.getResponse(message);
+                addCandyBotMessage(response, 'bot');
+            }, 500);
+        }
+
+        function addCandyBotMessage(text, sender) {
+            const messagesDiv = document.getElementById('candybotMessages');
+            const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `candybot-message ${sender}`;
+            messageDiv.innerHTML = `
+                <div class="message-sender" style="color: ${sender === 'bot' ? '#FF69B4' : '#00ff41'};">
+                    ${sender === 'bot' ? '🍬 Candy-Bot' : 'You'}
+                </div>
+                <div class="message-text">${text}</div>
+                <div class="message-time">${time}</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // ============================================
+        // AUTHENTICATION
+        // ============================================
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // DEMO: Accept any login for now
+            // TODO: Replace with actual Cosmos DB authentication
+            if (username && password) {
+                STATE.currentUser = { username, fullName: username };
+                showPage('dashboard');
+                updateNav();
+                loadBookings();
+            } else {
+                showError('loginError', 'Please enter username and password');
+            }
+        }
+
+        function updateNav() {
+            const nav = document.getElementById('navMenu');
+            if (STATE.currentUser) {
+                nav.innerHTML = `
+                    <span style="color: var(--accent-color); margin-right: 15px;">
+                        Welcome, ${STATE.currentUser.username}!
+                    </span>
+                    <button class="nav-btn" onclick="logout()">Logout</button>
+                `;
+            }
+        }
+
+        function logout() {
+            STATE.currentUser = null;
+            showPage('login');
+            location.reload();
+        }
+
+        // ============================================
+        // PAGE NAVIGATION
+        // ============================================
+        
+        function showPage(pageName) {
+            document.querySelectorAll('[id$="Page"]').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageName + 'Page').classList.remove('hidden');
+            STATE.currentPage = pageName;
+        }
+
+        function showError(elementId, message) {
+            const errorDiv = document.getElementById(elementId);
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        // ============================================
+        // DATA LOADING (Cosmos DB Placeholder)
+        // ============================================
+        
+        async function loadBookings() {
+            // TODO: Replace with actual Cosmos DB API call
+            const demoBookings = [
+                {
+                    time: '20:00',
+                    djName: 'DJ Shadow',
+                    venue: 'The Space Club',
+                    status: 'Confirmed'
+                },
+                {
+                    time: '22:00',
+                    djName: 'DJ Phoenix',
+                    venue: 'Neon Nights',
+                    status: 'Live',
+                    isLive: true
+                }
+            ];
+            
+            const tbody = document.getElementById('bookingsTable');
+            tbody.innerHTML = demoBookings.map(booking => `
+                <tr>
+                    <td>${booking.time}</td>
+                    <td>${booking.djName}</td>
+                    <td>${booking.venue}</td>
+                    <td>
+                        <span class="status-badge ${booking.isLive ? 'status-live' : 'status-confirmed'}">
+                            ${booking.isLive ? '🔴 LIVE' : booking.status}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            RadioPlayer.init();
+            console.log('🎵 The Fallen Collective - Initialized');
+            console.log('💫 In Memory of DJCANDY');
+        });
+    </script>
+</body>
+</html>

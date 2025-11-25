@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ?? NEON WHITE THEME -->
+    
+    <Color x:Key="AccentColor">#ffffff</Color>
+    <Color x:Key="AccentDark">#cccccc</Color>
+    <Color x:Key="AccentLight">#ffffff</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    
+</ResourceDictionary>

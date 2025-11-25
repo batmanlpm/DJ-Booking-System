@@ -1,0 +1,26 @@
+{
+  "updateAvailable": true,
+  "currentVersion": "1.2.4",
+  "latestVersion": "1.2.5",
+  "releaseDate": "2025-01-23",
+  "downloadUrl": "https://djbookupdates.com/downloads/DJBookingSystem-Setup.exe",
+  "changelogUrl": "https://djbookupdates.com/changelog.html",
+  "releaseNotes": "CRITICAL UPDATE: Auto-update system fixed. This version corrects the update server URL. All future updates will work automatically.",
+  "features": [
+    "? CRITICAL: Auto-update server URL corrected",
+    "? All 17 permissions fully enforced",
+    "? Tutorial system with role-based videos",
+    "? Intro video system",
+    "? Enhanced stability and error handling"
+  ],
+  "bugFixes": [
+    "? CRITICAL: Fixed auto-update server URL (was pointing to wrong server)",
+    "? Fixed permission enforcement",
+    "? Fixed tutorial logic",
+    "? Fixed splash screen initialization"
+  ],
+  "isCritical": true,
+  "minimumVersion": "1.0.0",
+  "isSecureConnection": true,
+  "_migration_notice": "This is a bridge file for users on v1.2.4 and earlier. Upload to old RadioBOSS server at: https://c40.radioboss.fm/u/98/update-info.json"
+}

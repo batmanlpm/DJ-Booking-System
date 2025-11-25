@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 💙 ELECTRIC BLUE THEME -->
+    
+    <Color x:Key="AccentColor">#3a86ff</Color>
+    <Color x:Key="AccentDark">#0466c8</Color>
+    <Color x:Key="AccentLight">#4ea8ff</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    
+</ResourceDictionary>

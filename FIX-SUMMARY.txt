@@ -1,0 +1,44 @@
+=== COMPREHENSIVE FIX SUMMARY ===
+
+COMPLETED AUTOMATICALLY:
+✓ Cleaned 0 temporary build files
+✓ Removed #pragma warning suppressions from AdminBookingManagementWindow.xaml.cs
+✓ Fixed OrderBy to use DayOfWeek/WeekNumber/TimeSlot
+✓ Commented out BookingDate assignments
+✓ Removed CS0618 from project NoWarn list
+✓ Fixed null safety in MainWindow.xaml.cs
+
+REQUIRES MANUAL ATTENTION:
+
+1. AdminBookingManagementWindow.xaml.cs (Lines 172-178)
+   OLD: var conflict = _allBookings.FirstOrDefault(b => b.VenueName == selectedVenue.Name && b.BookingDate == bookingDateTime);
+   FIX: Replace with proper day/week/time comparison using new properties
+
+2. Booking.cs - Remove BookingDate property entirely
+   - Property is marked obsolete but still exists
+   - Remove lines ~37-38
+
+3. App.xaml.cs - Async error handling (Lines 67-85)
+   - Change underscore discard (_  = Task.Run) to proper await
+   - Add .ConfigureAwait(false) to all async calls
+
+4. Search all *.cs files for remaining "BookingDate" usage:
+   - Replace with GetNextOccurrence() or OccursOn() methods
+   - Use DayOfWeek, WeekNumber, TimeSlot properties
+
+FILES STILL USING BookingDate:
+  - AdminBookingManagementWindow.xaml.cs
+  - BookingDetailWindow.xaml.cs
+  - EditBookingWindow.xaml.cs
+  - VenueDailyScheduleWindow.xaml.cs
+  - Booking.cs
+  - BookingViewModel.cs
+  - BookingsView.xaml.cs
+  - CreateBookingWindow.xaml.cs
+  - BookingsView.xaml.cs
+
+NEXT STEPS:
+1. Review changes
+2. Fix manual items above
+3. Run: dotnet build
+4. Test thoroughly

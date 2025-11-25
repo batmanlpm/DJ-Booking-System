@@ -1,0 +1,250 @@
+<Window x:Class="DJBookingSystem.Views.PromoteDemoteUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Promote/Demote Users" 
+        Height="550" 
+        Width="700"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize">
+    
+    <Border BorderBrush="#00FF00" BorderThickness="4" Background="Black" CornerRadius="10">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" 
+                    Background="Black" 
+                    BorderBrush="#00FF00" 
+                    BorderThickness="2" 
+                    CornerRadius="10"
+                    Padding="15"
+                    Margin="0,0,0,20">
+                <TextBlock Text="Promote/Demote Users"
+                          FontFamily="Consolas"
+                          FontSize="24"
+                          FontWeight="Bold"
+                          Foreground="#00FF00"
+                          HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Content -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Current Role -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,30">
+                    <TextBlock Text="Current Role"
+                              FontFamily="Consolas"
+                              FontSize="20"
+                              FontWeight="Bold"
+                              Foreground="#FF1493"
+                              Margin="0,0,40,0"/>
+                    <TextBlock x:Name="CurrentRoleText"
+                              Text="Manager"
+                              FontFamily="Consolas"
+                              FontSize="20"
+                              FontWeight="Bold"
+                              Foreground="#00FF00"/>
+                </StackPanel>
+
+                <!-- Available Roles -->
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Available Roles"
+                              FontFamily="Consolas"
+                              FontSize="20"
+                              FontWeight="Bold"
+                              Foreground="#FF1493"
+                              Margin="0,0,0,20"
+                              HorizontalAlignment="Center"/>
+
+                    <!-- Role Selection Buttons -->
+                    <StackPanel x:Name="RoleButtonsPanel" HorizontalAlignment="Center" Margin="0,0,0,30">
+                        <!-- User -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                   x:Name="SelectUserButton"
+                                   Content="Select"
+                                   Click="SelectRole_Click"
+                                   Tag="User"
+                                   FontFamily="Consolas"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#00FF00"
+                                   Background="Black"
+                                   BorderBrush="#FF1493"
+                                   BorderThickness="3"
+                                   Padding="15,8"
+                                   Cursor="Hand"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="User"
+                                      FontFamily="Consolas"
+                                      FontSize="20"
+                                      Foreground="#00FF00"
+                                      VerticalAlignment="Center"
+                                      Margin="20,0,0,0"/>
+                        </Grid>
+
+                        <!-- DJ -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                   x:Name="SelectDJButton"
+                                   Content="Select"
+                                   Click="SelectRole_Click"
+                                   Tag="DJ"
+                                   FontFamily="Consolas"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#00FF00"
+                                   Background="Black"
+                                   BorderBrush="#FF1493"
+                                   BorderThickness="3"
+                                   Padding="15,8"
+                                   Cursor="Hand"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="DJ"
+                                      FontFamily="Consolas"
+                                      FontSize="20"
+                                      Foreground="#00FF00"
+                                      VerticalAlignment="Center"
+                                      Margin="20,0,0,0"/>
+                        </Grid>
+
+                        <!-- Venue Owner -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                   x:Name="SelectVenueOwnerButton"
+                                   Content="Select"
+                                   Click="SelectRole_Click"
+                                   Tag="VenueOwner"
+                                   FontFamily="Consolas"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#00FF00"
+                                   Background="Black"
+                                   BorderBrush="#FF1493"
+                                   BorderThickness="3"
+                                   Padding="15,8"
+                                   Cursor="Hand"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="Venue Owner"
+                                      FontFamily="Consolas"
+                                      FontSize="20"
+                                      Foreground="#00FF00"
+                                      VerticalAlignment="Center"
+                                      Margin="20,0,0,0"/>
+                        </Grid>
+
+                        <!-- Manager -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                   x:Name="SelectManagerButton"
+                                   Content="Select"
+                                   Click="SelectRole_Click"
+                                   Tag="Manager"
+                                   FontFamily="Consolas"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#00FF00"
+                                   Background="Black"
+                                   BorderBrush="#FF1493"
+                                   BorderThickness="3"
+                                   Padding="15,8"
+                                   Cursor="Hand"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="Manager"
+                                      FontFamily="Consolas"
+                                      FontSize="20"
+                                      Foreground="#00FF00"
+                                      VerticalAlignment="Center"
+                                      Margin="20,0,0,0"/>
+                        </Grid>
+
+                        <!-- SysAdmin -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                   x:Name="SelectSysAdminButton"
+                                   Content="Select"
+                                   Click="SelectRole_Click"
+                                   Tag="SysAdmin"
+                                   FontFamily="Consolas"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#00FF00"
+                                   Background="Black"
+                                   BorderBrush="#FF1493"
+                                   BorderThickness="3"
+                                   Padding="15,8"
+                                   Cursor="Hand"/>
+                            <TextBlock Grid.Column="1"
+                                      Text="SysAdmin"
+                                      FontFamily="Consolas"
+                                      FontSize="20"
+                                      Foreground="#00FF00"
+                                      VerticalAlignment="Center"
+                                      Margin="20,0,0,0"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button x:Name="ConfirmButton"
+                       Content="Confirm"
+                       Click="Confirm_Click"
+                       FontFamily="Consolas"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Background="#00FF00"
+                       BorderBrush="#00FF00"
+                       BorderThickness="0"
+                       Padding="40,10"
+                       Margin="0,0,20,0"
+                       Cursor="Hand"/>
+                <Button x:Name="CancelButton"
+                       Content="Cancel"
+                       Click="Cancel_Click"
+                       FontFamily="Consolas"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Background="#FF1493"
+                       BorderBrush="#FF1493"
+                       BorderThickness="0"
+                       Padding="40,10"
+                       Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

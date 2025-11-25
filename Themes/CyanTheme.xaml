@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 🩵 CYBER CYAN THEME -->
+    
+    <Color x:Key="AccentColor">#00f5ff</Color>
+    <Color x:Key="AccentDark">#00d9e6</Color>
+    <Color x:Key="AccentLight">#4dffff</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    
+</ResourceDictionary>

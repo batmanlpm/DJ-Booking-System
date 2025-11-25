@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Booking System - The Fallen Collective</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #00FF00;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #0A0A0A;
+            border-bottom: 2px solid #00FF00;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #00BFFF;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .header p {
+            color: #00FF00;
+            font-size: 1em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .main-box {
+            background: #0A0A0A;
+            border: 3px solid #00FF00;
+            border-radius: 15px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+
+        .main-box h2 {
+            color: #00BFFF;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .version-badge {
+            background: #00FF00;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            margin: 30px 0;
+        }
+
+        .features h3 {
+            color: #FF1493;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            color: #00FF00;
+        }
+
+        .features li:before {
+            content: "* ";
+            margin-right: 10px;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 20px 50px;
+            background: #00FF00;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .download-btn:hover {
+            background: #00BFFF;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.6);
+        }
+
+        .download-info {
+            margin-top: 15px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .changelog-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #00BFFF;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #00BFFF;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .changelog-link:hover {
+            background: #00BFFF;
+            color: #000;
+        }
+
+        .registration-section {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 3px solid #FF1493;
+        }
+
+        .registration-box {
+            background: #0A0A0A;
+            border: 3px solid #FF1493;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .registration-box h2 {
+            color: #FF1493;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .registration-box .subtitle {
+            color: #888;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00FF00;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00BFFF;
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+        }
+
+        .password-requirements {
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .account-type {
+            margin-bottom: 25px;
+        }
+
+        .account-type label {
+            color: #00FF00;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .account-type-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .account-type-option {
+            background: #1a1a1a;
+            border: 2px solid #00FF00;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .account-type-option:hover {
+            background: #00FF00;
+            color: #000;
+        }
+
+        .account-type-option input[type="radio"] {
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #FF1493;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: #00BFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
+        }
+
+        .error-message, .success-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #ff000020;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+
+        .success-message {
+            background: #00ff0020;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+
+        footer {
+            background: #0A0A0A;
+            border-top: 2px solid #FF00FF;
+            padding: 20px;
+            text-align: center;
+            color: #FF00FF;
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .main-box, .registration-box {
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .download-btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            .account-type-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>THE FALLEN COLLECTIVE</h1>
+        <p>DJ BOOKING SYSTEM - ONLINE PLATFORM</p>
+    </div>
+
+    <div class="container">
+        <div class="main-box">
+            <div style="text-align: center;">
+                <span class="version-badge">Version 1.3.0 - Latest Release</span>
+            </div>
+
+            <h2>Welcome to DJ Booking System</h2>
+
+            <div class="features">
+                <h3>NEW in Version 1.3.0 - Friends List & Direct Messaging</h3>
+                <ul>
+                    <li>Discord-style Friends List with Real-Time Online Status</li>
+                    <li>Send & Receive Friend Requests</li>
+                    <li>Private Direct Messaging (DM) with Friends</li>
+                    <li>Auto-Refresh Friend Status In Real-time</li>
+                    <li>Clean Green/Black Theme Integration & Customisable</li>
+                    <li>Smart Auto-Accept for Mutual Friend Requests</li>
+                </ul>
+            </div>
+
+            <div class="features">
+                <h3>Previous Features (v1.2.6)</h3>
+                <ul>
+                    <li>Three-Strike Progressive Ban System</li>
+                    <li>Machine + IP Dual-Layer Ban Enforcement</li>
+                    <li>VPN Bypass Prevention</li>
+                    <li>Animated Ban Countdown Timer</li>
+                    <li>Role Security with Self-Promotion Prevention</li>
+                    <li>Real-Time Online/Offline Status</li>
+                </ul>
+            </div>
+
+            <div class="features">
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Booking Management System</li>
+                    <li>Venue Management</li>
+                    <li>User & Role Management</li>
+                    <li>Integrated Chat with Channels</li>
+                    <li>Friends List & Direct Messaging</li>
+                    <li>RadioBOSS Integration</li>
+                    <li>Real-time Online Status</li>
+                    <li>Automatic Updates</li>
+                    <li>Candy-Bot AI Assistant</li>
+                </ul>
+            </div>
+
+            <div class="download-section">
+                <a href="https://djbookupdates.com/DJBookingSystem-Setup-v1.3.0.exe" class="download-btn" download>
+                    DOWNLOAD NOW
+                </a>
+                <div class="download-info">
+                    Version 1.3.0 | Windows 10/11 | .NET 8 (Self-contained)
+                </div>
+                
+                <!-- SmartScreen Bypass Instructions -->
+                <div style="margin-top: 30px; padding: 20px; background: #1a1a1a; border: 2px solid #FFD700; border-radius: 10px;">
+                    <h3 style="color: #FFD700; margin-bottom: 15px; text-align: center;">Windows SmartScreen Warning?</h3>
+                    <p style="color: #888; text-align: center; margin-bottom: 15px;">
+                        Windows may show a protection warning. This is normal for new applications.
+                    </p>
+                    <ol style="color: #00FF00; text-align: left; max-width: 600px; margin: 0 auto; line-height: 2;">
+                        <li>Click "More info" on the SmartScreen popup</li>
+                        <li>Click "Run anyway" at the bottom</li>
+                        <li>The installer will start normally</li>
+                    </ol>
+                    <p style="color: #888; text-align: center; margin-top: 15px; font-size: 0.85em;">
+                        The app is safe and virus-free. SmartScreen shows this because we're a new publisher.
+                    </p>
+                </div>
+                
+                <a href="https://djbookupdates.com/changelog.html" class="changelog-link">View Full Changelog</a>
+            </div>
+        </div>
+
+        <div class="registration-section">
+            <div class="registration-box">
+                <h2>Create Your Account Now</h2>
+                <p class="subtitle">Join the platform and start booking today</p>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+
+                <form id="registrationForm" onsubmit="handleRegistration(event)">
+                    <div class="form-group">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" name="username" required 
+                               placeholder="Choose a unique username" 
+                               minlength="3" maxlength="20"
+                               pattern="[a-zA-Z0-9_]+" 
+                               title="Username can only contain letters, numbers, and underscores">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Create a password (minimum 6 characters)"
+                               minlength="6">
+                        <div class="password-requirements">
+                            Password must be at least 6 characters long
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required 
+                               placeholder="Re-enter your password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name (Optional)</label>
+                        <input type="text" id="fullName" name="fullName" 
+                               placeholder="Your full name">
+                    </div>
+
+                    <div class="account-type">
+                        <label>I am a: *</label>
+                        <div class="account-type-options">
+                            <div class="account-type-option">
+                                <input type="radio" id="typeUser" name="accountType" value="User" checked>
+                                <label for="typeUser">User</label>
+                            </div>
+                            <div class="account-type-option">
+                                <input type="radio" id="typeDJ" name="accountType" value="DJ">
+                                <label for="typeDJ">DJ</label>
+                            </div>
+                            <div class="account-type-option">
+                                <input type="radio" id="typeVenueOwner" name="accountType" value="VenueOwner">
+                                <label for="typeVenueOwner">Venue Owner</label>
+                            </div>
+                            <div class="account-type-option">
+                                <input type="radio" id="typeBoth" name="accountType" value="Both">
+                                <label for="typeBoth">Both</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        SUPPORTED BY: THE FALLEN COLLECTIVE &amp; MEGA BYTE I.T SERVICES
+    </footer>
+
+    <script>
+        fetch('version.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Latest version:', data.latestVersion);
+                console.log('Release notes:', data.releaseNotes);
+            })
+            .catch(error => {
+                console.log('Version check failed:', error);
+            });
+
+        function handleRegistration(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const fullName = document.getElementById('fullName').value.trim();
+            const accountType = document.querySelector('input[name="accountType"]:checked').value;
+
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+
+            if (password !== confirmPassword) {
+                showError('Passwords do not match!');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters long.');
+                return;
+            }
+
+            const registrationData = {
+                username: username,
+                password: password,
+                fullName: fullName || username,
+                accountType: accountType,
+                isDJ: accountType === 'DJ' || accountType === 'Both',
+                isVenueOwner: accountType === 'VenueOwner' || accountType === 'Both'
+            };
+
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Creating Account...';
+            submitBtn.disabled = true;
+
+            fetch('register.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(registrationData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error || 'Registration failed');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                showSuccess('Account created successfully! You can now download and login to the app.');
+                document.getElementById('registrationForm').reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            })
+            .catch(error => {
+                showError(error.message || 'Registration failed. Please try again.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        document.querySelectorAll('.account-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.account-type-option').forEach(opt => {
+                    opt.style.background = '#1a1a1a';
+                    opt.style.color = '#00FF00';
+                });
+                
+                this.style.background = '#00FF00';
+                this.style.color = '#000';
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+    </script>
+</body>
+</html>

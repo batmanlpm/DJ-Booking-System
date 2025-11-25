@@ -1,0 +1,130 @@
+<Window x:Class="DJBookingSystem.ConnectionStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Connecting..." 
+        Height="300" Width="400"
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        ShowInTaskbar="False">
+
+    <Border Background="#1a1a2e" BorderBrush="{StaticResource AccentBrush}" BorderThickness="3" CornerRadius="15">
+        <Border.Effect>
+            <DropShadowEffect Color="{StaticResource AccentColor}" BlurRadius="30" ShadowDepth="0" Opacity="0.8"/>
+        </Border.Effect>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock x:Name="TitleText" 
+                       Text="🌌 CONNECTING TO COSMOS..."
+                       FontFamily="Consolas" 
+                       FontSize="18" 
+                       FontWeight="Bold"
+                       Foreground="{StaticResource AccentBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="{StaticResource AccentColor}" BlurRadius="15" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <!-- Claude Character Animation -->
+            <Viewbox Grid.Row="1" Height="120" Width="120">
+                <Canvas Width="100" Height="100">
+                    <!-- Claude's Body (Circle) -->
+                    <Ellipse x:Name="ClaudeBody" 
+                             Width="80" Height="80" 
+                             Canvas.Left="10" Canvas.Top="10"
+                             Fill="#16213e"
+                             Stroke="{StaticResource AccentBrush}" 
+                             StrokeThickness="3">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="{StaticResource AccentColor}" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+                        </Ellipse.Effect>
+                    </Ellipse>
+
+                    <!-- Left Eye -->
+                    <Ellipse x:Name="LeftEye" 
+                             Width="15" Height="20" 
+                             Canvas.Left="30" Canvas.Top="35"
+                             Fill="{StaticResource AccentBrush}"/>
+
+                    <!-- Right Eye -->
+                    <Ellipse x:Name="RightEye" 
+                             Width="15" Height="20" 
+                             Canvas.Left="55" Canvas.Top="35"
+                             Fill="{StaticResource AccentBrush}"/>
+
+                    <!-- Happy Mouth (Smile) -->
+                    <Path x:Name="HappyMouth" 
+                          Data="M 35 60 Q 50 70 65 60" 
+                          Stroke="{StaticResource AccentBrush}" 
+                          StrokeThickness="3" 
+                          Fill="Transparent"
+                          Visibility="Visible"/>
+
+                    <!-- Sad Mouth (Error) -->
+                    <Path x:Name="SadMouth" 
+                          Data="M 35 70 Q 50 60 65 70" 
+                          Stroke="#ff0055" 
+                          StrokeThickness="3" 
+                          Fill="Transparent"
+                          Visibility="Collapsed"/>
+
+                    <!-- Antenna -->
+                    <Line x:Name="Antenna" 
+                          X1="50" Y1="10" X2="50" Y2="0"
+                          Stroke="{StaticResource AccentBrush}" 
+                          StrokeThickness="2"/>
+
+                    <!-- Signal Waves (Animated) -->
+                    <Path x:Name="SignalWave1" 
+                          Data="M 20 30 Q 10 50 20 70" 
+                          Stroke="{StaticResource AccentBrush}" 
+                          StrokeThickness="2" 
+                          Opacity="0.6"/>
+                    
+                    <Path x:Name="SignalWave2" 
+                          Data="M 80 30 Q 90 50 80 70" 
+                          Stroke="{StaticResource AccentBrush}" 
+                          StrokeThickness="2" 
+                          Opacity="0.6"/>
+                </Canvas>
+            </Viewbox>
+
+            <!-- Status Message -->
+            <StackPanel Grid.Row="2" Margin="0,20,0,0">
+                <TextBlock x:Name="StatusText" 
+                           Text="Establishing secure connection..."
+                           FontFamily="Consolas" 
+                           FontSize="14"
+                           Foreground="{StaticResource AccentBrush}"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"/>
+
+                <!-- Progress Bar -->
+                <ProgressBar x:Name="ConnectionProgress"
+                             Height="8" 
+                             Margin="0,15,0,0"
+                             IsIndeterminate="True"
+                             Background="#0a0a0a"
+                             BorderBrush="{StaticResource AccentBrush}"
+                             BorderThickness="2">
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}"/>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,249 @@
+<Window x:Class="DJBookingSystem.CandyBotWelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welcome to Candy-Bot!" 
+        Height="500" 
+        Width="600"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <!-- Bounce In Animation -->
+        <Storyboard x:Key="BounceInAnimation">
+            <DoubleAnimation Storyboard.TargetName="MainBorder"
+                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                           From="0" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="3" EasingMode="EaseOut" Bounciness="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="MainBorder"
+                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                           From="0" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="3" EasingMode="EaseOut" Bounciness="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="MainBorder"
+                           Storyboard.TargetProperty="Opacity"
+                           From="0" To="1" Duration="0:0:0.4"/>
+        </Storyboard>
+        
+        <!-- Candy Icon Bounce -->
+        <Storyboard x:Key="CandyBounce" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="CandyIcon"
+                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                           From="0" To="-15" Duration="0:0:0.6"
+                           AutoReverse="True">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <!-- Glow Pulse -->
+        <Storyboard x:Key="GlowPulse" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="GlowEffect"
+                           Storyboard.TargetProperty="BlurRadius"
+                           From="20" To="35" Duration="0:0:1.5"
+                           AutoReverse="True"/>
+        </Storyboard>
+    </Window.Resources>
+    
+    <Grid>
+        <Border x:Name="MainBorder"
+                Background="#CC000000" 
+                BorderBrush="#FF69B4" 
+                BorderThickness="3" 
+                CornerRadius="20"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <ScaleTransform ScaleX="0" ScaleY="0"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect x:Name="GlowEffect"
+                                Color="#FF69B4" 
+                                BlurRadius="20" 
+                                ShadowDepth="0" 
+                                Opacity="0.8"/>
+            </Border.Effect>
+            
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <!-- Candy Icon -->
+                    <RowDefinition Height="Auto"/> <!-- Title -->
+                    <RowDefinition Height="*"/>    <!-- Content -->
+                    <RowDefinition Height="Auto"/> <!-- Input/Button -->
+                </Grid.RowDefinitions>
+
+                <!-- Animated Candy Icon -->
+                <TextBlock Grid.Row="0"
+                          x:Name="CandyIcon"
+                          Text="??"
+                          FontSize="80"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,20"
+                          RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="0"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+                <!-- Welcome Title -->
+                <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                    <TextBlock Text="Hi! I'm The Candy-Bot ??"
+                              FontSize="28"
+                              FontWeight="Bold"
+                              Foreground="#FF69B4"
+                              FontFamily="Consolas"
+                              HorizontalAlignment="Center"
+                              TextAlignment="Center"/>
+                    <TextBlock Text="Your Personal AI Assistant!"
+                              FontSize="14"
+                              Foreground="#CCCCCC"
+                              FontFamily="Consolas"
+                              HorizontalAlignment="Center"
+                              TextAlignment="Center"
+                              Margin="0,5,0,0"/>
+                </StackPanel>
+
+                <!-- Content Area (Changes based on step) -->
+                <StackPanel Grid.Row="2" 
+                           x:Name="ContentPanel"
+                           VerticalAlignment="Center">
+                    
+                    <!-- Step 1: Name Input -->
+                    <StackPanel x:Name="NameInputPanel" Visibility="Visible">
+                        <TextBlock Text="Before we get started, what should I call you?"
+                                  FontSize="16"
+                                  Foreground="#FFFFFF"
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  TextAlignment="Center"
+                                  TextWrapping="Wrap"
+                                  Margin="0,0,0,20"/>
+                        
+                        <TextBox x:Name="PreferredNameTextBox"
+                                Height="50"
+                                Padding="15,12"
+                                FontFamily="Consolas"
+                                FontSize="18"
+                                Background="#1A1A1A"
+                                Foreground="#FF69B4"
+                                BorderBrush="#FF69B4"
+                                BorderThickness="2"
+                                CaretBrush="#FF69B4"
+                                HorizontalAlignment="Center"
+                                Width="300"
+                                TextAlignment="Center"
+                                KeyDown="PreferredName_KeyDown"/>
+                        
+                        <TextBlock Text="(This is just for me to personalize our chats!)"
+                                  FontSize="11"
+                                  Foreground="#888888"
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,10,0,0"
+                                  FontStyle="Italic"/>
+                    </StackPanel>
+
+                    <!-- Step 2: Tutorial Intro -->
+                    <StackPanel x:Name="TutorialIntroPanel" Visibility="Collapsed">
+                        <TextBlock x:Name="PersonalGreeting"
+                                  Text="Awesome, Nice To Meet You [Name]! ??"
+                                  FontSize="22"
+                                  FontWeight="Bold"
+                                  Foreground="#FF69B4"
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  TextAlignment="Center"
+                                  Margin="0,0,0,20"/>
+                        
+                        <TextBlock Text="Let me show you around! I'll give you a quick tour of:"
+                                  FontSize="14"
+                                  Foreground="#FFFFFF"
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  TextAlignment="Center"
+                                  Margin="0,0,0,15"/>
+                        
+                        <StackPanel Margin="20,0">
+                            <TextBlock Text="? How to book DJ slots"
+                                      FontSize="14"
+                                      Foreground="#00FF00"
+                                      FontFamily="Consolas"
+                                      Margin="0,5"/>
+                            <TextBlock Text="? Finding awesome venues"
+                                      FontSize="14"
+                                      Foreground="#00FF00"
+                                      FontFamily="Consolas"
+                                      Margin="0,5"/>
+                            <TextBlock Text="? Using the chat system"
+                                      FontSize="14"
+                                      Foreground="#00FF00"
+                                      FontFamily="Consolas"
+                                      Margin="0,5"/>
+                            <TextBlock Text="? Getting help from ME! ??"
+                                      FontSize="14"
+                                      Foreground="#00FF00"
+                                      FontFamily="Consolas"
+                                      Margin="0,5"/>
+                        </StackPanel>
+                        
+                        <TextBlock Text="Ready? This will only take a minute!"
+                                  FontSize="14"
+                                  Foreground="#CCCCCC"
+                                  FontFamily="Consolas"
+                                  HorizontalAlignment="Center"
+                                  TextAlignment="Center"
+                                  Margin="0,20,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Action Buttons -->
+                <StackPanel Grid.Row="3" 
+                           Orientation="Horizontal" 
+                           HorizontalAlignment="Center"
+                           Margin="0,20,0,0">
+                    
+                    <Button x:Name="ContinueButton"
+                           Content="Continue"
+                           Click="Continue_Click"
+                           Width="150"
+                           Height="50"
+                           Background="#FF69B4"
+                           Foreground="#000000"
+                           FontFamily="Consolas"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           BorderThickness="0"
+                           Cursor="Hand"
+                           Margin="5">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#FF69B4" BlurRadius="15" ShadowDepth="0"/>
+                        </Button.Effect>
+                    </Button>
+                    
+                    <Button x:Name="SkipButton"
+                           Content="Skip Tutorial"
+                           Click="Skip_Click"
+                           Width="150"
+                           Height="50"
+                           Background="#333333"
+                           Foreground="#888888"
+                           FontFamily="Consolas"
+                           FontSize="14"
+                           BorderThickness="0"
+                           Cursor="Hand"
+                           Margin="5"
+                           Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

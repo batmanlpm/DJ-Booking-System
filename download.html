@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download DJ Booking System</title><BR>
+    <title>The Fallen Collective & Mega Byte I.T Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.95);
+            border: 3px solid #00ff00;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.4), inset 0 0 20px rgba(0, 255, 0, 0.1);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.4), inset 0 0 20px rgba(0, 255, 0, 0.1); }
+            50% { box-shadow: 0 0 70px rgba(0, 255, 0, 0.6), inset 0 0 30px rgba(0, 255, 0, 0.2); }
+        }
+
+        h1 {
+            color: #ff1493;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px #ff1493, 0 0 30px #ff1493;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493; }
+            to { text-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493, 0 0 60px #ff1493; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #00ff00;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .version {
+            text-align: center;
+            color: #00ffff;
+            margin-bottom: 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: all 0.3s;
+            border: 3px solid #00ff00;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #00cc00 0%, #009900 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            transform: translateY(-3px);
+            border-color: #00ffff;
+        }
+
+        .secondary-btn {
+            background: linear-gradient(135deg, #ff1493 0%, #cc1177 100%);
+            border-color: #ff1493;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .secondary-btn:hover {
+            background: linear-gradient(135deg, #cc1177 0%, #990055 100%);
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
+            border-color: #ff00ff;
+        }
+
+        .info {
+            margin-top: 35px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            border-left: 5px solid #00ff00;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        .info h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .info ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .info li {
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        .info a {
+            color: #ff1493;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .info a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #ff1493;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-left: 10px;
+            text-shadow: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #00ff00;
+            color: #00ff00;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .download-btn {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> DJ Booking System</h1>
+        <div class="subtitle">The Fallen Collective</div>
+        <div class="version">Version 1.2.5<span class="badge">LATEST</span></div>
+        
+        <a href="DJBookingSystem.exe" class="download-btn">
+             Download Update (EXE Only)
+            <div style="font-size: 0.7em; margin-top: 5px;">Quick update for existing users</div>
+        </a>
+        
+        <a href="DJBookingSystem-Full-v1.2.5.zip" class="download-btn secondary-btn">
+            Download Full Package (ZIP)
+            <div style="font-size: 0.7em; margin-top: 5px;">Complete installation package</div>
+        </a>
+        
+        <div class="info">
+            <h3> What's New in v1.2.5</h3>
+            <ul>
+                <li><strong>Interactive tutorial system</strong> with CandyBot voice narration</li>
+                <li><strong>Interactive UI highlighting</strong> - shows you where everything is</li>
+                <li><strong>Auto-playing voice narration</strong> - CandyBot guides you through</li>
+                <li> <strong>Multiple bug fixes</strong> and performance improvements</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h3> System Requirements</h3>
+            <ul>
+                <li><strong>.NET 8.0 Runtime</strong> (download automatically if needed)</li>
+                <li><strong>Windows 10</strong> or later (64-bit)</li>
+                <li> <strong>Internet connection</strong> for updates and cloud sync</li>
+                <li> <strong>Audio device</strong> for tutorial voice narration</li>
+                <li><strong>4GB RAM</strong> minimum (8GB recommended)</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h3> Installation Instructions</h3>
+            <ul>
+                <li><strong>First Time Users:</strong> Download the Full Package (ZIP), extract all files, run DJBookingSystem.exe</li>
+                <li><strong>Existing Users:</strong> Download the Update (EXE only), replace your old exe file</li>
+                <li><strong>Auto-Update:</strong> The app will check for updates automatically and notify you</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h3>Useful Links</h3>
+            <ul>
+                <li><a href="https://livepartymusic.fm" target="_blank"> Live Party Music</a></li>
+                <li><a href="https://c40.radioboss.fm" target="_blank"> RadioBoss Cloud</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <strong>The Fallen Collective DJ Booking System</strong><br>
+	    Built By Shane Of Mega Byte I.T Services - ABN 34 575 102 165<br>
+            Powered by Azure Cosmos DB | Built with .NET 8.0 | Voice by CandyBot AI<br>
+              2025 Live Party Music | All Rights Reserved
+        </div>
+    </div>
+</body>
+</html>

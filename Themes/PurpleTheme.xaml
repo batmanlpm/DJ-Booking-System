@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 💜 COSMIC PURPLE THEME -->
+    
+    <Color x:Key="AccentColor">#9d4edd</Color>
+    <Color x:Key="AccentDark">#7b2cbf</Color>
+    <Color x:Key="AccentLight">#c77dff</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    
+</ResourceDictionary>

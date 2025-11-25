@@ -1,0 +1,136 @@
+<Window x:Class="DJBookingSystem.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:DJBookingSystem.Controls"
+        Title="Loading..." Height="535" Width="600"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <!-- Fade animation -->
+        <Storyboard x:Key="FadeOutAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                           From="1.0" To="0.0" Duration="0:0:1"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <!-- Semi-transparent background -->
+    <Border Background="#CC000000" CornerRadius="15" BorderBrush="#00FF00" BorderThickness="3" Height="515" VerticalAlignment="Top">
+        <Grid Margin="20,20,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Claude Indicators -->
+                <RowDefinition Height="Auto"/>
+                <!-- Logo -->
+                <RowDefinition Height="*"/>
+                <!-- Progress area -->
+                <RowDefinition Height="Auto"/>
+                <!-- Version -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Connection Status Indicators (4 Claudes) -->
+            <StackPanel Grid.Row="0" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="0,10,0,15">
+                <controls:ClaudeIndicator x:Name="CosmosIndicator"
+                                          ServiceName="Azure Cosmos DB"
+                                          LabelText="Cosmos"
+                                          Margin="25,0"/>
+                <controls:ClaudeIndicator x:Name="LPMIndicator"
+                                          ServiceName="Live Party Music"
+                                          LabelText="LPM.fm"
+                                          Margin="25,0"/>
+                <controls:ClaudeIndicator x:Name="RadioBossIndicator"
+                                          ServiceName="RadioBOSS Control"
+                                          LabelText="Booking"
+                                          Margin="25,0" Loaded="RadioBossIndicator_Loaded"/>
+                <controls:ClaudeIndicator x:Name="StreamIndicator"
+                                          ServiceName="RadioBOSS Stream"
+                                          LabelText="Live Status"
+                                          Margin="25,0"/>
+            </StackPanel>
+
+            <!-- Logo Image -->
+            <Image Grid.Row="1"
+                   x:Name="LogoImage"
+                   Stretch="Uniform"
+                   MaxHeight="200"
+                   Margin="0,10,0,10"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   ImageFailed="Image_Failed"
+                   Source="/DJBookingSystem;component/PNG_Version.png"/>
+
+            <!-- Progress Area -->
+            <Grid Grid.Row="2" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Humorous Message -->
+                <TextBlock x:Name="HumorousMessageTextBlock"
+                          Grid.Row="0"
+                          Text="Initializing Awesomeness..."
+                          FontSize="16"
+                          FontWeight="Bold"
+                          Foreground="#00FF00"
+                          TextWrapping="Wrap"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,15"/>
+
+                <!-- Progress Bar Container -->
+                <Border Grid.Row="1"
+                       Height="30"
+                       Background="#1a1a1a"
+                       BorderBrush="#00FF00"
+                       BorderThickness="2"
+                       CornerRadius="15"
+                       Margin="20,0">
+                    <!-- Rainbow Progress Bar Fill -->
+                    <Border x:Name="ProgressBarFill"
+                           Width="0"
+                           HorizontalAlignment="Left"
+                           CornerRadius="13">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#FF0000" Offset="0.0"/>
+                                <GradientStop Color="#FF7F00" Offset="0.16"/>
+                                <GradientStop Color="#FFFF00" Offset="0.33"/>
+                                <GradientStop Color="#00FF00" Offset="0.5"/>
+                                <GradientStop Color="#0000FF" Offset="0.66"/>
+                                <GradientStop Color="#4B0082" Offset="0.83"/>
+                                <GradientStop Color="#9400D3" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Border>
+
+                <!-- Percentage Text -->
+                <TextBlock x:Name="PercentageTextBlock"
+                          Grid.Row="1"
+                          Text="0%"
+                          FontSize="20"
+                          FontWeight="Bold"
+                          Foreground="#00FF00"
+                          HorizontalAlignment="Center"
+                          Margin="0,10,0,13"/>
+            </Grid>
+
+            <!-- Version Number -->
+            <TextBlock x:Name="VersionTextBlock"
+                      Grid.Row="3"
+                      Text="Version 1.3.0"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="#00FF00"
+                      HorizontalAlignment="Center"
+                      Margin="0,10,0,0"/>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,31 @@
+{
+  "updateAvailable": true,
+  "currentVersion": "1.3.0",
+  "latestVersion": "1.3.0",
+  "releaseDate": "2025-01-23",
+  "downloadUrl": "https://djbookupdates.com/DJBookingSystem-Setup-v1.3.0.exe",
+  "changelogUrl": "https://djbookupdates.com/changelog.html",
+  "releaseNotes": "Discord-style Friends List with real-time online status, friend requests, and private direct messaging. Build successful with ZERO errors.",
+  "features": [
+    "Discord-Style Friends List with Online/Offline Status",
+    "Send & Receive Friend Requests with Optional Messages",
+    "Private Direct Messaging (DM) Between Friends",
+    "Real-Time Friend Status (Green = Online, Gray = Offline)",
+    "Auto-Refresh Friends List Every 10 Seconds",
+    "Smart Auto-Accept for Mutual Friend Requests",
+    "Seamless Green/Black Theme Integration",
+    "New Cosmos DB Containers (FriendRequests, Friendships)",
+    "Privacy Protected (DMs Only Visible to Participants)",
+    "Optimized Performance with Partition Keys"
+  ],
+  "bugFixes": [
+    "Fixed UserReport model properties for moderation",
+    "Added missing Friendship.cs model file",
+    "Implemented all Cosmos DB friends/requests methods",
+    "Fixed DM message filtering and conversation tracking",
+    "Added data binding for friends list UI"
+  ],
+  "isCritical": false,
+  "minimumVersion": "1.0.0",
+  "isSecureConnection": true
+}

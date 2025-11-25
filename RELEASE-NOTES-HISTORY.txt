@@ -1,0 +1,46 @@
+﻿# 📝 RELEASE NOTES HISTORY - EDIT THIS FILE BEFORE UPLOAD
+# This file contains all release notes for version history
+# Format: Keep the ✅ checkmarks for proper HTML conversion
+
+═══════════════════════════════════════════════════════════════
+VERSION 1.2.5 - Current Release (2025-01-21)
+═══════════════════════════════════════════════════════════════
+
+✨ What's New in v1.2.5
+
+MAJOR FEATURES:
+✅ Auto-playing tutorial with CandyBot voice narration
+✅ Interactive UI highlighting with pink spotlight
+✅ 100% black overlay outside MainWindow
+✅ Users panel pop-out maximizable window
+
+BUG FIXES:
+✅ Fixed logout DialogResult error
+✅ Fixed tutorial audio playback (absolute paths)
+✅ Fixed element highlighting (added x:Name attributes)
+✅ Fixed panel positioning (inside MainWindow, not taskbar)
+✅ Fixed voice file paths (InteractiveGuide/Voices/)
+✅ Fixed Cosmos DB partition key mismatch (JsonProperty attributes)
+
+IMPROVEMENTS:
+✅ Auto-advances when voice finishes
+✅ 1 second pause between steps
+✅ Fallback timers for missing audio files
+✅ Proper JSON serialization for all User properties
+
+
+═══════════════════════════════════════════════════════════════
+HOW TO USE THIS FILE
+═══════════════════════════════════════════════════════════════
+
+1. Edit the release notes above for past versions
+2. When uploading a new version:
+   - Upload-Version.ps1 will show you the latest notes
+   - You can edit them in Notepad
+   - The script will update index.html automatically
+
+3. Keep this file as a master reference
+
+4. The ✅ checkmarks are important - they get converted to HTML
+
+═══════════════════════════════════════════════════════════════
