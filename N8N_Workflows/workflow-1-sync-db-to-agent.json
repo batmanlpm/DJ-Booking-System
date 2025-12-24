@@ -6,13 +6,13 @@
         "rule": {
           "interval": [
             {
-              "field": "hours",
-              "hoursInterval": 1
+              "field": "minutes",
+              "minutesInterval": 15
             }
           ]
         }
       },
-      "name": "Schedule: Every Hour",
+      "name": "Schedule: Every 15 Minutes",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [250, 300]
@@ -181,7 +181,7 @@
     }
   ],
   "connections": {
-    "Schedule: Every Hour": {
+    "Schedule: Every 15 Minutes": {
       "main": [
         [
           {
