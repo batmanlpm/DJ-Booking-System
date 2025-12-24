@@ -12,13 +12,12 @@ services:
       # N8N Configuration
       - N8N_HOST=n8n.thefallencollective.live
       - N8N_PORT=5678
-      - N8N_PROTOCOL=https
-      - WEBHOOK_URL=https://n8n.thefallencollective.live/
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://n8n.thefallencollective.live/
       
       # Authentication
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=YourSecurePassword123
+      - N8N_BASIC_AUTH_ACTIVE=false
+      - N8N_SECURE_COOKIE=false
       
       # Database Credentials (Cosmos DB)
       - COSMOS_ENDPOINT=${COSMOS_ENDPOINT:-https://your-account.documents.azure.com}
@@ -47,7 +46,7 @@ services:
       timeout: 10s
       retries: 3
 
-  # Nginx Reverse Proxy with Auto-SSL
+  # Nginx Reverse Proxy
   nginx:
     image: nginx:alpine
     container_name: nginx
