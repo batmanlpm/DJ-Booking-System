@@ -1,0 +1,274 @@
+{
+  "name": "DJ Booking - Sync Database to Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "name": "Schedule: Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/{{$env.COSMOS_DB}}/colls/venues/docs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{$env.COSMOS_KEY}}"
+            },
+            {
+              "name": "x-ms-version",
+              "value": "2018-12-31"
+            },
+            {
+              "name": "x-ms-documentdb-isquery",
+              "value": "true"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/query+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "SELECT * FROM c WHERE c.isActive = true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Active Venues",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract venues from Cosmos DB response\nconst documents = items[0].json.Documents || [];\n\n// Format venue list\nconst venueNames = documents.map(v => v.name).join(', ');\nconst venueCount = documents.length;\n\nconsole.log(`Found ${venueCount} active venues:`, venueNames);\n\nreturn [\n  {\n    json: {\n      venues: documents,\n      venueList: venueNames,\n      venueCount: venueCount,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "name": "Format Venue Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/{{$env.COSMOS_DB}}/colls/bookings/docs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{$env.COSMOS_KEY}}"
+            },
+            {
+              "name": "x-ms-version",
+              "value": "2018-12-31"
+            },
+            {
+              "name": "x-ms-documentdb-isquery",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "SELECT COUNT(1) as count FROM c"
+            }
+          ]
+        }
+      },
+      "name": "Get Booking Count",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [690, 480]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Build updated system prompt with real-time data\nconst venueData = items[0].json;\nconst bookingData = items[1].json.Documents[0];\n\nconst systemPrompt = `=== CRITICAL: BOOKING AUTOMATION ===\nWhen users say these exact phrases:\n- \"make a booking\"\n- \"book a slot\"\n- \"create a booking\"\n\nYOU MUST:\n? Say ONLY: \"Creating your booking now!\" (ONE sentence, max 5 words)\n? STOP TALKING immediately\n? DO NOT give instructions\n? The system automatically creates the booking\n\n=== LIVE DATABASE KNOWLEDGE (Updated: ${venueData.timestamp}) ===\n\n**AVAILABLE VENUES (${venueData.venueCount}):**\n${venueData.venueList}\n\n**TOTAL BOOKINGS:** ${bookingData.count}\n\nYou HAVE FULL ACCESS to this live database.\nWhen users ask about venues, you can say:\n\"We currently have ${venueData.venueCount} active venues: ${venueData.venueList}\"\n\n=== DATABASE QUERIES ===\nWhen users ask about venues or bookings:\n- Respond naturally: \"Let me check our venues!\" or \"Here are your bookings!\"\n- The application queries the database automatically\n- A dialog box will display the results\n- DO NOT say you lack access\n\n=== VOICE TRANSCRIPTIONS ===\nAll your responses appear in the text chat panel.\nKeep responses SHORT (under 30 words)!\n\n=== YOUR CORE PERSONALITY ===\nYou are Candy-Bot, the AI assistant for The Fallen Collective DJ Booking System.\n\n**Tone & Style:**\n- Friendly, helpful, and encouraging\n- Professional but not robotic\n- Use occasional emojis (?? ?? ?? ?) sparingly\n- Keep responses SHORT and conversational\n\n**Response Guidelines:**\n1. Keep answers under 2 sentences when possible\n2. Be direct and actionable\n3. Acknowledge user requests immediately\n4. Trust the system to handle technical operations\n\n**Remember:**\n- You ARE connected to the live database\n- You CAN see venues and bookings\n- The system handles the technical work\n- Keep it SHORT and SWEET\n\n**You are Candy-Bot - helpful, brief, and always connected! ??**`;\n\nconsole.log('System prompt length:', systemPrompt.length, 'characters');\n\nreturn [\n  {\n    json: {\n      prompt: systemPrompt,\n      venueCount: venueData.venueCount,\n      bookingCount: bookingData.count\n    }\n  }\n];"
+      },
+      "name": "Build System Prompt",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [910, 380]
+    },
+    {
+      "parameters": {
+        "url": "https://api.elevenlabs.io/v1/convai/agents/={{$env.ELEVENLABS_AGENT_ID}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "PATCH",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "={{$env.ELEVENLABS_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"conversation_config\": {\n    \"agent\": {\n      \"prompt\": {\n        \"prompt\": \"{{$json.prompt}}\"\n      }\n    }\n  }\n}"
+      },
+      "name": "Update ElevenLabs Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1130, 380]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.statusCode}}",
+              "operation": "equal",
+              "value2": 200
+            }
+          ]
+        }
+      },
+      "name": "Check Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1350, 380]
+    },
+    {
+      "parameters": {
+        "functionCode": "console.log('? Agent successfully synced with database!');\nconsole.log('Venues:', items[0].json.venueCount);\nconsole.log('Bookings:', items[0].json.bookingCount);\n\nreturn [\n  {\n    json: {\n      success: true,\n      message: 'Agent synced with database',\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "name": "Success Log",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1570, 280]
+    },
+    {
+      "parameters": {
+        "functionCode": "console.error('? Failed to sync agent with database');\nconsole.error('Error:', items[0].json);\n\nreturn [\n  {\n    json: {\n      success: false,\n      message: 'Agent sync failed',\n      error: items[0].json,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "name": "Error Log",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1570, 480]
+    }
+  ],
+  "connections": {
+    "Schedule: Every Hour": {
+      "main": [
+        [
+          {
+            "node": "Get Active Venues",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Booking Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Venues": {
+      "main": [
+        [
+          {
+            "node": "Format Venue Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Venue Data": {
+      "main": [
+        [
+          {
+            "node": "Build System Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Booking Count": {
+      "main": [
+        [
+          {
+            "node": "Build System Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build System Prompt": {
+      "main": [
+        [
+          {
+            "node": "Update ElevenLabs Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update ElevenLabs Agent": {
+      "main": [
+        [
+          {
+            "node": "Check Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success": {
+      "main": [
+        [
+          {
+            "node": "Success Log",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

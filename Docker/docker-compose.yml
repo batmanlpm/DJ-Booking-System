@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # N8N Workflow Automation
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      # N8N Configuration
+      - N8N_HOST=n8n.thefallencollective.live
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://n8n.thefallencollective.live/
+      
+      # Authentication
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=YourSecurePassword123
+      
+      # Database Credentials (Cosmos DB)
+      - COSMOS_ENDPOINT=${COSMOS_ENDPOINT:-https://your-account.documents.azure.com}
+      - COSMOS_KEY=${COSMOS_KEY:-your_cosmos_key_here}
+      - COSMOS_DB=DJBookingDB
+      - COSMOS_VENUES_CONTAINER=venues
+      - COSMOS_BOOKINGS_CONTAINER=bookings
+      - COSMOS_USERS_CONTAINER=users
+      
+      # ElevenLabs API
+      - ELEVENLABS_API_KEY=sk_b04ee67b81c033d87b4ec481ccb20a5d63fa3b81c7d62a60
+      - ELEVENLABS_AGENT_ID=agent_2201kacf3j0nfjj9w151tbr3n5e0
+      
+      # N8N Settings
+      - N8N_METRICS=false
+      - EXECUTIONS_TIMEOUT=300
+      - EXECUTIONS_TIMEOUT_MAX=600
+      
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - n8n_network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy with Auto-SSL
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    networks:
+      - n8n_network
+    depends_on:
+      - n8n
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  # Certbot for SSL Certificate
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+volumes:
+  n8n_data:
+    driver: local
+  certbot_data:
+    driver: local
+  certbot_www:
+    driver: local
+
+networks:
+  n8n_network:
+    driver: bridge
