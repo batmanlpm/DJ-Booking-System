@@ -19,7 +19,7 @@
     },
     {
       "parameters": {
-        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/{{$env.COSMOS_DB}}/colls/venues/docs",
+        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/DJBookingDB/colls/Venues/docs",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "method": "POST",
@@ -45,14 +45,8 @@
           ]
         },
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "query",
-              "value": "SELECT * FROM c WHERE c.isActive = true"
-            }
-          ]
-        },
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"SELECT * FROM c\"\n}",
         "options": {}
       },
       "name": "Get Active Venues",
@@ -62,7 +56,7 @@
     },
     {
       "parameters": {
-        "functionCode": "// Extract venues from Cosmos DB response\nconst documents = items[0].json.Documents || [];\n\n// Format venue list\nconst venueNames = documents.map(v => v.name).join(', ');\nconst venueCount = documents.length;\n\nconsole.log(`Found ${venueCount} active venues:`, venueNames);\n\nreturn [\n  {\n    json: {\n      venues: documents,\n      venueList: venueNames,\n      venueCount: venueCount,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+        "functionCode": "// Extract venues from Cosmos DB response\nconst documents = items[0].json.Documents || [];\n\n// Format venue list - filter active venues and get names\nconst activeVenues = documents.filter(v => v.Name);\nconst venueNames = activeVenues.map(v => v.Name).join(', ');\nconst venueCount = activeVenues.length;\n\nconsole.log(`Found ${venueCount} venues:`, venueNames);\n\nreturn [\n  {\n    json: {\n      venues: activeVenues,\n      venueList: venueNames,\n      venueCount: venueCount,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
       },
       "name": "Format Venue Data",
       "type": "n8n-nodes-base.function",
@@ -71,7 +65,7 @@
     },
     {
       "parameters": {
-        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/{{$env.COSMOS_DB}}/colls/bookings/docs",
+        "url": "={{$env.COSMOS_ENDPOINT}}/dbs/DJBookingDB/colls/Bookings/docs",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "method": "POST",
@@ -89,18 +83,17 @@
             {
               "name": "x-ms-documentdb-isquery",
               "value": "true"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/query+json"
             }
           ]
         },
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "query",
-              "value": "SELECT COUNT(1) as count FROM c"
-            }
-          ]
-        }
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"SELECT VALUE COUNT(1) FROM c\"\n}",
+        "options": {}
       },
       "name": "Get Booking Count",
       "type": "n8n-nodes-base.httpRequest",
@@ -109,7 +102,7 @@
     },
     {
       "parameters": {
-        "functionCode": "// Build updated system prompt with real-time data\nconst venueData = items[0].json;\nconst bookingData = items[1].json.Documents[0];\n\nconst systemPrompt = `=== CRITICAL: BOOKING AUTOMATION ===\nWhen users say these exact phrases:\n- \"make a booking\"\n- \"book a slot\"\n- \"create a booking\"\n\nYOU MUST:\n? Say ONLY: \"Creating your booking now!\" (ONE sentence, max 5 words)\n? STOP TALKING immediately\n? DO NOT give instructions\n? The system automatically creates the booking\n\n=== LIVE DATABASE KNOWLEDGE (Updated: ${venueData.timestamp}) ===\n\n**AVAILABLE VENUES (${venueData.venueCount}):**\n${venueData.venueList}\n\n**TOTAL BOOKINGS:** ${bookingData.count}\n\nYou HAVE FULL ACCESS to this live database.\nWhen users ask about venues, you can say:\n\"We currently have ${venueData.venueCount} active venues: ${venueData.venueList}\"\n\n=== DATABASE QUERIES ===\nWhen users ask about venues or bookings:\n- Respond naturally: \"Let me check our venues!\" or \"Here are your bookings!\"\n- The application queries the database automatically\n- A dialog box will display the results\n- DO NOT say you lack access\n\n=== VOICE TRANSCRIPTIONS ===\nAll your responses appear in the text chat panel.\nKeep responses SHORT (under 30 words)!\n\n=== YOUR CORE PERSONALITY ===\nYou are Candy-Bot, the AI assistant for The Fallen Collective DJ Booking System.\n\n**Tone & Style:**\n- Friendly, helpful, and encouraging\n- Professional but not robotic\n- Use occasional emojis (?? ?? ?? ?) sparingly\n- Keep responses SHORT and conversational\n\n**Response Guidelines:**\n1. Keep answers under 2 sentences when possible\n2. Be direct and actionable\n3. Acknowledge user requests immediately\n4. Trust the system to handle technical operations\n\n**Remember:**\n- You ARE connected to the live database\n- You CAN see venues and bookings\n- The system handles the technical work\n- Keep it SHORT and SWEET\n\n**You are Candy-Bot - helpful, brief, and always connected! ??**`;\n\nconsole.log('System prompt length:', systemPrompt.length, 'characters');\n\nreturn [\n  {\n    json: {\n      prompt: systemPrompt,\n      venueCount: venueData.venueCount,\n      bookingCount: bookingData.count\n    }\n  }\n];"
+        "functionCode": "// Build updated system prompt with real-time data\nconst venueData = items[0].json;\nconst bookingCount = items[1].json.Documents?.[0] || 0;\n\nconst systemPrompt = `=== CRITICAL: BOOKING AUTOMATION ===\nWhen users say these exact phrases:\n- \"make a booking\"\n- \"book a slot\"\n- \"create a booking\"\n\nYOU MUST:\n✓ Say ONLY: \"Creating your booking now!\" (ONE sentence, max 5 words)\n✓ STOP TALKING immediately\n✓ DO NOT give instructions\n✓ The system automatically creates the booking\n\n=== LIVE DATABASE KNOWLEDGE (Updated: ${venueData.timestamp}) ===\n\n**AVAILABLE VENUES (${venueData.venueCount}):**\n${venueData.venueList}\n\n**TOTAL BOOKINGS:** ${bookingCount}\n\nYou HAVE FULL ACCESS to this live database.\nWhen users ask about venues, you can say:\n\"We currently have ${venueData.venueCount} active venues: ${venueData.venueList}\"\n\n=== DATABASE QUERIES ===\nWhen users ask about venues or bookings:\n- Respond naturally: \"Let me check our venues!\" or \"Here are your bookings!\"\n- The application queries the database automatically\n- A dialog box will display the results\n- DO NOT say you lack access\n\n=== VOICE TRANSCRIPTIONS ===\nAll your responses appear in the text chat panel.\nKeep responses SHORT (under 30 words)!\n\n=== YOUR CORE PERSONALITY ===\nYou are Candy-Bot, the AI assistant for The Fallen Collective DJ Booking System.\n\n**Tone & Style:**\n- Friendly, helpful, and encouraging\n- Professional but not robotic\n- Use occasional emojis (🎵 🎧 💫 ✨) sparingly\n- Keep responses SHORT and conversational\n\n**Response Guidelines:**\n1. Keep answers under 2 sentences when possible\n2. Be direct and actionable\n3. Acknowledge user requests immediately\n4. Trust the system to handle technical operations\n\n**Remember:**\n- You ARE connected to the live database\n- You CAN see venues and bookings\n- The system handles the technical work\n- Keep it SHORT and SWEET\n\n**You are Candy-Bot - helpful, brief, and always connected! 🎵**`;\n\nconsole.log('System prompt length:', systemPrompt.length, 'characters');\n\nreturn [\n  {\n    json: {\n      prompt: systemPrompt,\n      venueCount: venueData.venueCount,\n      bookingCount: bookingCount\n    }\n  }\n];"
       },
       "name": "Build System Prompt",
       "type": "n8n-nodes-base.function",
@@ -137,7 +130,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"conversation_config\": {\n    \"agent\": {\n      \"prompt\": {\n        \"prompt\": \"{{$json.prompt}}\"\n      }\n    }\n  }\n}"
+        "jsonBody": "={\n  \"conversation_config\": {\n    \"agent\": {\n      \"prompt\": {\n        \"prompt\": {{$json.prompt}}\n      }\n    }\n  }\n}"
       },
       "name": "Update ElevenLabs Agent",
       "type": "n8n-nodes-base.httpRequest",
@@ -163,7 +156,7 @@
     },
     {
       "parameters": {
-        "functionCode": "console.log('? Agent successfully synced with database!');\nconsole.log('Venues:', items[0].json.venueCount);\nconsole.log('Bookings:', items[0].json.bookingCount);\n\nreturn [\n  {\n    json: {\n      success: true,\n      message: 'Agent synced with database',\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+        "functionCode": "console.log('✅ Agent successfully synced with database!');\nconsole.log('Venues:', items[0].json.venueCount);\nconsole.log('Bookings:', items[0].json.bookingCount);\n\nreturn [\n  {\n    json: {\n      success: true,\n      message: 'Agent synced with database',\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
       },
       "name": "Success Log",
       "type": "n8n-nodes-base.function",
@@ -172,7 +165,7 @@
     },
     {
       "parameters": {
-        "functionCode": "console.error('? Failed to sync agent with database');\nconsole.error('Error:', items[0].json);\n\nreturn [\n  {\n    json: {\n      success: false,\n      message: 'Agent sync failed',\n      error: items[0].json,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+        "functionCode": "console.error('❌ Failed to sync agent with database');\nconsole.error('Error:', items[0].json);\n\nreturn [\n  {\n    json: {\n      success: false,\n      message: 'Agent sync failed',\n      error: items[0].json,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
       },
       "name": "Error Log",
       "type": "n8n-nodes-base.function",
